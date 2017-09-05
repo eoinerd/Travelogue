@@ -1,0 +1,59 @@
+﻿@model Travelogue.ViewModels.PostsViewModel
+<div class="container-fluid">
+    <div class="post-meta">
+        @foreach (var post in Model.Posts)
+        {
+
+
+
+        <div class="row">
+
+            <!--Heading-->
+            <div class="form-group">
+                <h2>@post.Title</h2>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <!--Category-->
+            @*<div class="form-group">
+                <span>Category: </span>@post.Category)
+            </div>*@
+
+            <!--Tags-->
+            <div class="form-group">
+                <span>Tags:</span>@*@Model.Tags*@
+            </div>
+
+            <!--Posted date-->
+            <div class="form-group">
+                @post.PostedOn
+            </div>
+            <!--Short Description-->
+            <div class="form-group">
+                @Html.Raw(@post.ShortDescription)
+            </div>
+
+            <!--Description-->
+            <div class="form-group">
+                @Html.Raw(@post.Description)
+            </div>
+        </div>
+
+        <div class="post-foot">
+            @Html.ActionLink("continue...", "post", "blog",
+                new
+                {
+                    year = @post.PostedOn.Year,
+                    month = @post.PostedOn.Month,
+                    day = @post.PostedOn.Day,
+                    title = @post.UrlSlug
+                },
+                new { title = "continue..." }
+            )
+        </div>
+        }
+    </div>
+</div>

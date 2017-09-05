@@ -1,0 +1,11 @@
+﻿{
+  "MailSettings": {
+    "ToAddress": "eoinerd@gmail.com"
+  },
+  "ConnectionStrings": {
+    "TravelogueContextConnection": "Server=(localdb)\\MSSQLLocalDB;Database=TravelDb;Trusted_Connection=true;MultipleActiveResultSets=true"
+  },
+  "Keys": {
+    "BingKey": "1pyt6Oi96QbZplB0meWf~7n8N3oqpfMAt9RFFoswYOw~AgeIiNviHhSJPC8CE0z-rxXpU1FH_idzup4djBjgiVcUdAg_hBghDgtLDrGF3FXr"
+  }
+}

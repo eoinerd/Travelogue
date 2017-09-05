@@ -1,0 +1,23 @@
+﻿@model Travelogue.ViewModels.PostsViewModel
+@{
+    ViewData["Title"] = "About";
+}
+<aside>
+    <div class="form-group">
+        <div id="content"></div>
+    </div>
+</aside>
+
+
+<div class="jumbotron">
+    <div id="container">
+        @Html.Partial("_PostTemplate", Model);
+    </div>
+</div>
+
+@section Scripts {
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
+<script src="~/js/react-stuff.jsx"></script>
+}

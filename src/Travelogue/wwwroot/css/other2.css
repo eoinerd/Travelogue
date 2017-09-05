@@ -1,0 +1,186 @@
+﻿
+#main{
+    background-color: #eee;
+    padding: 20px 4px 4px 4px;
+    margin: 0;
+    width: 50%;
+    display: block;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+body {
+    padding-top:0px;
+    padding-bottom: 20px;
+    margin: 0;
+}
+
+#footer{
+    background-color: #2a2c36;
+    color: #ff6a00;
+    padding: 8px 5px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.headshot{
+    max-width: 50px;
+    border: 1px solid #222;
+    padding: 3px;
+}
+
+.menu {
+    font-size: 12px;
+}
+
+    .menu li {
+        list-style-type: none;
+    }
+
+    .menu li.active {
+        font-weight: bold;
+    }
+
+#sidebar {
+    background: #2a2c36;
+    color: #eee;
+    position: fixed;
+    height: 100%;
+    width: 210px;
+    overflow: hidden;
+    left: 0;
+    margin: 0;
+    -moz-transition: left ease .45s;
+    -o-transition: left ease .45s;
+    -webkit-transition: left ease .45s;
+    transition: left ease .45s;
+}
+
+    #sidebar.hide-sidebar {
+        left: -338px;
+        -moz-transition: left ease .45s;
+        -o-transition: left ease .45s;
+        -webkit-transition: left ease .45s;
+        transition: left ease .45s;
+    }
+
+#wrapper {
+    display: block;
+    margin: 0 auto;
+    -moz-transition: margin-left ease .45s;
+    -o-transition: margin-left ease .45s;
+    -webkit-transition: margin-left ease .45s;
+    transition: margin-left ease .45s;
+}
+
+    #wrapper.hide-sidebar {
+            margin-left:0px;
+        -moz-transition: margin-left ease .45s;
+        -o-transition: margin-left ease .45s;
+        -webkit-transition: margin-left ease .45s;
+        transition: margin-left ease .45s;
+    }
+
+    .middle{
+            width: 50%;
+            display: block;
+            margin: 0 auto;
+    }
+
+    .sidetoggle{
+            background: #2a2c36;
+        color: white;
+        left: 316px;
+
+        z-index: 10000;
+        position: absolute;
+    }
+
+    .sidetoggle.expand-toggle {
+            margin-left: -138px;
+        -moz-transition: margin-left ease .45s;
+        -o-transition: margin-left ease .45s;
+        -webkit-transition: margin-left ease .45s;
+        transition: margin-left ease .45s;
+    }
+
+    .sidetoggle.collapse-toggle {
+         margin-left: -318px;
+        -moz-transition: margin-left ease .45s;
+        -o-transition: margin-left ease .45s;
+        -webkit-transition: margin-left ease .45s;
+        transition: margin-left ease .45s;
+    }
+
+#sidebarToggle {
+        position: fixed;
+}
+
+.rotator {
+
+}
+
+.rotator .container {
+    overflow: hidden;
+    border-color: rgba(0, 0, 0, 0.2);
+    margin: 5px auto;
+    position: relative;
+}
+
+.rotator .container .images {
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.rotator .container .images img {
+    position: absolute;
+    text-align: center;
+    display: block;
+}
+
+.loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: white;
+}
+
+.loading img {
+    position: absolute;
+    left: 48%;
+    top:45%;
+}
+
+.controls {
+    width: 100%;
+    text-align: center;
+    margin: 10px auto;
+}
+
+.controls span {
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 7px;
+    margin: 0 5px;
+    cursor: pointer;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.08) inset;
+    -webkit-transition: all 400ms;
+    transition: all 400ms;
+}
+
+.controls span.active {
+    cursor: default;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: none;    box-shadow: 0px -1px 1px 0px rgba(0, 0, 0, 0.35) inset;
+}
+
+#map {
+    width:100%;
+    height:600px;
+}
