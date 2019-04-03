@@ -16,8 +16,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
-using React.AspNet;
-
+using Travelogue.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Travelogue
 {
@@ -42,7 +42,6 @@ namespace Travelogue
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddReact();
 
             services.AddMvc(config =>
             {
@@ -58,43 +57,46 @@ namespace Travelogue
 
             services.AddScoped<IMailService, DebugMailService>();
             services.AddSingleton(Configuration);
-            services.AddDbContext<TravelogueContext>();
+            //services.AddDbContext<TravelogueContext>();
 
-            services.AddScoped<ITravelRepository, TravelRepository>();
+            services.AddDbContext<BlogContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<TravelUser, IdentityRole>(config =>
-           {
-               config.User.RequireUniqueEmail = true;
-               config.Password.RequiredLength = 8;
-               config.Cookies.ApplicationCookie.LoginPath = "/Auth/Login";
-               config.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents()
-               {
-                   OnRedirectToLogin = async ctx =>
-                   {
-                       if (ctx.Request.Path.StartsWithSegments("/api") && 
-                       ctx.Response.StatusCode == 200)
-                       {
-                           ctx.Response.StatusCode = 401;
-                       }
-                       else
-                       {
-                           ctx.Response.Redirect(ctx.RedirectUri);
-                       }
-                       await Task.Yield();
-                   }
-               };
-           })
-            .AddEntityFrameworkStores<TravelogueContext>();
+            services.AddScoped<IBlogRepository, BlogRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
+            //services.AddScoped<ITravelRepository, TravelRepository>();
+
+            // services.AddIdentity<TravelUser, IdentityRole>(config =>
+            //{
+            //    config.User.RequireUniqueEmail = true;
+            //    config.Password.RequiredLength = 8;
+            //    config.Cookies.ApplicationCookie.LoginPath = "/Auth/Login";
+            //    config.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents()
+            //    {
+            //        OnRedirectToLogin = async ctx =>
+            //        {
+            //            if (ctx.Request.Path.StartsWithSegments("/api") && 
+            //            ctx.Response.StatusCode == 200)
+            //            {
+            //                ctx.Response.StatusCode = 401;
+            //            }
+            //            else
+            //            {
+            //                ctx.Response.Redirect(ctx.RedirectUri);
+            //            }
+            //            await Task.Yield();
+            //        }
+            //    };
+            //})
+            // .AddEntityFrameworkStores<TravelogueContext>();
 
             services.AddLogging();
 
             services.AddTransient<GeoCoordsService>();
-            services.AddTransient<TravelContextSeedData>();
+            //services.AddTransient<TravelContextSeedData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, 
-            ILoggerFactory loggerFactory, TravelContextSeedData seeder)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             Mapper.Initialize(Configuration =>
             {
@@ -115,31 +117,10 @@ namespace Travelogue
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
-            // Initialise ReactJS.NET. Must be before static files.
-            app.UseReact(config =>
-            {
-                // If you want to use server-side rendering of React components,
-                // add all the necessary JavaScript files here. This includes
-                // your components as well as all of their dependencies.
-                // See http://reactjs.net/ for more information. Example:
-                //config
-                //  .AddScript("~/Scripts/First.jsx")
-                //  .AddScript("~/Scripts/Second.jsx");
-
-                // If you use an external build too (for example, Babel, Webpack,
-                // Browserify or Gulp), you can improve performance by disabling
-                // ReactJS.NET's version of Babel and loading the pre-transpiled
-                // scripts. Example:
-                //config
-                //  .SetLoadBabel(false)
-                //  .AddScriptWithoutTransform("~/Scripts/bundle.server.js");
-            });
-
-
+        
             app.UseStaticFiles();
 
-            app.UseIdentity();
+          //  app.UseIdentity();
 
             app.UseMvc(routes =>
             {
@@ -148,7 +129,7 @@ namespace Travelogue
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            seeder.EnsureSeedData().Wait();
+            //seeder.EnsureSeedData().Wait();
         }
     }
 }

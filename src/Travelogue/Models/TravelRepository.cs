@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Travelogue.ViewModels;
 
 namespace Travelogue.Models
 {
@@ -67,13 +68,13 @@ namespace Travelogue.Models
 
         public IList<Post> Posts(int pageNo, int pageSize)
         {
-            var posts = _context.Posts
-                                  .Where(p => p.Published)
-                                  .OrderByDescending(p => p.PostedOn)
-                                  .Skip(pageNo * pageSize)
-                                  .Take(pageSize)
+            var posts = _context.Posts.ToList();
+                                  //.Where(p => p.Published)
+                                  //.OrderByDescending(p => p.PostedOn)
+                                  //.Skip(pageNo * pageSize)
+                                  //.Take(pageSize)
                                   //.Fetch(p => p.Category)
-                                  .ToList();
+                                  //.ToList();
 
             var postIds = posts.Select(p => p.Id).ToList();
 

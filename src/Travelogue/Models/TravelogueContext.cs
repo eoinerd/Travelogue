@@ -21,7 +21,6 @@ namespace Travelogue.Models
         public DbSet<Trip> Trips { get; set; }
         public DbSet<Stop> Stops { get; set; }
         public DbSet<Post> Posts { get; set; }
-        //public DbSet<PostTagMap> PostTagMaps { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Tag> Tags { get; set; }
 

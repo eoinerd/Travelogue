@@ -1,0 +1,14 @@
+﻿@model Travelogue.ViewModels.PostViewModel
+@{
+    ViewData["Title"] = "View Post";
+}
+
+<div class="well">
+    <h2>
+        @Html.DisplayFor(modelPost => Model.Title)
+    </h2>
+          
+    <div class="row">
+        @Html.DisplayFor(modelPost => Model.Post)
+    </div>
+</div>

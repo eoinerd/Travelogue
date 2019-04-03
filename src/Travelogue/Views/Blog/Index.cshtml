@@ -1,4 +1,4 @@
-﻿@model Travelogue.ViewModels.PostsViewModel
+﻿@model IEnumerable<Travelogue.Models.Blog>
 @{
     ViewData["Title"] = "About";
 }
@@ -7,17 +7,30 @@
         <div id="content"></div>
     </div>
 </aside>
-
-
 <div class="jumbotron">
     <div id="container">
-        @Html.Partial("_PostTemplate", Model);
-    </div>
-</div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a class="btn btn-primary" asp-area="" asp-controller="Blog" asp-action="Create">Create Blog</a></li>
+            </ul>
+        </div>
+        <div class="well">
+            @foreach (var item in Model)
+            {
+                <div class="row">
+                    <h3>@Html.DisplayFor(modelItem => item.Title)</h3>
+                </div>
+                <div class="row">
+                    <h5>@Html.DisplayFor(modelItem => item.Subtitle)</h5>
+                </div>
 
-@section Scripts {
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
-<script src="~/js/react-stuff.jsx"></script>
-}
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            }
+        </div>
+    </div>
+    @*<div>
+            <a asp-controller="Blog" asp-action="Create" class="btn btn-default">Create Blog Post</a>
+        </div>*@
+</div>
