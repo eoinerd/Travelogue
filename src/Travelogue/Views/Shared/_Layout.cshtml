@@ -21,7 +21,7 @@
      </environment>
 </head>
 <body>
-    <div style="display: block;margin: 0 auto;height: 70px;" class="navbar navbar-inverse navbar-fixed-top">
+    <div style="display: block;margin: 0 auto;height: 70px;z-index:60;" class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -36,16 +36,17 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Blog" asp-action="Index">Blog</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Trips">Trips</a></li>
+                    <li><a asp-area="" asp-controller="Auth" asp-action="Login">Login</a></li>
                 </ul>
             </div>
         </div>
     </div>
     <div>
-        @*<button id="sidebarToggle" class="btn btn-lg sidetoggle expand-toggle">
-            <i class="fa fa-chevron-circle-left"></i>
+        <button id="sidebarToggle" class="btn btn-lg sidetoggle expand-toggle">
+            <i class="fa fa-chevron-circle-up"></i>
         </button>
-        <div id="sidebar">
+        <div id="sidebar" class="hide-sidebar">
             @if (User.Identity.IsAuthenticated)
             {
                 <img src="~/images/2015-10-12 21.52.23.jpg" alt="headshot" class="headshot" />
@@ -59,18 +60,17 @@
                     <li><a asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a></li>
                 }
             </ul>
-
-        </div>*@
+        </div>
         <div id="wrapper" style="border-radius:50%;">
-            @*<img src="~/images/3.PNG" style="width: 100%;position: absolute;right: 7px;top: 7px;" />*@   
-            <div id="main" style="background-color: #eee;padding: 20px 4px 4px 4px;margin: 0;width: 50%;display: block;margin: 0 auto;padding-top: 50px;">
+            @*   <img src="~/images/3.PNG" style="width: 100%;position: absolute;right: 7px;top: 7px;" />*@
+            <div id="main" style="background-color: #eee;padding: 20px 4px 4px 4px;margin: 0;display: block;margin: 0 auto;padding-top: 50px;">
                 <div>
                     @RenderBody()
                 </div>
             </div>
-            <div style="margin: 0 auto;" class="navbar navbar-inverse">
-                <h4 class="text-center">&copy; 2016 - Travelogue</h4>
-            </div>
+        </div>
+        <div style="margin: 0 auto;bottom: 0px;position: fixed; width: 100%;z-index:60;" class="navbar navbar-inverse">
+            <h4 class="text-center">&copy; 2016 - Travelogue</h4>
         </div>
     </div>
 

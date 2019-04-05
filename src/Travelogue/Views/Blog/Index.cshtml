@@ -11,7 +11,9 @@
     <div id="container">
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a class="btn btn-primary" asp-area="" asp-controller="Blog" asp-action="Create">Create Blog</a></li>
+                <li>
+                    <a class="btn btn-primary" asp-area="" asp-controller="Blog" asp-action="Create">Create Blog</a>
+                </li>
             </ul>
         </div>
         <div class="well">
@@ -24,8 +26,8 @@
                     <h5>@Html.DisplayFor(modelItem => item.Subtitle)</h5>
                 </div>
 
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a asp-controller="Blog" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a asp-controller="Blog" asp-action="Details" asp-route-id="@item.Id">View</a>
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             }
         </div>

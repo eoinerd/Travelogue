@@ -32,7 +32,7 @@ namespace Travelogue.Controllers
             return View();         
         }
 
-        [Authorize]
+       // [Authorize]
         public IActionResult Trips()
         {
             return View();

@@ -18,12 +18,13 @@ namespace Travelogue.Data
 
         public void AddBlog(Blog blog)
         {
-            var g = _context.Blogs.Add(blog);
+            _context.Blogs.Add(blog);
         }
 
-        public void DeleteBlog(Blog blog)
+        public void DeleteBlog(int Id)
         {
-            _context.Blogs.Remove(blog);
+            var blogToBeDeleted = _context.Blogs.Where(x => x.Id == Id).FirstOrDefault();
+            _context.Blogs.Remove(blogToBeDeleted);
         }
 
         public async Task<IEnumerable<Blog>> GetAllBlogs()
@@ -33,16 +34,21 @@ namespace Travelogue.Data
             return await _context.Blogs.ToListAsync();  //.Result.Join();
         }
 
-        public Blog GetBlogById(int id)
+        public async Task<Blog> GetBlogById(int id)
         {
-            return _context.Blogs.Include(x => x.Posts)
+            return await _context.Blogs.Include(x => x.Posts)
                                         .Where(x => x.Id == id)
-                                        .FirstOrDefault();
+                                        .FirstOrDefaultAsync();
         }
 
         public async Task<bool> SaveChangesAsync()
         {
             return (await _context.SaveChangesAsync()) > 0;
+        }
+
+        public void UpdateBlog(Blog blog)
+        {
+            _context.Update(blog);
         }
     }
 }

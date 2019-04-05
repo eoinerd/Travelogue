@@ -63,40 +63,40 @@ namespace Travelogue
 
             services.AddScoped<IBlogRepository, BlogRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
-            //services.AddScoped<ITravelRepository, TravelRepository>();
+            services.AddScoped<ITravelRepository, TravelRepository>();
 
-            // services.AddIdentity<TravelUser, IdentityRole>(config =>
-            //{
-            //    config.User.RequireUniqueEmail = true;
-            //    config.Password.RequiredLength = 8;
-            //    config.Cookies.ApplicationCookie.LoginPath = "/Auth/Login";
-            //    config.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents()
-            //    {
-            //        OnRedirectToLogin = async ctx =>
-            //        {
-            //            if (ctx.Request.Path.StartsWithSegments("/api") && 
-            //            ctx.Response.StatusCode == 200)
-            //            {
-            //                ctx.Response.StatusCode = 401;
-            //            }
-            //            else
-            //            {
-            //                ctx.Response.Redirect(ctx.RedirectUri);
-            //            }
-            //            await Task.Yield();
-            //        }
-            //    };
-            //})
-            // .AddEntityFrameworkStores<TravelogueContext>();
+            services.AddIdentity<TravelUser, IdentityRole>(config =>
+           {
+               config.User.RequireUniqueEmail = true;
+               config.Password.RequiredLength = 8;
+               config.Cookies.ApplicationCookie.LoginPath = "/Auth/Login";
+               config.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents()
+               {
+                   OnRedirectToLogin = async ctx =>
+                   {
+                       if (ctx.Request.Path.StartsWithSegments("/api") &&
+                       ctx.Response.StatusCode == 200)
+                       {
+                           ctx.Response.StatusCode = 401;
+                       }
+                       else
+                       {
+                           ctx.Response.Redirect(ctx.RedirectUri);
+                       }
+                       await Task.Yield();
+                   }
+               };
+           })
+            .AddEntityFrameworkStores<BlogContext>();
 
             services.AddLogging();
 
             services.AddTransient<GeoCoordsService>();
-            //services.AddTransient<TravelContextSeedData>();
+            services.AddTransient<TravelContextSeedData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, TravelContextSeedData seeder)
         {
             Mapper.Initialize(Configuration =>
             {
@@ -120,7 +120,7 @@ namespace Travelogue
         
             app.UseStaticFiles();
 
-          //  app.UseIdentity();
+            app.UseIdentity();
 
             app.UseMvc(routes =>
             {
@@ -129,7 +129,7 @@ namespace Travelogue
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            //seeder.EnsureSeedData().Wait();
+            seeder.EnsureSeedData().Wait();
         }
     }
 }

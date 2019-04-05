@@ -12,7 +12,7 @@ using Travelogue.ViewModels;
 
 namespace Travelogue.Controllers.Api
 {
-    [Authorize]
+    //[Authorize]
     [Route("/api/trips/{tripName}/stops")]
     public class StopsController : Controller
     {
@@ -33,7 +33,7 @@ namespace Travelogue.Controllers.Api
         {
             try
             {
-                var trip = _repository.GetUserTripByName(tripName, User.Identity.Name);
+                var trip = _repository.GetUserTripByName(tripName, this.User.Identity.Name);
 
                 return Ok(Mapper.Map<IEnumerable<StopsViewModel>>(trip.Stops.OrderBy(x => x.ArrivalDate).ToList()));
             }

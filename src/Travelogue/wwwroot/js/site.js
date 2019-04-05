@@ -26,19 +26,19 @@
     var $wrapper = $("#wrapper");
 
     $("#sidebarToggle").on("click", function () {
-        $sidebarAndWrapper.toggleClass("hide-sidebar");
-        if($sidebarAndWrapper.hasClass("hide-sidebar")){
-            $icon.removeClass("fa-chevron-circle-left");
-            $icon.addClass("fa-chevron-circle-right");
-            $toggleButton.addClass("collapse-toggle");
-            $toggleButton.removeClass("expand-toggle");
-            $wrapper.css("margin-left", "229px");
-        } else {
-            $icon.removeClass("fa-chevron-circle-right");
-            $icon.addClass("fa-chevron-circle-left");
-            $toggleButton.addClass("expand-toggle");
-            $toggleButton.removeClass("collapse-toggle");
-        }
+        //$sidebarAndWrapper.toggleClass("hide-sidebar");
+        $("#sidebar").toggleClass("hide-sidebar");
+        //if($sidebarAndWrapper.hasClass("hide-sidebar")){
+        //    $icon.removeClass("fa-chevron-circle-left");
+        //    $icon.addClass("fa-chevron-circle-right");
+        //    $toggleButton.addClass("collapse-toggle");
+        //    $toggleButton.removeClass("expand-toggle");
+        //} else {
+        //    $icon.removeClass("fa-chevron-circle-right");
+        //    $icon.addClass("fa-chevron-circle-left");
+        //    $toggleButton.addClass("expand-toggle");
+        //    $toggleButton.removeClass("collapse-toggle");
+        //}
     });
 
     var ImageRotator = function (options) {
@@ -79,7 +79,7 @@
     };
 
     ImageRotator.prototype.onCtrlClick = function (imageVM) {
-        if (imageVM == this.images()[1]) {
+        if (imageVM === this.images()[1]) {
             return;
         }
         clearInterval(this.switchInterval);

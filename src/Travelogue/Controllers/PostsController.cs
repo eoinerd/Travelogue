@@ -26,7 +26,6 @@ namespace Travelogue.Controllers
             return View();
         }
 
-        [HttpGet]
         public IActionResult Details(int Id)
         {
             var model = _postRepository.GetPostByBlogId(Id);

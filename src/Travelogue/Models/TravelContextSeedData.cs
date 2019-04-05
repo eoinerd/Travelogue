@@ -3,15 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Travelogue.Data;
 
 namespace Travelogue.Models
 {
     public class TravelContextSeedData
     {
-        private TravelogueContext _context;
+        private BlogContext _context;
         private UserManager<TravelUser> _userManager;
 
-        public TravelContextSeedData(TravelogueContext context, UserManager<TravelUser> userManager)
+        public TravelContextSeedData(BlogContext context, UserManager<TravelUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -19,6 +20,8 @@ namespace Travelogue.Models
 
         public async Task EnsureSeedData()
         {
+            _context.Database.EnsureCreated();
+
             if (await _userManager.FindByEmailAsync("eoinerd@gmail.com") == null)
             {
                 var user = new TravelUser()
@@ -28,6 +31,33 @@ namespace Travelogue.Models
                 };
 
                 await _userManager.CreateAsync(user, "Fiatpunto26%20");
+            }
+
+            // Look for any students.
+            if (_context.Blogs.Any())
+            {
+                return;   // DB has been seeded
+            }
+
+            var blogs = new Blog[]
+            {
+                new Blog{Title="Cambodia", Subtitle="A month in a cool country", AllowsComments=true, CreatedAt=DateTime.Now}
+            };
+            foreach (Blog b in blogs)
+            {
+                _context.Blogs.Add(b);
+            }
+            _context.SaveChanges();
+
+            var posts = new Post[]
+            {
+                new Post{Title="Siem Reap", Text="blah blah blah", BlogId=1, PostedOn=DateTime.Now, Published=true, UserId=1},
+                new Post{Title="Koh Rong", Text="boob obobobob", BlogId=1, PostedOn=DateTime.Now, Published=true, UserId=1},
+                new Post{Title="Phnom Penh", Text="asdasdfasdasf asdasd", BlogId=1, PostedOn=DateTime.Now, Published=true, UserId=1}
+            };
+            foreach (Post p in posts)
+            {
+                _context.Posts.Add(p);
             }
 
             if (!_context.Trips.Any())
@@ -117,7 +147,6 @@ namespace Travelogue.Models
 
                     }
                 };
-
 
                 _context.Trips.Add(worldStop);
                 _context.Stops.AddRange(worldStop.Stops);

@@ -1,8 +1,7 @@
 ﻿(function () {
     "use strict";
 
-    angular.module("app-trips")
-    .controller("tripEditorController", tripEditorController);
+    angular.module("app-trips").controller("tripEditorController", tripEditorController);
 
     function tripEditorController($routeParams, $http) {
         var vm = this;

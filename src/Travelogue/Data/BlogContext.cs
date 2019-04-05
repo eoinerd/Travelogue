@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Travelogue.Models;
 using Travelogue.Models.Blogs;
 
 namespace Travelogue.Data
 {
-    public class BlogContext : DbContext
+    public class BlogContext : IdentityDbContext<TravelUser>
     {
         private IConfigurationRoot _config;
 
@@ -30,6 +31,12 @@ namespace Travelogue.Data
 
         public DbSet<UsersBlog> UsersBlogs { get; set; }
 
+        public DbSet<Trip> Trips { get; set; }
+
+        public DbSet<Stop> Stops { get; set; }
+
+        public DbSet<TravelUser> TravelUsers { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Blog>().ToTable("Blogs");
@@ -40,6 +47,10 @@ namespace Travelogue.Data
             modelBuilder.Entity<Comment>().ToTable("Comments");
             modelBuilder.Entity<Category>().ToTable("Categories");
             modelBuilder.Entity<CategoriesPost>().ToTable("CategoriesPosts");
+            modelBuilder.Entity<Trip>().ToTable("Trips");
+            modelBuilder.Entity<Stop>().ToTable("Stops");
+
+            base.OnModelCreating(modelBuilder);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)

@@ -8,6 +8,8 @@ namespace Travelogue.ViewModels
 {
     public class BlogViewModel
     {
+        public int Id { get; set; }
+
         [Required]
         public string BlogTitle { get; set; }
 
@@ -17,6 +19,6 @@ namespace Travelogue.ViewModels
         [Required]
         public bool AllowsComments { get; set; }
 
-        public List<PostViewModel> Posts { get; set; }
+        public List<PostViewModel> Posts { get; set; }        
     }
 }

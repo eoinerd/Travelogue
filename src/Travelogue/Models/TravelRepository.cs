@@ -3,15 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Travelogue.Data;
 using Travelogue.ViewModels;
 
 namespace Travelogue.Models
 {
     public class TravelRepository : ITravelRepository
     {
-        private TravelogueContext _context;
+        private BlogContext _context;
 
-        public TravelRepository(TravelogueContext context)
+        public TravelRepository(BlogContext context)
         {
             _context = context;
         }

@@ -33,17 +33,17 @@
             </div>
             <!--Short Description-->
             <div class="form-group">
-                @Html.Raw(@post.ShortDescription)
+                @*@Html.Raw(@post.ShortDescription)*@
             </div>
 
             <!--Description-->
             <div class="form-group">
-                @Html.Raw(@post.Description)
+               @* @Html.Raw(@post.Description)*@
             </div>
         </div>
 
         <div class="post-foot">
-            @Html.ActionLink("continue...", "post", "blog",
+            @*@Html.ActionLink("continue...", "post", "blog",
                 new
                 {
                     year = @post.PostedOn.Year,
@@ -52,7 +52,7 @@
                     title = @post.UrlSlug
                 },
                 new { title = "continue..." }
-            )
+            )*@
         </div>
         }
     </div>

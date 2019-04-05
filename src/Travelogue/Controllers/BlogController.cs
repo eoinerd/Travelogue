@@ -32,37 +32,50 @@ namespace Travelogue.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(BlogViewModel model)
+       // [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(BlogViewModel viewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                // should use automapper here.....
-                var blog = new Blog() {};
-                blog.AllowsComments = model.AllowsComments;
-                blog.CreatedAt = DateTime.Now;
-                blog.Subtitle = model.Description;
-                blog.Title = model.BlogTitle;
+                if (ModelState.IsValid)
+                {
+                    // should use automapper here.....
+                    var blog = new Blog();
+                    blog.AllowsComments = viewModel.AllowsComments;
+                    blog.CreatedAt = DateTime.Now;
+                    blog.Subtitle = viewModel.Description;
+                    blog.Title = viewModel.BlogTitle;
 
-                // need exception handling here....
-                _blogRepository.AddBlog(blog);
+                    // need exception handling here....
+                    _blogRepository.AddBlog(blog);
 
-                await _blogRepository.SaveChangesAsync();
+                    await _blogRepository.SaveChangesAsync();
+
+                    return RedirectToAction(nameof(Index));
+                }
             }
-            return RedirectToAction("Index");
+            catch(DbUpdateException ex)
+            {
+                // nned to addd exception to some sort of logger here
+                Console.WriteLine("Error updating: {0}", ex.Message);
+            }
+
+            return View(viewModel);
         }
 
         [HttpGet("")]
-        public IActionResult Details(int Id)
+        public async Task<IActionResult> Details(int Id)
         {
             var blogViewModel = new BlogViewModel();
 
             try
             {
                 // automapper
-                var model = _blogRepository.GetBlogById(Id);
+                var model = await _blogRepository.GetBlogById(Id);
                 blogViewModel.AllowsComments = model.AllowsComments;
                 blogViewModel.BlogTitle = model.Title;
                 blogViewModel.Description = model.Subtitle;
+                blogViewModel.Id = model.Id;
                 blogViewModel.Posts = new List<PostViewModel>();
 
                 // automapper
@@ -83,7 +96,59 @@ namespace Travelogue.Controllers
                 Console.WriteLine("Exception {0}", ex.Message);
             }
 
-            return View("Details", blogViewModel);
+            return View(blogViewModel);
+        }
+
+        public async Task<IActionResult> Delete(int Id)
+        {
+            _blogRepository.DeleteBlog(Id);
+            var result = await _blogRepository.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int Id)
+        {
+            var viewModel = new BlogViewModel();
+
+            var blogModel = await _blogRepository.GetBlogById(Id);
+
+            // automapper needed
+            viewModel.AllowsComments = blogModel.AllowsComments;
+            viewModel.BlogTitle = blogModel.Title;
+            viewModel.Description = blogModel.Subtitle;
+            viewModel.Id = Id;
+            viewModel.Posts = new List<PostViewModel>();
+
+            // automapper
+            foreach (var post in blogModel.Posts)
+            {
+                var postViewModel = new PostViewModel();
+                postViewModel.Id = post.Id;
+                postViewModel.DatePosted = post.PostedOn;
+                postViewModel.Post = post.Text;
+                postViewModel.Title = post.Title;
+                postViewModel.Comments = post.Comments ?? new List<Comment>();
+                viewModel.Posts.Add(postViewModel);
+            }
+            return View(viewModel);
+        }
+        
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(BlogViewModel blogViewModel)
+        {
+            var blogModel = await _blogRepository.GetBlogById(blogViewModel.Id);
+
+            blogModel.Title = blogViewModel.BlogTitle;
+            blogModel.AllowsComments = blogViewModel.AllowsComments;
+            blogModel.Subtitle = blogViewModel.Description;
+
+            _blogRepository.UpdateBlog(blogModel);
+            await _blogRepository.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
 
         //[Route("comments")]

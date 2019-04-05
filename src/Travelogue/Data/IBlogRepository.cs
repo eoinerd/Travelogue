@@ -12,10 +12,12 @@ namespace Travelogue.Data
 
         void AddBlog(Blog blog);
 
-        void DeleteBlog(Blog blog);
+        void DeleteBlog(int Id);
 
         Task<bool> SaveChangesAsync();
 
-        Blog GetBlogById(int id);
+        Task<Blog> GetBlogById(int id);
+
+        void UpdateBlog(Blog blog);
     }
 }

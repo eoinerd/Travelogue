@@ -1,6 +1,6 @@
 ﻿@model Travelogue.ViewModels.BlogViewModel
 @{
-    ViewData["Title"] = "Create Blog";
+    ViewData["Title"] = "Edit Blog";
 }
 
 <div class="row">
@@ -12,6 +12,8 @@
             {
                 <div>@ViewBag.UserMessage</div>
             }
+            
+            <input type="hidden" asp-for="Id"/>
             <div class="form-group">
                 <label asp-for="BlogTitle" class="">Title</label>
                 <input asp-for="BlogTitle" class="form-control" />
@@ -31,7 +33,7 @@
             </div>
             <div>
                 <a asp-controller="Blog" asp-action="Index" class="btn btn-default">Cancel</a>
-                <input type="submit" value="Create Blog" class="btn btn-success" />
+                <input type="submit" value="Update Post" class="btn btn-success" />
             </div>
         </form>
     </div>
