@@ -14,9 +14,11 @@
     "travelmap": "~1.0.2",
     "rich-editor": "*",
     "elliptical-polymer-behaviors": "~1.2.8",
-    "elliptical-mutation-summary": "1.0.2"
+    "elliptical-mutation-summary": "1.0.2",
+    "knockout": "3.4.0"
   },
   "resolutions": {
-    "jquery": ">= 1.7.2"
+    "jquery": ">= 1.7.2",
+    "knockout": "3.4.0"
   }
 }

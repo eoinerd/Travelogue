@@ -41,7 +41,8 @@ namespace Travelogue.Models
 
             var blogs = new Blog[]
             {
-                new Blog{Title="Cambodia", Subtitle="A month in a cool country", AllowsComments=true, CreatedAt=DateTime.Now}
+                new Blog{ Title="Cambodia", Subtitle="A month in a cool country", AllowsComments=true, CreatedAt=DateTime.Now,
+                    UserName ="eoiner", Image="C:\\Users\\Eoin\\Documents\\Visual Studio 2015\\Projects\\Travelogue\\Travelogue\\src\\Travelogue\\wwwroot\\images\\IMG-20181031-WA0000.jpg"}
             };
             foreach (Blog b in blogs)
             {

@@ -2,13 +2,13 @@
 @{
     ViewData["Title"] = "Blog Details";
 }
-<div class="row">
+<div style="padding-left: 20px;">
     <h3>@Html.DisplayFor(modelItem => modelItem.BlogTitle)</h3>
 </div>
-<div class="row">
+<div style="padding-left: 20px;">
     <h5>@Html.DisplayFor(modelItem => modelItem.Description)</h5>
 </div>
-<div class="well">
+<div class="container-fluid">
     @if (Model.Posts != null)
     {
         @foreach (var post in Model.Posts)
@@ -17,13 +17,14 @@
                 <a asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id">
                     @Html.DisplayFor(modelPost => post.Title)
                 </a>
-                <div class="row">
+                <div>
                     @Html.DisplayFor(modelPost => post.Post)
                 </div>
             </div>
         }
     }
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+<div style="padding-left: 15px;">
+    <a class="btn btn-success" asp-controller="Blog" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+    <a class="btn btn-warning" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
 </div>

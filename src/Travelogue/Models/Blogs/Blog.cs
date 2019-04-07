@@ -17,6 +17,10 @@ namespace Travelogue.Models
 
         public DateTime CreatedAt { get; set; }
 
+        public string UserName { get; set; }
+
         public ICollection<Post> Posts { get; set; }
+
+        public string Image { get; set; }
     }
 }

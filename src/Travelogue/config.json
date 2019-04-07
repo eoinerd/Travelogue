@@ -2,6 +2,10 @@
   "MailSettings": {
     "ToAddress": "eoinerd@gmail.com"
   },
+  "ImageSettings": {
+    "RootImagePath": "/images/",
+    "RootUrl":  "http://localhost:54015/Travel/Index/"
+  },
   "ConnectionStrings": {
     "BlogContextConnection": "Server=(localdb)\\MSSQLLocalDB;Database=BlogDb;Trusted_Connection=true;MultipleActiveResultSets=true"
   },

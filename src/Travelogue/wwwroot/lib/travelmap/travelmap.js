@@ -56,7 +56,7 @@
     // calculate past, future and current stops
     var pastLines = settings.stops.slice(0, settings.currentStop + 1);
     var futureLines = settings.stops.slice(settings.currentStop, settings.stops.length);
-    var currentLocation = settings.stops[settings.currentStop];
+    var currentLocation = settings.stops[settings.currentStop - 1];
 
     _initStyle();
 

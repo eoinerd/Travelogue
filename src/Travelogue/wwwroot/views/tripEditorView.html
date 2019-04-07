@@ -1,8 +1,8 @@
 ﻿<div>
-    <div>
-        <a href="#/" class="btn btn-sm btn-default"><i class="fa fa-angle-left"></i>Back</a>
-    </div>
-    <div class="col-md-4">
+    <div class="col-md-4" style="padding-left:30px;">
+        <a href="#/" class="btn btn-sm btn-default" style="margin-top:50px;">
+            <i class="fa fa-angle-left"></i>Back
+        </a>
         <h2>
             {{ vm.tripName }}
         </h2>
@@ -12,17 +12,17 @@
         <form novalidate name="newStopForm" ng-submit="vm.addStop()">
             <div class="form-group">
                 <label>Date</label>
-                <input class="form-control" id="arrival" name="arrival" ng-model="vm.newStop.arrivalDate" required ng-pattern="/^(\d{2})\/(\d{2})\/(\d{4})$/"/>
+                <input class="form-control" id="arrival" name="arrival" ng-model="vm.newStop.arrivalDate" required ng-pattern="/^(\d{2})\/(\d{2})\/(\d{4})$/" />
                 <span class="text-danger" ng-show="newStopForm.arrivalDate.$error.required">Required</span>
                 <span class="text-danger" ng-show="newStopForm.arrivalDate.$error.pattern">Must match pattern MM/DD/YYYY</span>
             </div>
             <div class="form-group">
                 <label>Location</label>
-                <input class="form-control" type="text" id="name" name="name" ng-model="vm.newStop.name" required autocomplete="on"/>
+                <input class="form-control" type="text" id="name" name="name" ng-model="vm.newStop.name" required autocomplete="on" />
                 <span class="text-danger" ng-show="newStopForm.name.$error.required">Required</span>
                 <!--<span class="text-danger" ng-show="newStopForm.name.$error.minlength">Must be 5</span>-->
             </div>
-            <input type="submit" value="add" class="btn btn-primary" ng-disabled="newStopForm.$invalid"/>
+            <input type="submit" value="add" class="btn btn-primary" ng-disabled="newStopForm.$invalid" />
         </form>
 
         <table class="table table-responsive table-striped" style="margin-top: 20px;">

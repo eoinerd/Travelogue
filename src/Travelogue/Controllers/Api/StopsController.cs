@@ -12,7 +12,7 @@ using Travelogue.ViewModels;
 
 namespace Travelogue.Controllers.Api
 {
-    //[Authorize]
+    [Authorize]
     [Route("/api/trips/{tripName}/stops")]
     public class StopsController : Controller
     {

@@ -19,6 +19,8 @@ namespace Travelogue.ViewModels
         [Required]
         public bool AllowsComments { get; set; }
 
+        public string Image { get; set; }
+
         public List<PostViewModel> Posts { get; set; }        
     }
 }

@@ -16,26 +16,18 @@ namespace Travelogue.Controllers
     {
         private IMailService _mailService;
         private IConfigurationRoot _config;
-       // private ITravelRepository _repository;
         private ILogger<HomeController> _logger;
 
         public HomeController(IMailService mailService, IConfigurationRoot config, ILogger<HomeController> logger)
         {
             _mailService = mailService;
             _config = config;
-            //_repository = repository;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
             return View();         
-        }
-
-       // [Authorize]
-        public IActionResult Trips()
-        {
-            return View();
         }
 
         public IActionResult Blog()

@@ -56,6 +56,7 @@ namespace Travelogue
             });
 
             services.AddScoped<IMailService, DebugMailService>();
+            services.AddScoped<IImageWriter, ImageWriter>();
             services.AddSingleton(Configuration);
             //services.AddDbContext<TravelogueContext>();
 

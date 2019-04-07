@@ -217,6 +217,7 @@ C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Tr
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Controllers\BlogController.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Controllers\HomeController.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Controllers\PostsController.cs
+C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Controllers\TravelController.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Controllers\Api\StopsController.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Controllers\Api\TripsController.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Data\BlogContext.cs
@@ -253,11 +254,16 @@ C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Tr
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Services\DebugMailService.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Services\GeoCoordsResult.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Services\GeoCoordsService.cs
+C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Services\IImageWriter.cs
+C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Services\ImageHandler.cs
+C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Services\ImageWriter.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Services\IMailService.cs
+C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Services\WriterHelper.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\ViewModels\BlogViewModel.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\ViewModels\ContactViewModel.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\ViewModels\LoginViewModel.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\ViewModels\PostsViewModel.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\ViewModels\PostViewModel.cs
+C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\ViewModels\RegisterViewModel.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\ViewModels\StopsViewModel.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\ViewModels\TripViewModel.cs

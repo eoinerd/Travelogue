@@ -1,23 +1,10 @@
 ﻿// Write your Javascript code.
 (function () {
 
-    //var ele = $("#userName");
-    //ele.text("Eoin Denneo");
+    $(".carousel-item").first().addClass("active");
 
-    //var main = $("#main");
-
-    //main.on("mouseenter", function () {
-    //    main.style.backgroundColor = "#888";
-    //});
-    //main.on("mouseleave", function () {
-    //    main.style.backgroundColor = "";
-    //});
-
-    //var menuItems = $("ul.menu li a");
-
-    //menuItems.on("click", function () {
-    //    var me = $(this);
-    //    alert(me.text());
+    //$('.carousel').carousel({
+    //    interval: 1200
     //});
 
     var $sidebarAndWrapper = $("#sidebar,#wrapper");
@@ -26,27 +13,16 @@
     var $wrapper = $("#wrapper");
 
     $("#sidebarToggle").on("click", function () {
-        //$sidebarAndWrapper.toggleClass("hide-sidebar");
         $("#sidebar").toggleClass("hide-sidebar");
-        //if($sidebarAndWrapper.hasClass("hide-sidebar")){
-        //    $icon.removeClass("fa-chevron-circle-left");
-        //    $icon.addClass("fa-chevron-circle-right");
-        //    $toggleButton.addClass("collapse-toggle");
-        //    $toggleButton.removeClass("expand-toggle");
-        //} else {
-        //    $icon.removeClass("fa-chevron-circle-right");
-        //    $icon.addClass("fa-chevron-circle-left");
-        //    $toggleButton.addClass("expand-toggle");
-        //    $toggleButton.removeClass("collapse-toggle");
-        //}
+        $(this).children('.fa').toggleClass('fa-chevron-circle-up fa-chevron-circle-down');
     });
 
     var ImageRotator = function (options) {
         // Set main component properties
         this.width = options.width + 'px';
         this.height = options.height + 'px';
-        this.interval = options.interval || 1000;
-        this.transition = options.transition || '0.4s linear';
+        this.interval = options.interval || 3000;
+        this.transition = options.transition || '2.8s ease';
         this.imagesToLoad = options.images;
         // Create sub-view-models for each image
         this.imageViewModels = [];
@@ -134,6 +110,7 @@
         imageEl.src = imgUrl;
     };
 
+
     var images = ['http://cdn-image.travelandleisure.com/sites/default/files/styles/1600x1000/public/brussels-evening-belg0316.jpg?itok=thl3zxby',
         'http://cdn-image.travelandleisure.com/sites/default/files/styles/1600x1000/public/1476113065/barcelona-spain-waterfront-SPDEAL1016.jpg?itok=CKzwLZaO',
         'http://images.trvl-media.com/media/content/shared/images/travelguides/Burlington-601763-smallTabletRetina.jpg',
@@ -141,14 +118,12 @@
         'https://image.jimcdn.com/app/cms/image/transf/none/path/sa6549607c78f5c11/image/id5715922f9bbddee/version/1472727543/prague.jpg'];
         var rotator = new ImageRotator({
             images: images,
-            width: 640,
-            height: 426,
-            transition: '3.4s linear',
-            interval: 2000
+            width: 1400,
+            height: 626,
+            transition: '3.4s ease',
+            interval: 3000
         });
         ko.applyBindings(rotator, document.body);
-
-   
 })();
 
 

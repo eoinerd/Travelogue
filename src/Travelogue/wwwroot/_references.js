@@ -26,6 +26,7 @@
 /// <reference path="lib/jquery-mutation-summary/dist/mutation.summary.js" />
 /// <reference path="lib/jquery-validation/dist/jquery.validate.js" />
 /// <reference path="lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" />
+/// <reference path="lib/knockout/dist/knockout.js" />
 /// <reference path="lib/travelmap/travelmap.js" />
 /// <reference path="lib/underscore/underscore.js" />
 /// <reference path="lib/webcomponentsjs/webcomponents.js" />

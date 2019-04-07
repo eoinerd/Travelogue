@@ -7,6 +7,9 @@ using Travelogue.Models;
 using Travelogue.ViewModels;
 using Travelogue.Data;
 using Microsoft.EntityFrameworkCore;
+using Travelogue.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 
 namespace Travelogue.Controllers
 {
@@ -14,10 +17,14 @@ namespace Travelogue.Controllers
     {
         private readonly IBlogRepository _blogRepository;
         private readonly IList<Comment> _comments;
+        private readonly IImageWriter _imageWriter;
+        private readonly IConfigurationRoot _config;
 
-        public BlogController(IBlogRepository blogRepository)
+        public BlogController(IBlogRepository blogRepository, IImageWriter imageWriter, IConfigurationRoot config)
         {
             _blogRepository = blogRepository;
+            _imageWriter = imageWriter;
+            _config = config;
         }
 
         public async Task<IActionResult> Index()
@@ -33,7 +40,7 @@ namespace Travelogue.Controllers
 
         [HttpPost]
        // [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(BlogViewModel viewModel)
+        public async Task<IActionResult> Create(BlogViewModel viewModel, IFormFile Image)
         {
             try
             {
@@ -45,7 +52,9 @@ namespace Travelogue.Controllers
                     blog.CreatedAt = DateTime.Now;
                     blog.Subtitle = viewModel.Description;
                     blog.Title = viewModel.BlogTitle;
-
+                    blog.UserName = User.Identity.Name;
+                    var secureFileName = await _imageWriter.UploadImage(Image);
+                    blog.Image = _config["ImageSettings:RootImagePath"] + secureFileName;
                     // need exception handling here....
                     _blogRepository.AddBlog(blog);
 

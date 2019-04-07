@@ -12,10 +12,12 @@ namespace Travelogue.Controllers
     public class AuthController : Controller
     {
         private SignInManager<TravelUser> _signInManager;
+        private UserManager<TravelUser> _userManager;
 
-        public AuthController(SignInManager<TravelUser> signInManager)
+        public AuthController(SignInManager<TravelUser> signInManager, UserManager<TravelUser> userManager)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
         }
 
         public IActionResult Login()
@@ -39,7 +41,7 @@ namespace Travelogue.Controllers
                 {
                     if(string.IsNullOrWhiteSpace(returnUrl))
                     {
-                        return RedirectToAction("Trips", "Home");
+                        return RedirectToAction("Trips", "Travel");
                     }
                     else
                     {
@@ -55,6 +57,46 @@ namespace Travelogue.Controllers
             return View();
         }
 
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Register(RegisterViewModel vm, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                if (await _userManager.FindByEmailAsync(vm.Email) == null)
+                {
+                    var user = new TravelUser()
+                    {
+                        UserName = vm.Username,
+                        Email = vm.Email,
+                        PhoneNumber = vm.PhoneNumber.ToString()
+                    };
+
+                    var res =  await _userManager.CreateAsync(user, vm.Password);
+
+                    if (res.Errors.Any())
+                        return View();
+
+                    var signInResult = await _signInManager.PasswordSignInAsync(vm.Username, vm.Password, true, false);
+                }
+     
+                if (string.IsNullOrWhiteSpace(returnUrl))
+                {
+                    return RedirectToAction("Trips", "Travel");
+                }
+                else
+                {
+                    return Redirect(returnUrl);
+                }            
+            }
+
+            return View();
+        }
+
         public async Task<ActionResult> Logout()
         {
             if(User.Identity.IsAuthenticated)
@@ -62,7 +104,7 @@ namespace Travelogue.Controllers
                 await _signInManager.SignOutAsync();
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Travel");
         }
     }
 }

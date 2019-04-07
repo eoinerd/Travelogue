@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:54015/",
+      "applicationUrl": "http://localhost:54015/Travel/Index/",
       "sslPort": 0
     }
   },

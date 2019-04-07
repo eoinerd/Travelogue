@@ -16,7 +16,9 @@ namespace Travelogue.Data
 
         Task<bool> SaveChangesAsync();
 
-        Task<Blog> GetBlogById(int id);
+        Task<IEnumerable<Blog>> GetBlogsByUsername(string username);
+
+        Task<Blog> GetBlogById(int Id);
 
         void UpdateBlog(Blog blog);
     }

@@ -34,10 +34,17 @@ namespace Travelogue.Data
             return await _context.Blogs.ToListAsync();  //.Result.Join();
         }
 
-        public async Task<Blog> GetBlogById(int id)
+        public async Task<IEnumerable<Blog>> GetBlogsByUsername(string name)
+        {
+            return await _context.Blogs//.Include(x => x.Posts)
+                                        .Where(x => x.UserName == name)
+                                        .ToListAsync();
+        }
+
+        public async Task<Blog> GetBlogById(int Id)
         {
             return await _context.Blogs.Include(x => x.Posts)
-                                        .Where(x => x.Id == id)
+                                        .Where(x => x.Id == Id)
                                         .FirstOrDefaultAsync();
         }
 
