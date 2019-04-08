@@ -19,30 +19,30 @@ namespace Travelogue.Controllers
         private IMailService _mailService;
         private IConfigurationRoot _config;
         private ILogger<TravelController> _logger;
-        private IBlogRepository _blogRepo;
+        private IPostRepository _postRepo;
 
         public TravelController(IMailService mailService, IConfigurationRoot config, 
-            ILogger<TravelController> logger, IBlogRepository blogRepo)
+            ILogger<TravelController> logger, IPostRepository postRepo)
         {
             _mailService = mailService;
             _config = config;
             _logger = logger;
-            _blogRepo = blogRepo;
+            _postRepo = postRepo;
         }
 
         public async Task<IActionResult> Index()
         {
-            var blogs = await _blogRepo.GetBlogsByUsername(User.Identity.Name);
+            var posts = await _postRepo.GetPostsByUsername(User.Identity.Name);
 
-            var viewModelList = new List<BlogViewModel>();
-            foreach(var blog in blogs)
+            var viewModelList = new List<PostViewModel>();
+            foreach(var post in posts)
             {
-                var vm = new BlogViewModel();
-                vm.AllowsComments = blog.AllowsComments;
-                vm.BlogTitle = blog.Title;
-                vm.Description = blog.Subtitle;
-                vm.Id = blog.Id;
-                vm.Image = _config["ImageSettings:Url"] + blog.Image;
+                var vm = new PostViewModel();
+                vm.AllowsComments = post.AllowsComments;
+                vm.Title = post.Title;
+                vm.Post = post.Text;
+                vm.Id = post.Id;
+                vm.Image = _config["ImageSettings:RootUrl"] + post.Image;
 
                 viewModelList.Add(vm);
             }

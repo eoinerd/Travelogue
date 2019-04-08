@@ -10,9 +10,9 @@ namespace Travelogue.Models
 {
     public class TravelRepository : ITravelRepository
     {
-        private BlogContext _context;
+        private StoryContext _context;
 
-        public TravelRepository(BlogContext context)
+        public TravelRepository(StoryContext context)
         {
             _context = context;
         }

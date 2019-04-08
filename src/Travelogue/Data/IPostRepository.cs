@@ -15,5 +15,11 @@ namespace Travelogue.Data
         void DeletePost(Post post);
 
         Post GetPostByBlogId(int id);
+
+        Task<IEnumerable<Post>> GetPostsByUsername(string username);
+
+        Task<IEnumerable<Post>> GetAllPosts();
+
+        Task<bool> SaveChangesAsync();
     }
 }

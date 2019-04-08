@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Travelogue.Models;
 using Travelogue.ViewModels;
 using Travelogue.Data;
 using Microsoft.EntityFrameworkCore;
 using Travelogue.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Travelogue.Models;
 
 namespace Travelogue.Controllers
 {
@@ -29,7 +29,7 @@ namespace Travelogue.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var model = await _blogRepository.GetAllBlogs();
+            var model = new List<BlogViewModel>();//await _blogRepository.GetAllBlogs();
             return View(model);
         }
 
@@ -56,9 +56,9 @@ namespace Travelogue.Controllers
                     var secureFileName = await _imageWriter.UploadImage(Image);
                     blog.Image = _config["ImageSettings:RootImagePath"] + secureFileName;
                     // need exception handling here....
-                    _blogRepository.AddBlog(blog);
+                    //_blogRepository.AddBlog(blog);
 
-                    await _blogRepository.SaveChangesAsync();
+                    //await _blogRepository.SaveChangesAsync();
 
                     return RedirectToAction(nameof(Index));
                 }
@@ -80,7 +80,7 @@ namespace Travelogue.Controllers
             try
             {
                 // automapper
-                var model = await _blogRepository.GetBlogById(Id);
+                var model = new Blog();//await _blogRepository.GetBlogById(Id);
                 blogViewModel.AllowsComments = model.AllowsComments;
                 blogViewModel.BlogTitle = model.Title;
                 blogViewModel.Description = model.Subtitle;
@@ -110,8 +110,8 @@ namespace Travelogue.Controllers
 
         public async Task<IActionResult> Delete(int Id)
         {
-            _blogRepository.DeleteBlog(Id);
-            var result = await _blogRepository.SaveChangesAsync();
+            //_blogRepository.DeleteBlog(Id);
+            //var result = await _blogRepository.SaveChangesAsync();
 
             return RedirectToAction("Index");
         }
@@ -121,7 +121,7 @@ namespace Travelogue.Controllers
         {
             var viewModel = new BlogViewModel();
 
-            var blogModel = await _blogRepository.GetBlogById(Id);
+            var blogModel = new Blog(); //await _blogRepository.GetBlogById(Id);
 
             // automapper needed
             viewModel.AllowsComments = blogModel.AllowsComments;
@@ -148,14 +148,14 @@ namespace Travelogue.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(BlogViewModel blogViewModel)
         {
-            var blogModel = await _blogRepository.GetBlogById(blogViewModel.Id);
+            var blogModel = new Blog(); // await _blogRepository.GetBlogById(blogViewModel.Id);
 
             blogModel.Title = blogViewModel.BlogTitle;
             blogModel.AllowsComments = blogViewModel.AllowsComments;
             blogModel.Subtitle = blogViewModel.Description;
 
-            _blogRepository.UpdateBlog(blogModel);
-            await _blogRepository.SaveChangesAsync();
+            //_blogRepository.UpdateBlog(blogModel);
+            //await _blogRepository.SaveChangesAsync();
 
             return RedirectToAction("Index");
         }

@@ -19,7 +19,14 @@ namespace Travelogue.ViewModels
 
         [Required]
         public string Post { get; set; }
-        public DateTime DatePosted { get; internal set; }
-        public ICollection<Comment> Comments { get; internal set; }
+
+        [Required]
+        public bool AllowsComments { get; set; }
+
+        public string Image { get; set; }
+
+        public DateTime DatePosted { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
     }
 }

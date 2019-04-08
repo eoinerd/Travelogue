@@ -1,6 +1,6 @@
 ﻿<div>
-    <div class="col-md-4" style="padding-left:30px;">
-        <a href="#/" class="btn btn-sm btn-default" style="margin-top:50px;">
+    <div class="col-md-4" style="padding-left:20px;display:inline-block;">
+        <a href="#/" class="btn btn-link" style="margin-top:20px;">
             <i class="fa fa-angle-left"></i>Back
         </a>
         <h2>
@@ -22,22 +22,25 @@
                 <span class="text-danger" ng-show="newStopForm.name.$error.required">Required</span>
                 <!--<span class="text-danger" ng-show="newStopForm.name.$error.minlength">Must be 5</span>-->
             </div>
-            <input type="submit" value="add" class="btn btn-primary" ng-disabled="newStopForm.$invalid" />
+            <input type="submit" value="Add Stop" class="btn btn-success" ng-disabled="newStopForm.$invalid" />
         </form>
 
         <table class="table table-responsive table-striped" style="margin-top: 20px;">
             <tr>
                 <th>Location</th>
                 <th>Arrival</th>
+                <th>Post</th>
             </tr>
             <tr ng-repeat="stop in vm.stops">
                 <td>{{ stop.name }}</td>
                 <td>{{ stop.arrivalDate | date:'MM-dd-yyyy' }}</td>
+                <td>
+                    <a href="/Posts/Create?stopId={{stop.order}}">Write Post</a>
+                </td>
             </tr>
         </table>
     </div>
-
-    <div class="col-md-8">
+    <div class="map-container">
         <div id="map"></div>
     </div>
 </div>

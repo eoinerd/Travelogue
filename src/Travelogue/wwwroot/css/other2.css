@@ -21,40 +21,41 @@ body {
 }
 
 .headshot{
-    max-width: 50px;
-    border: 1px solid #222;
-    padding: 3px;
+    max-width: 100px;
+    border: 1px solid black;
+    border-radius: 50%;
+    margin-bottom: 10px;
 }
 
 .menu {
     font-size: 12px;
 }
 
-    .menu li {
-        list-style-type: none;
-    }
+.menu li {
+    list-style-type: none;
+}
 
-    .menu li.active {
-        font-weight: bold;
-    }
+.menu li.active {
+    font-weight: bold;
+}
 
 #sidebar {
     background: #f7f7f0;
-    border:1px solid black; 
+    border:1px solid #dadad2; 
     color: #eee;
     position: fixed;
-    height: 50%;
-    width: 210px;
+    width: 257px;
     overflow: hidden;
     right: 17px;
-    top:0px;
+    top:60px;
     margin: 0;
     -moz-transition: top ease .45s;
     -o-transition: top ease .45s; 
     -webkit-transition: top ease .45s;
     transition: top ease .45s;
     z-index: 70;
-    border-radius: 3%;
+    border-radius: 2%;
+    padding: 20px;
 }
 
 #sidebar.hide-sidebar {
@@ -148,8 +149,6 @@ body {
 
 .loading img {
     position: absolute;
-    /*left: 48%;
-    top:45%;*/
 }
 
 .controls {
@@ -210,4 +209,61 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+.map-container{
+    width: 606px;
+    float: right;
+    display: inline-block;
+}
+.card-container {
+  cursor: pointer;
+  height: 150px;
+  perspective: 600;
+  position: relative;
+  width: 150px;
+  display: inline-block;
+  margin-right: -15px;
+}
+.card {
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: all 1s ease-in-out;
+  width: 100%;
+  margin-left: 50px;
+  border-radius: 50%;
+  border:none;
+}
+.card:hover {
+  transform: rotateY(180deg);
+}
+.card .side {
+  backface-visibility: hidden;
+  border-radius: 6px;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+}
+.card .back {
+  color: #0087cc;
+  top: 30px;
+  text-align: center;
+  transform: rotateY(180deg);
+}
+
+.fa-chevron-circle-down:hover, .fa-chevron-circle-up:hover, .sidetoggle:hover {
+    cursor: pointer;
+    color: #eee !important;
+}
+
+.headshot-nav{
+    max-width: 50px;
+    border-radius: 50%;
+}
+#userName{
+    color:#000;
+    font-weight:bold;
+    margin-left: 26px;
 }

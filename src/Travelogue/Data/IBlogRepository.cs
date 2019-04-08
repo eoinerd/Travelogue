@@ -8,18 +8,18 @@ namespace Travelogue.Data
 {
     public interface IBlogRepository
     {
-        Task<IEnumerable<Blog>> GetAllBlogs();
+        //Task<IEnumerable<Blog>> GetAllBlogs();
 
-        void AddBlog(Blog blog);
+        //void AddBlog(Blog blog);
 
-        void DeleteBlog(int Id);
+        //void DeleteBlog(int Id);
 
-        Task<bool> SaveChangesAsync();
+        //Task<bool> SaveChangesAsync();
 
-        Task<IEnumerable<Blog>> GetBlogsByUsername(string username);
+        //Task<IEnumerable<Blog>> GetBlogsByUsername(string username);
 
-        Task<Blog> GetBlogById(int Id);
+        //Task<Blog> GetBlogById(int Id);
 
-        void UpdateBlog(Blog blog);
+        //void UpdateBlog(Blog blog);
     }
 }

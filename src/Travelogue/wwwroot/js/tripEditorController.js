@@ -20,7 +20,7 @@
         $http.get(url)
             .then(function (response) {
                 // success
-                console.log(response);
+                console.log(vm.stops);
                 angular.copy(response.data, vm.stops);
                 _showMap(vm.stops);
             }, function (err) {

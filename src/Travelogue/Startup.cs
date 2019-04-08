@@ -60,9 +60,9 @@ namespace Travelogue
             services.AddSingleton(Configuration);
             //services.AddDbContext<TravelogueContext>();
 
-            services.AddDbContext<BlogContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<StoryContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IBlogRepository, BlogRepository>();
+            //services.AddScoped<IBlogRepository, BlogRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<ITravelRepository, TravelRepository>();
 
@@ -88,7 +88,7 @@ namespace Travelogue
                    }
                };
            })
-            .AddEntityFrameworkStores<BlogContext>();
+            .AddEntityFrameworkStores<StoryContext>();
 
             services.AddLogging();
 

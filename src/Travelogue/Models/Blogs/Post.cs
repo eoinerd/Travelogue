@@ -17,8 +17,14 @@ namespace Travelogue.Models
 
         public int UserId { get; set; }
 
-        public int BlogId { get; set; }
+        public int StopId { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
+
+        public bool AllowsComments { get; set; }
+
+        public string UserName { get; set; }
+
+        public string Image { get; set; }
     }
 }
