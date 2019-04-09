@@ -9,5 +9,7 @@ namespace Travelogue.Models
     public class TravelUser : IdentityUser
     {
         public DateTime FirstTrip { get; set; }
+
+        public string Image { get; set; }
     }
 }

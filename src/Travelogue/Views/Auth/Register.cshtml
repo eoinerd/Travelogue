@@ -6,36 +6,65 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <h3>
-            Create Account
-        </h3>
-        <form method="post" novalidate>
-            @*<div asp-validation-summary="ValidationSummary.ModelOnly"></div>*@
-            <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password"></label>
-                <input type="password" asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Username"></label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Register" class="btn btn-success" />
-            </div>
-        </form>
+<form method="post" enctype="multipart/form-data">
+    <div class="card-custom bg-light">
+        <article class="card-body mx-auto" style="max-width: 400px;">
+            <h4 class="card-title mt-3 text-center">Create Account</h4>
+            <p class="text-center">Get started with your free account</p>
+            <p>
+                <a href="" class="btn btn-block btn-twitter"> <i class="fa fa-twitter"></i>   Login via Twitter</a>
+                <a href="" class="btn btn-block btn-facebook"> <i class="fa fa-facebook-f"></i>   Login via facebook</a>
+            </p>
+            <p class="divider-text">
+                <span class="bg-light">OR</span>
+            </p>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend" style="max-width: 40px;">
+                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                    </div>
+                    <input asp-for="Username" class="form-control" placeholder="User name" />
+                    <span asp-validation-for="Username"></span>
+                </div> <!-- form-group// -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend" style="max-width: 40px;">
+                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                    </div>
+                    <input asp-for="Email" class="form-control" placeholder="Email" />
+                    <span asp-validation-for="Email"></span>
+                </div> <!-- form-group// -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend" style="max-width: 40px;">
+                        <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+                    </div>
+                    <input asp-for="PhoneNumber" class="form-control" placeholder="Phone" />
+                    <span asp-validation-for="PhoneNumber"></span>
+                </div> <!-- form-group// -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend" style="max-width: 40px;">
+                        <span class="input-group-text"> <i class="fa fa-image"></i> </span>
+                    </div>
+                    <input type="file" name="Image" id="Imageinput" asp-for="Image" class="form-control" placeholder="Upload image" />
+                    <span asp-validation-for="Image"></span>
+                </div> <!-- form-group end.// -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend" style="max-width: 40px;">
+                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    <input type="password" asp-for="Password" class="form-control" placeholder="Password" />
+                    <span asp-validation-for="Password"></span>
+                </div> <!-- form-group// -->
+                @*<div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                        </div>
+                        <input class="form-control" placeholder="Repeat password" type="password">
+                    </div>*@
+                <div class="form-group">
+                    <input type="submit" value="Register" class="btn btn-success" />
+                </div> <!-- form-group// -->
+                <p class="text-center">Have an account? <a href="">Log In</a> </p>
+        </article>
     </div>
-</div>
+
+</form>
+

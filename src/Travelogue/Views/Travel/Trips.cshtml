@@ -11,8 +11,26 @@
     <script src="~/js/simpleControls.js"></script>
     <script src="~/js/app-trips.js"></script>
     <script src="~/js/tripsController.js"></script>
+    <script src="~/js/bootstrap_confirm_dialog.js"></script>
     <script src="~/js/tripEditorController.js"></script>
 }
+
+<div class="modal" id="confirmModal" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true" data-backdrop="false">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog modal-sm vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btn_close_modal_info"><span aria-hidden="true">&times;</span></button>
+                    <div id="confirmContent" style="font-weight: normal;"></div>
+                </div>
+                <div class="modal-footer bg-warning text-center" id="footer_modal">
+                    <button type="button" class="btn btn-primary btn_yes_confirm">Yes</button>
+                    <button type="button" class="btn btn-primary btn_no_confirm" data-dismiss="modal" aria-label="Close">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="row" ng-app="app-trips">
     <div ng-view style="width:100%;"></div>

@@ -8,13 +8,11 @@ namespace Travelogue.Data
 {
     public interface IPostRepository
     {
-        Task<IEnumerable<Post>> GetPostsByBlogId(int blogId);
+        Task<Post> GetPostById(int Id);
 
         void CreatePost(Post post);
 
         void DeletePost(Post post);
-
-        Post GetPostByBlogId(int id);
 
         Task<IEnumerable<Post>> GetPostsByUsername(string username);
 

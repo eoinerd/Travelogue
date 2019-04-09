@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Travelogue.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace Travelogue.Controllers
 {
@@ -17,6 +18,7 @@ namespace Travelogue.Controllers
         private IMailService _mailService;
         private IConfigurationRoot _config;
         private ILogger<HomeController> _logger;
+        private UserManager<TravelUser> _userManager;
 
         public HomeController(IMailService mailService, IConfigurationRoot config, ILogger<HomeController> logger)
         {

@@ -21,6 +21,7 @@ namespace Travelogue.Controllers
         private readonly IList<Comment> _comments;
         private readonly IImageWriter _imageWriter;
         private readonly IConfigurationRoot _config;
+
         public PostsController(IPostRepository postRepository, IImageWriter imageWriter, IConfigurationRoot config)
         {
             _postRepository = postRepository;
@@ -30,13 +31,29 @@ namespace Travelogue.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var model = await _postRepository.GetAllPosts();
-            return View(model);
+            var posts = await _postRepository.GetAllPosts();
+
+            var viewModelList = new List<PostViewModel>();
+
+            foreach (var post in posts)
+            {
+                var vm = new PostViewModel();
+                vm.AllowsComments = post.AllowsComments;
+                vm.Title = post.Title;
+                vm.DatePosted = post.PostedOn;
+                vm.Post = post.Text.Substring(0, 300) + "....";
+                vm.Id = post.Id;
+                vm.Image = _config["ImageSettings:RootUrl"] + post.Image;
+
+                viewModelList.Add(vm);
+            }
+
+            return View(viewModelList);
         }
 
-        public IActionResult Details(int Id)
+        public async Task<IActionResult> Details(int Id)
         {
-            var model = _postRepository.GetPostByBlogId(Id);
+            var model = await _postRepository.GetPostById(Id);
 
             // AutoMapper
             var postViewModel = new PostViewModel();
@@ -44,6 +61,7 @@ namespace Travelogue.Controllers
             postViewModel.DatePosted = model.PostedOn;
             postViewModel.Title = model.Title;
             postViewModel.Post = model.Text;
+            postViewModel.Image = _config["ImageSettings:RootUrl"] + model.Image;
 
             return View(postViewModel);
         }

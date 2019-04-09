@@ -3,7 +3,7 @@
 
     angular.module("app-trips").controller("tripEditorController", tripEditorController);
 
-    function tripEditorController($routeParams, $http) {
+    function tripEditorController($routeParams, $http, $location) {
         var vm = this;
 
         var input = document.getElementById('name');
@@ -41,13 +41,23 @@
                     // success
                     vm.stops.push(response.data);
                     _showMap(vm.stops);
-                    vm.newStop = {};
+                   
+                    show_confirm_message({
+                        message: "Do you want to create a post for " + vm.newStop.name + "",
+                        executeYes: function () {
+                            window.location = "/Posts/Create";
+                        },
+                        executeNo: function () {
+                            return false;
+                        }
+                    });
 
                 }, function () {
                     //  failure
                     vm.errorMessage = "Failed to add stop..."
                 })
             .finally(function () {
+                vm.newStop = {};
                 vm.isBusy = false;
             });
         };
@@ -72,6 +82,19 @@
                 initialZoom: 3
             });
         }
+    }
+
+    function createPost(message) {
+        show_confirm_message({
+            message: message,
+            executeYes: function () {
+                //window.location("~/Posts/Create");
+                $location.path('~/Posts/Create');
+            },
+            executeNo: function () {
+                return false;
+            }
+        });
     }
 
 })();

@@ -26,14 +26,9 @@ namespace Travelogue.Data
             _context.Posts.Remove(post);
         }
 
-        public Post GetPostByBlogId(int id)
+        public async Task<Post> GetPostById(int id)
         {
-            return _context.Posts.Where(x => x.Id == id).FirstOrDefault();
-        }
-
-        public async Task<IEnumerable<Post>> GetPostsByBlogId(int blogId)
-        {
-            return await _context.Posts.ToListAsync();
+            return await _context.Posts.Where(x => x.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Post>> GetPostsByUsername(string name)
