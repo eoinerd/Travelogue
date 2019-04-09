@@ -3,33 +3,27 @@
     ViewData["Title"] = "View Post";
 }
 <div class="container">
-
     <div class="row">
-
         <!-- Post Content Column -->
         <div class="col-lg-8">
-
             <!-- Title -->
             <h1 class="mt-4">@Html.DisplayFor(modelPost => Model.Title)</h1>
-
             <!-- Author -->
-            <p class="lead">
+            <p class="lead" style="display: inline-block;">
                 by
                 <a href="#">@User.Identity.Name</a>
             </p>
-
+            <div style="display: inline-block;float: right;">
+                <a class="btn btn-primary" asp-controller="Posts" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                <a class="btn btn-primary" asp-controller="Posts" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+            </div>
             <hr>
-
             <!-- Date/Time -->
             <p>Posted on @Html.DisplayFor(modelPost => Model.DatePosted)</p>
-
             <hr>
-
             <!-- Preview Image -->
             <img class="img-fluid rounded" src="@Html.DisplayFor(modelPost => Model.Image)" alt="" />
-
             <hr>
-
             <!-- Post Content -->
             <p class="lead">@Model.Post</p>
 
@@ -87,20 +81,6 @@
 
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
-
-            <!-- Search Widget -->
-            <div class="card-custom my-4">
-                <h5 class="card-header">Search</h5>
-                <div class="card-body">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-secondary" type="button">Go!</button>
-                        </span>
-                    </div>
-                </div>
-            </div>
-
             <!-- Categories Widget -->
             <div class="card-custom my-4">
                 <h5 class="card-header">Categories</h5>
@@ -143,10 +123,6 @@
                     You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
                 </div>
             </div>
-
         </div>
-
     </div>
-    <!-- /.row -->
-
 </div>

@@ -45,7 +45,8 @@
                     show_confirm_message({
                         message: "Do you want to create a post for " + vm.newStop.name + "",
                         executeYes: function () {
-                            window.location = "/Posts/Create";
+                            var redirectUrl = "/Posts/Create#/withMap/" + vm.tripName + "/" + vm.stops[vm.stops.length-1].name
+                            window.location = redirectUrl;
                         },
                         executeNo: function () {
                             return false;

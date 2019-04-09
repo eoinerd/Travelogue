@@ -12,12 +12,14 @@ namespace Travelogue.Data
 
         void CreatePost(Post post);
 
-        void DeletePost(Post post);
+        void DeletePost(int Id);
 
         Task<IEnumerable<Post>> GetPostsByUsername(string username);
 
         Task<IEnumerable<Post>> GetAllPosts();
 
         Task<bool> SaveChangesAsync();
+
+        void UpdatePost(Post postModel);
     }
 }

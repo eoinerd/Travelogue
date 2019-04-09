@@ -61,6 +61,7 @@ namespace Travelogue.Controllers
             postViewModel.DatePosted = model.PostedOn;
             postViewModel.Title = model.Title;
             postViewModel.Post = model.Text;
+            postViewModel.Id = model.Id;
             postViewModel.Image = _config["ImageSettings:RootUrl"] + model.Image;
 
             return View(postViewModel);
@@ -85,6 +86,7 @@ namespace Travelogue.Controllers
                     post.PostedOn = DateTime.Now;
                     post.Text = viewModel.Post;
                     post.Title = viewModel.Title;
+                    post.Published = viewModel.Published;
                     post.UserName = User.Identity.Name;
                     var secureFileName = await _imageWriter.UploadImage(Image);
                     post.Image = _config["ImageSettings:RootImagePath"] + secureFileName;
@@ -103,6 +105,58 @@ namespace Travelogue.Controllers
             }
 
             return View(viewModel);
+        }
+
+        public async Task<IActionResult> Delete(int Id)
+        {
+            _postRepository.DeletePost(Id);
+            var result = await _postRepository.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int Id)
+        {
+            var postViewModel = new PostViewModel();
+
+            var model = await _postRepository.GetPostById(Id);
+
+            // automapper needed
+            postViewModel.Comments = model.Comments ?? new List<Comment>();
+            postViewModel.DatePosted = model.PostedOn;
+            postViewModel.AllowsComments = model.AllowsComments;
+            postViewModel.Title = model.Title;
+            postViewModel.Post = model.Text;
+            postViewModel.Published = model.Published;
+            postViewModel.Id = model.Id;
+            postViewModel.Image = _config["ImageSettings:RootUrl"] + model.Image;
+
+            return View(postViewModel);
+        }
+
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(PostViewModel postViewModel, IFormFile Image)
+        {
+            var postModel = await _postRepository.GetPostById(postViewModel.Id);
+
+            postModel.Title = postViewModel.Title;
+            postModel.AllowsComments = postViewModel.AllowsComments;
+
+            if(Image != null)
+            {
+                var secureFileName = await _imageWriter.UploadImage(Image);
+                postModel.Image = _config["ImageSettings:RootImagePath"] + secureFileName;
+            }
+            
+            postModel.Published = postViewModel.Published;
+            postModel.Text = postViewModel.Post;
+
+            _postRepository.UpdatePost(postModel);
+            await _postRepository.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
     }
 }

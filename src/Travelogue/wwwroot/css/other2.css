@@ -95,7 +95,7 @@ body {
     position: absolute;
 }
 
-.sidetoggle.expand-toggle {
+/*.sidetoggle.expand-toggle {
      margin-left: -138px;
     -moz-transition: margin-left ease .45s;
     -o-transition: margin-left ease .45s;
@@ -109,11 +109,12 @@ body {
     -o-transition: margin-left ease .45s;
     -webkit-transition: margin-left ease .45s;
     transition: margin-left ease .45s;
-}
+}*/
 
 #sidebarToggle {
     position: fixed;
     top: 1px;
+    box-shadow:none;
 }
 
 .rotator {

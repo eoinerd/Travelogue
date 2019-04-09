@@ -45,6 +45,23 @@ namespace Travelogue.Controllers.Api
             return BadRequest("Failed to get stops");
         }
 
+        //[HttpGet("")]
+        //public IActionResult GetStop(string stopName, string tripName)
+        //{
+        //    try
+        //    {
+        //        //var stop = _repository.GetUserStopByNameAndTrip(stopName, tripName, this.User.Identity.Name);
+
+        //        //return Ok(Mapper.Map<IEnumerable<StopsViewModel>>(trip.Stops.OrderBy(x => x.ArrivalDate).ToList()));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError("Failed to get stops: {0}", ex);
+        //    }
+
+        //    return BadRequest("Failed to get stops");
+        //}
+
         [HttpPost("")]
         public async Task<IActionResult> Post(string tripName, [FromBody]StopsViewModel vm)
         {

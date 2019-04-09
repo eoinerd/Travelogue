@@ -103,7 +103,7 @@ namespace Travelogue
             {
                 Configuration.CreateMap<TripViewModel, Trip>().ReverseMap();
                 Configuration.CreateMap<StopsViewModel, Stop>().ReverseMap();
-                Configuration.CreateMap<PostsViewModel, Post>().ReverseMap();
+                //Configuration.CreateMap<PostsViewModel, Post>().ReverseMap();
             });
 
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));

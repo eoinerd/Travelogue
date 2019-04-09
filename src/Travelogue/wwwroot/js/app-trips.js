@@ -18,6 +18,12 @@
             templateUrl: "/views/tripEditorView.html"
         });
 
+        $routeProvider.when("/withMap/:tripName/:stopName", {
+            controller: "createPostWithMapController",
+            controllerAs: "vm",
+            templateUrl: "/views/createPostMapView.html"
+        });
+
         $routeProvider.otherwise({ redirectTo: "/" })
     }).config(['$locationProvider', function ($locationProvider) {
         $locationProvider.hashPrefix('');

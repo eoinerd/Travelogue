@@ -20,7 +20,7 @@
                     <img class="card-img-top" src="@item.Image" alt="Card image cap">
                     <div class="card-body">
                         <h2 class="card-title">@item.Title</h2>
-                        <p class="card-text">@item.Post</p>
+                        <p class="card-text" style="overflow-wrap: break-word;">@item.Post</p>
                         <a class="btn btn-primary" asp-controller="Posts" asp-action="Details" asp-route-id="@item.Id">Read More &rarr;</a>
                     </div>
                     <div class="card-footer text-muted">

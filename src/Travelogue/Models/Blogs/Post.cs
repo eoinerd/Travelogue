@@ -15,9 +15,11 @@ namespace Travelogue.Models
 
         public DateTime PostedOn { get; set; }
 
-        public int UserId { get; set; }
+        public DateTime UpdatedOn { get; set; }
 
-        public int StopId { get; set; }
+        public string Stop { get; set; }
+
+        public string Trip { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
 

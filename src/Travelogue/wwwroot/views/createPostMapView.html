@@ -1,11 +1,5 @@
 ﻿<div>
-    <div class="col-md-4" style="padding-left:20px;display:inline-block;">
-        <a href="#/" class="btn btn-link" style="margin-top:20px;">
-            <i class="fa fa-angle-left"></i>Back
-        </a>
-        <h2>
-            {{ vm.tripName }}
-        </h2>
+    <!--<div class="col-md-4" style="padding-left:20px;display:inline-block;">
         <wait-cursor display-when="vm.isBusy"></wait-cursor>
         <div class="alert alert-danger" ng-show="vm.errorMessage">{{ vm.errorMessage }}</div>
 
@@ -20,26 +14,10 @@
                 <label>Location</label>
                 <input class="form-control" type="text" id="name" name="name" ng-model="vm.newStop.name" required autocomplete="on" />
                 <span class="text-danger" ng-show="newStopForm.name.$error.required">Required</span>
-                <!--<span class="text-danger" ng-show="newStopForm.name.$error.minlength">Must be 5</span>-->
             </div>
             <input type="submit" value="Add Stop" class="btn btn-success" ng-disabled="newStopForm.$invalid" />
         </form>
-
-        <table class="table table-responsive table-striped" style="margin-top: 20px;">
-            <tr>
-                <th>Location</th>
-                <th>Arrival</th>
-                <th>Post</th>
-            </tr>
-            <tr ng-repeat="stop in vm.stops">
-                <td>{{ stop.name }}</td>
-                <td>{{ stop.arrivalDate | date:'MM-dd-yyyy' }}</td>
-                <td>
-                    <a href="/Posts/Create#/withMap/{{vm.tripName}}/{{stop.name}}">Write Post</a>
-                </td>
-            </tr>
-        </table>
-    </div>
+    </div>-->
     <div class="map-container">
         <div id="map"></div>
     </div>

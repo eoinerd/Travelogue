@@ -7,6 +7,7 @@ using Travelogue.ViewModels;
 using Travelogue.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace Travelogue.Controllers
 {
@@ -105,6 +106,19 @@ namespace Travelogue.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<ActionResult> ViewProfile()
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user == null)
+            {
+                return View(new TravelUser());
+            }
+
+            user.Image = _config["ImageSettings:RootUrl"] + user.Image;
+            return View(user);
+        }
         public async Task<ActionResult> Logout()
         {
             if(User.Identity.IsAuthenticated)

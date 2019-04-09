@@ -21,9 +21,10 @@ namespace Travelogue.Data
             _context.Posts.Add(post);
         }
 
-        public void DeletePost(Post post)
+        public void DeletePost(int Id)
         {
-            _context.Posts.Remove(post);
+            var postToBeDeleted = _context.Posts.Where(x => x.Id == Id).FirstOrDefault();
+             _context.Posts.Remove(postToBeDeleted);
         }
 
         public async Task<Post> GetPostById(int id)
@@ -41,6 +42,11 @@ namespace Travelogue.Data
         public async Task<IEnumerable<Post>> GetAllPosts()
         {
             return await _context.Posts.ToListAsync();  //.Result.Join();
+        }
+
+        public void UpdatePost(Post post)
+        {
+            _context.Update(post);
         }
 
         public async Task<bool> SaveChangesAsync()
