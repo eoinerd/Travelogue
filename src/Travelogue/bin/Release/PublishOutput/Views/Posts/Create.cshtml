@@ -1,0 +1,99 @@
+﻿@model Travelogue.ViewModels.PostViewModel
+@{
+    ViewData["Title"] = "Create Post";
+}
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-3">
+        <h2>@ViewData["Title"]</h2>
+        <form method="post" enctype="multipart/form-data">
+            <span asp-validation-summary="ModelOnly"></span>
+            @if (ViewBag.UserMessage != null)
+            {
+                <div>@ViewBag.UserMessage</div>
+            }
+            <div class="form-group">
+                <label asp-for="Title" class="">Title</label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-muted"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Post">Post</label>
+                <textarea cols="40" rows="10" asp-for="Post" type="text" class="form-control"></textarea>  @*data-bind="value: theValue, valueUpdate: 'afterkeydown'"*@
+                <span asp-validation-for="Post" class="text-muted"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AllowsComments">Allow Comments?</label>
+                <input type="checkbox" asp-for="AllowsComments" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Published">Publish Post?</label>
+                <input type="checkbox" asp-for="Published" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Image">Upload Image</label>
+                <input type="file" name="Image" id="Imageinput" asp-for="Image" class="form-control" />
+            </div>
+
+            <div>
+                <a asp-controller="Post" asp-action="Index" class="btn btn-warning">Cancel</a>
+                <input type="submit" value="Create Post" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <div class="row" ng-app="app-trips">
+            <div ng-view style="width:100%;"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Write to us</h4>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="md-form">
+                    <i class="fas fa-pencil prefix grey-text"></i>
+                    <textarea type="text" id="form8" class="md-textarea form-control" rows="4" data-bind="value: theValue, valueUpdate: 'afterkeydown'"></textarea>
+                    <label data-error="wrong" data-success="right" for="form8">Your message</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center">
+    <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalContactForm">
+        Launch
+        Modal Contact Form
+    </a>
+</div>
+@section Scripts {
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV8YBn-Y4Lyl43-uRP6nUtnPRw4Ta1zT8&sensor=false&amp;libraries=places"></script>
+    <script src="~/lib/underscore/underscore-min.js"></script>
+    <script src="~/lib/angular/angular.min.js"></script>
+    <script src="~/lib/angular-route/angular-route.min.js"></script>
+    <script src="~/lib/gmaps/gmaps.min.js"></script>
+    <script src="~/lib/travelmap/travelmap.js"></script>
+    <script src="~/js/simpleControls.js"></script>
+    <script src="~/js/app-trips.js"></script>
+    <script src="~/js/tripsController.js"></script>
+    <script src="~/js/bootstrap_confirm_dialog.js"></script>
+    <script src="~/js/createPostWithMapController.js"></script>
+
+    <script type="text/javascript">
+        var viewModel = {
+            theValue: ko.observable("defaultText"),
+        };
+
+        ko.applyBindings(viewModel);
+    </script>
+}

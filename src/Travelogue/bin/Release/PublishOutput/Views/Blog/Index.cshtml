@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Travelogue.Models.Blog>
+@{
+    ViewData["Title"] = "About";
+}
+<aside>
+    <div class="form-group">
+        <div id="content"></div>
+    </div>
+</aside>
+<div>
+    <div class="well">
+        <section id="portfolio">
+            <div class="container">
+                <div class="content-section-heading text-center">
+                    <h3 class="text-secondary mb-0">Portfolio</h3>
+                    <h2 class="mb-5">Your Blogs, @User.Identity.Name !</h2>
+                    <a class="btn btn-primary" asp-area="" asp-controller="Blog" asp-action="Create">Create New Blog</a>
+                </div>                
+
+                <div class="row no-gutters">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-6">
+                            <a class="portfolio-item" style="padding:10px;" asp-controller="Blog" asp-action="Details" asp-route-id="@item.Id">
+                                <span class="caption" style="background-color:transparent;">
+                                    <span class="caption-content">
+                                        <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
+                                        <p class="mb-0">@Html.DisplayFor(modelItem => item.Subtitle)</p>
+                                    </span>
+                                </span>
+                                <img class="img-fluid" src="@item.Image" style="height:327px;"/>
+                            </a>
+                        </div>
+
+                    }</div>
+                </div>
+            </section>
+        </div>
+    </div>

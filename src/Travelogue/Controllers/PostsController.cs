@@ -18,20 +18,27 @@ namespace Travelogue.Controllers
     public class PostsController : Controller
     {
         private readonly IPostRepository _postRepository;
-        private readonly IList<Comment> _comments;
+        private readonly ICommentRepository _commentRepository;
         private readonly IImageWriter _imageWriter;
         private readonly IConfigurationRoot _config;
 
-        public PostsController(IPostRepository postRepository, IImageWriter imageWriter, IConfigurationRoot config)
+        public PostsController(IPostRepository postRepository, IImageWriter imageWriter, 
+            IConfigurationRoot config, ICommentRepository commentRepository)
         {
             _postRepository = postRepository;
             _imageWriter = imageWriter;
             _config = config;
+            _commentRepository = commentRepository;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             var posts = await _postRepository.GetAllPosts();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                posts = posts.Where(s => s.Title.Contains(searchString));
+            }
 
             var viewModelList = new List<PostViewModel>();
 
@@ -42,7 +49,7 @@ namespace Travelogue.Controllers
                 vm.Title = post.Title;
                 vm.DatePosted = post.PostedOn;
                 vm.Post = post.Text.Substring(0, 300) + "....";
-                vm.Id = post.Id;
+                vm.Id = post.Id;               
                 vm.Image = _config["ImageSettings:RootUrl"] + post.Image;
 
                 viewModelList.Add(vm);
@@ -62,6 +69,7 @@ namespace Travelogue.Controllers
             postViewModel.Title = model.Title;
             postViewModel.Post = model.Text;
             postViewModel.Id = model.Id;
+            postViewModel.Comments = await _commentRepository.GetCommentsByPostId(model.Id);
             postViewModel.Image = _config["ImageSettings:RootUrl"] + model.Image;
 
             return View(postViewModel);

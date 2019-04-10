@@ -30,7 +30,11 @@ namespace Travelogue.ViewComponents
                 return View(new TravelUser());
             }
 
-            user.Image = _config["ImageSettings:RootUrl"] + user.Image;
+            if (!user.Image.Contains(_config["ImageSettings:RootUrl"]))
+            {
+                user.Image =_config["ImageSettings:RootUrl"] + user.Image;
+            }
+            
             return View(user);
         }
     }

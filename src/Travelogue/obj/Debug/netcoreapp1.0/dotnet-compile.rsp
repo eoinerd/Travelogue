@@ -211,10 +211,8 @@
 --reference:C:\Users\Eoin\.nuget\packages\System.Xml.ReaderWriter\4.0.11\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\Eoin\.nuget\packages\System.Xml.XDocument\4.0.11\ref\netstandard1.3\System.Xml.XDocument.dll
 --resource:"C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\obj\Debug\netcoreapp1.0\Traveloguedotnet-compile.deps.json",Travelogue.deps.json
-C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Program.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Startup.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Controllers\AuthController.cs
-C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Controllers\BlogController.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Controllers\HomeController.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Controllers\PostsController.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Controllers\TravelController.cs
@@ -222,8 +220,10 @@ C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Tr
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Controllers\Api\StopsController.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Controllers\Api\TripsController.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Data\BlogRepository.cs
+C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Data\CommentRepository.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Data\DbInitializer.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Data\IBlogRepository.cs
+C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Data\ICommentRepository.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Data\IPostRepository.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Data\PostRepository.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Data\StoryContext.cs
@@ -268,3 +268,4 @@ C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Tr
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\ViewModels\RegisterViewModel.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\ViewModels\StopsViewModel.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\ViewModels\TripViewModel.cs
+C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\wwwroot\images\Program.cs

@@ -39,10 +39,7 @@ namespace Travelogue.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           // modelBuilder.Entity<Blog>().ToTable("Blogs");
             modelBuilder.Entity<Post>().ToTable("Posts");
-           // modelBuilder.Entity<User>().ToTable("Users");
-           // modelBuilder.Entity<UsersBlog>().ToTable("UsersBlogs");
             modelBuilder.Entity<Tag>().ToTable("Tags");
             modelBuilder.Entity<Comment>().ToTable("Comments");
             modelBuilder.Entity<Category>().ToTable("Categories");
@@ -57,7 +54,7 @@ namespace Travelogue.Data
         {
             base.OnConfiguring(builder);
 
-            builder.UseSqlServer(_config["ConnectionStrings:StoryContextConnection"]);
+            builder.UseSqlServer("Server=EOINERD\\SQLEXPRESS;Database=StoryDb;Trusted_Connection=true;MultipleActiveResultSets=true");
         }
     }
 }

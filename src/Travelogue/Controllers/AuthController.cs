@@ -82,7 +82,7 @@ namespace Travelogue.Controllers
                         UserName = vm.Username,
                         Email = vm.Email,
                         PhoneNumber = vm.PhoneNumber.ToString(),
-                        Image = _config["ImageSettings:RootImagePath"] + secureFileName
+                        Image = _config["ImageSettings:RootUrl"] + secureFileName
                     };
 
                     var res =  await _userManager.CreateAsync(user, vm.Password);

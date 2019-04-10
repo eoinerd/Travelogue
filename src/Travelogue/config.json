@@ -7,7 +7,7 @@
     "RootUrl":  "http://localhost:54015/"
   },
   "ConnectionStrings": {
-    "StoryContextConnection": "Server=(localdb)\\MSSQLLocalDB;Database=StoryDb;Trusted_Connection=true;MultipleActiveResultSets=true"
+    "StoryContextConnection": "Server=EOINERD\\SQLEXPRESS;Database=StoryDb;Trusted_Connection=true;MultipleActiveResultSets=true"
   },
   "Keys": {
     "BingKey": "1pyt6Oi96QbZplB0meWf~7n8N3oqpfMAt9RFFoswYOw~AgeIiNviHhSJPC8CE0z-rxXpU1FH_idzup4djBjgiVcUdAg_hBghDgtLDrGF3FXr"

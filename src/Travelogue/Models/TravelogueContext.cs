@@ -28,7 +28,7 @@ namespace Travelogue.Models
         {
             base.OnConfiguring(builder);
 
-            builder.UseSqlServer(_config["ConnectionStrings:TravelogueContextConnection"]);
+            builder.UseSqlServer("Server=EOINERD\\SQLEXPRESS;Database=StoryDb;Trusted_Connection=true;MultipleActiveResultSets=true");
         }
     }
 }

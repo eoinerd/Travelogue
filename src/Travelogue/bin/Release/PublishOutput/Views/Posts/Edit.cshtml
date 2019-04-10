@@ -1,0 +1,55 @@
+﻿@model Travelogue.ViewModels.PostViewModel
+@{
+    ViewData["Title"] = "Edit Post";
+}
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-3">
+        <h2>@ViewData["Title"]</h2>
+        <form method="post" enctype="multipart/form-data">
+            <span asp-validation-summary="ModelOnly"></span>
+            @if (ViewBag.UserMessage != null)
+            {
+                <div>@ViewBag.UserMessage</div>
+            }
+            <div class="form-group">
+                <label asp-for="Title" class="">Title</label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-muted"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Post">Post</label>
+                <textarea cols="40" rows="10" asp-for="Post" type="text" class="form-control"></textarea>
+                <span asp-validation-for="Post" class="text-muted"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AllowsComments">Allow Comments?</label>
+                <input type="checkbox" asp-for="AllowsComments" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Published">Publish Post?</label>
+                <input type="checkbox" asp-for="Published" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Image">Upload Image</label>
+                <input type="text" name="Image" asp-for="Image" value="@Model.Image" class="form-control" />
+                <input type="file" name="Image" id="Imageinput" asp-for="Image" class="form-control" />
+            </div>
+
+            <div>
+                <a asp-controller="Post" asp-action="Index" class="btn btn-warning">Cancel</a>
+                <input type="submit" value="Update Post" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+    @*<div class="col-md-8">
+        <div class="row" ng-app="app-trips">
+            <div ng-view style="width:100%;"></div>
+        </div>
+    </div>*@
+</div>
+

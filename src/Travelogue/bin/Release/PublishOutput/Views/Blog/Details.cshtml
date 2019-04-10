@@ -1,0 +1,30 @@
+﻿@model Travelogue.ViewModels.BlogViewModel
+@{
+    ViewData["Title"] = "Blog Details";
+}
+<div style="padding-left: 20px;">
+    <h3>@Html.DisplayFor(modelItem => modelItem.BlogTitle)</h3>
+</div>
+<div style="padding-left: 20px;">
+    <h5>@Html.DisplayFor(modelItem => modelItem.Description)</h5>
+</div>
+<div class="container-fluid">
+    @if (Model.Posts != null)
+    {
+        @foreach (var post in Model.Posts)
+        {
+            <div class="well">
+                <a asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id">
+                    @Html.DisplayFor(modelPost => post.Title)
+                </a>
+                <div>
+                    @Html.DisplayFor(modelPost => post.Post)
+                </div>
+            </div>
+        }
+    }
+</div>
+<div style="padding-left: 15px;">
+    <a class="btn btn-success" asp-controller="Blog" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+</div>

@@ -48,7 +48,7 @@ namespace Travelogue
                 if (_env.IsProduction())
                 {
                     config.Filters.Add(new RequireHttpsAttribute());
-                }               
+                }
             })
             .AddJsonOptions(opt =>
             {
@@ -58,13 +58,14 @@ namespace Travelogue
             services.AddScoped<IMailService, DebugMailService>();
             services.AddScoped<IImageWriter, ImageWriter>();
             services.AddSingleton(Configuration);
-            //services.AddDbContext<TravelogueContext>();
+            services.AddDbContext<TravelogueContext>();
 
-            services.AddDbContext<StoryContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<StoryContext>(options => options.UseSqlServer("Server=EOINERD\\SQLEXPRESS;Database=StoryDb;Trusted_Connection=true;MultipleActiveResultSets=true"));
 
             //services.AddScoped<IBlogRepository, BlogRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<ITravelRepository, TravelRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
 
             services.AddIdentity<TravelUser, IdentityRole>(config =>
            {
@@ -116,6 +117,7 @@ namespace Travelogue
             }
             else
             {
+                app.UseDeveloperExceptionPage();
                 app.UseExceptionHandler("/Home/Error");
             }
         
