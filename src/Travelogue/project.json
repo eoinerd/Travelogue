@@ -30,7 +30,8 @@
       "version": "1.0.1",
       "type": "platform"
     },
-    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0"
+    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
+    "SixLabors.ImageSharp": "1.0.0-beta0006"
   },
 
   "tools": {

@@ -13,15 +13,19 @@
             <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
         </ol>
         <div class="carousel-inner" role="listbox">
+            @*<div class="carousel-item" style="background-image: url('https://media.timeout.com/images/105282343/image.jpg')">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3 class="display-4">Prague, Czech Republic</h3>
+                </div>
+            </div>*@
             @foreach (var item in Model)
             {
                 <div class="carousel-item" style="background-image: url('@item.Image')">
                     <div class="carousel-caption d-none d-md-block">
                         <h3 class="display-4">@item.Title</h3>
-                        @*<p class="lead">@item.Post</p>*@
                     </div>
                 </div>
-            }
+            }        
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -33,7 +37,6 @@
         </a>
     </div>
 </header>
-
 <!-- Page Content -->
 <section class="py-5">
     <div class="container">
@@ -42,49 +45,55 @@
             <div class="container text-center">
                 <div class="row">
                     <div class="col-lg-10 mx-auto">
-                        <h2>Stylish Portfolio is the perfect theme for your next project!</h2>
+                        <h2>Eoin Dennehy, Software Engineer with 6 years experience</h2>
                         <p class="lead mb-5">
-                            This theme features a flexible, UX friendly sidebar menu and stock photos from our friends at
-                            <a href="https://unsplash.com/">Unsplash</a>!
+                            C#, ASP.NET MVC, SQL, Javascript, HTML5, CSS and much more....
                         </p>
-                        <a class="btn btn-dark btn-xl js-scroll-trigger" href="#services">What We Offer</a>
+                        <a class="btn btn-dark btn-xl js-scroll-trigger" href="#aboutMe">About Me</a>
+                        <a class="btn btn-dark btn-xl js-scroll-trigger" href="#portfolio">My Other Projects</a>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Services -->
-        <section class="content-section bg-primary text-white text-center" id="services">
+        <section class="content-section bg-primary text-white text-center" id="aboutMe">
             <div class="container">
                 <div class="content-section-heading">
                     <h3 class="text-secondary mb-0">Services</h3>
-                    <h2 class="mb-5">What We Offer</h2>
+                    <h2 class="mb-5">About Me</h2>
                 </div>
                 <div class="row">
                     <div class="card-container">
                         <div class="card">
                             <div class="side">
-                                <img src="~/images/69524.png" style="width: 75%; margin-top: 18px;" />
+                                <img src="https://img.icons8.com/ios/50/000000/github-filled.png" style="width: 75%; margin-top: 18px;">
                             </div>
-                            <div class="side back">At vero eos et accusamus et iusto</div>
+                            <div class="side back">
+                                <a href="https://github.com/eoinerd">GitHub</a>
+                            </div>
                         </div>
                     </div>
                     <div style="display:inline-block;width:150px;"></div>
                     <div class="card-container">
                         <div class="card">
                             <div class="side">
-                                <img src="~/images/29302.png" style="width: 75%; margin-top: 18px;" />
+                                <img src="https://img.icons8.com/ios/50/000000/linkedin-filled.png" style="width: 75%; margin-top: 18px;">
                             </div>
-                            <div class="side back"> Et harum quidem rerum facilis est et expedita distinctio</div>
+                            <div class="side back">
+                                <a href="https://www.linkedin.com/in/eoin-dennehy-41582631/">LinkedIn</a>
+                            </div>
                         </div>
                     </div>
                     <div style="display:inline-block;width:150px;"></div>
                     <div class="card-container">
                         <div class="card">
                             <div class="side">
-                                <img src="~/images/52349.png" style="width: 75%; margin-top: 18px;" />
+                                <img src="https://img.icons8.com/ios/50/000000/facebook-filled.png" style="width: 75%; margin-top: 18px;">
                             </div>
-                            <div class="side back">Nam libero tempore, cum soluta nobis est eligendi </div>
+                            <div class="side back">
+                                <a href="https://facebook.com/eoinerd">Facebook</a>
+                            </div>
                         </div>
                     </div>
                     <div style="display:inline-block;width:150px;"></div>
@@ -93,7 +102,9 @@
                             <div class="side">
                                 <img src="~/images/59919.png" style="width: 75%; margin-top: 18px;" />
                             </div>
-                            <div class="side back"> Itaque earum rerum hic tenetur a sapiente delectus</div>
+                            <div class="side back">
+                                <a href="https://github.com/eoinerd">Some Link</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -112,30 +123,30 @@
                         <a class="portfolio-item" href="#">
                             <span class="caption">
                                 <span class="caption-content">
-                                    <h2>Stationary</h2>
-                                    <p class="mb-0">A yellow pencil with envelopes on a clean, blue backdrop!</p>
+                                    <h2>Gig Finder</h2>
+                                    <p class="mb-0">An AngularJs App for finding music gigs close to your location</p>
                                 </span>
                             </span>
-                            <img class="img-fluid" src="~/img/portfolio-1.jpg" alt="">
+                            <img class="img-fluid" src="~/images/themoat.jpg" alt="">
                         </a>
                     </div>
                     <div class="col-lg-6">
                         <a class="portfolio-item" href="#">
                             <span class="caption">
                                 <span class="caption-content">
-                                    <h2>Ice Cream</h2>
-                                    <p class="mb-0">A dark blue background with a colored pencil, a clip, and a tiny ice cream cone!</p>
+                                    <h2>Angular 4 App</h2>
+                                    <p class="mb-0">Some future App implemented in Angular</p>
                                 </span>
                             </span>
-                            <img class="img-fluid" src="~/img/portfolio-2.jpg" alt="">
+                            <img class="img-fluid" src="~/img/portfolio-2.jpg" alt="" style="">
                         </a>
                     </div>
                     <div class="col-lg-6">
                         <a class="portfolio-item" href="#">
                             <span class="caption">
                                 <span class="caption-content">
-                                    <h2>Strawberries</h2>
-                                    <p class="mb-0">Strawberries are such a tasty snack, especially with a little sugar on top!</p>
+                                    <h2>React App</h2>
+                                    <p class="mb-0">Some future App implemented in React</p>
                                 </span>
                             </span>
                             <img class="img-fluid" src="~/img/portfolio-3.jpg" alt="">
@@ -145,11 +156,11 @@
                         <a class="portfolio-item" href="#">
                             <span class="caption">
                                 <span class="caption-content">
-                                    <h2>Workspace</h2>
-                                    <p class="mb-0">A yellow workspace with some scissors, pencils, and other objects.</p>
+                                    <h2>NodeJs</h2>
+                                    <p class="mb-0">Some other project</p>
                                 </span>
                             </span>
-                            <img class="img-fluid" src="~/img/portfolio-4.jpg" alt="">
+                            <img class="img-fluid" src="~/img/portfolio-1.jpg" alt="">
                         </a>
                     </div>
                 </div>
@@ -175,52 +186,6 @@
         </section>
     </div>
 </section>
-
-@*<footer class="footer text-center">
-    <div class="container">
-        <ul class="list-inline mb-5">
-            <li class="list-inline-item">
-                <a class="social-link rounded-circle text-white mr-3" href="#">
-                    <i class="icon-social-facebook"></i>
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <a class="social-link rounded-circle text-white mr-3" href="#">
-                    <i class="icon-social-twitter"></i>
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <a class="social-link rounded-circle text-white" href="#">
-                    <i class="icon-social-github"></i>
-                </a>
-            </li>
-        </ul>
-        <p class="text-muted small mb-0">Copyright &copy; Your Website 2019</p>
-    </div>
-</footer>
-
-<a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
-    <i class="fa fa-angle-up"></i>
-</a>*@
-
-@*<div class="rotator">
-        <div style="overflow:hidden;" data-bind="style:{width:width, height:height}">
-            <div class="images" data-bind="template: {name:'imageTpl', foreach:images}">
-            </div>
-            <!-- ko if: showLoading -->
-            <div class="loading"><img src="http://pshabalin.files.wordpress.com/2013/01/loading.gif" /></div>
-            <!-- /ko -->
-        </div>
-        <div class="controls" data-bind="template: { name: 'controlTpl', foreach: imageViewModels}"></div>
-    </div>
-
-    <script id="imageTpl" type="text/html">
-        <img data-bind="attr : {src : url}" />
-    </script>
-    <script id="controlTpl" type="text/html">
-        <span data-bind="css : {active : active()}, click : $parent.onCtrlClick.bind($parent)"></span>
-    </script>
-*@
 @section Scripts
 {
     <script>

@@ -1,6 +1,6 @@
 ﻿<div>
-    <div class="col-md-4" style="padding-left:20px;display:inline-block;">
-        <a href="#/" class="btn btn-link" style="margin-top:20px;">
+    <div class="col-md-4 edit-trip-container">
+        <a href="#/" class="btn btn-link mg-tp-20">
             <i class="fa fa-angle-left"></i>Back
         </a>
         <h2>
@@ -25,17 +25,17 @@
             <input type="submit" value="Add Stop" class="btn btn-success" ng-disabled="newStopForm.$invalid" />
         </form>
 
-        <table class="table table-responsive table-striped" style="margin-top: 20px;">
+        <table class="table table-responsive table-striped mg-tp-20">
             <tr>
                 <th>Location</th>
                 <th>Arrival</th>
                 <th>Post</th>
             </tr>
             <tr ng-repeat="stop in vm.stops">
-                <td>{{ stop.name }}</td>
-                <td>{{ stop.arrivalDate | date:'MM-dd-yyyy' }}</td>
+                <td style="width: 100px;">{{ stop.name }}</td>
+                <td style="width: 100px;">{{ stop.arrivalDate | date:'MM-dd-yyyy' }}</td>
                 <td>
-                    <a href="/Posts/Create#/withMap/{{vm.tripName}}/{{stop.name}}">Write Post</a>
+                    <a href="/Posts/Create#/withMap/{{vm.tripName}}/{{stop.name}}">{{stop.postId > 0 ? "View" : "Create"}}</a>
                 </td>
             </tr>
         </table>

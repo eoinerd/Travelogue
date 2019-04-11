@@ -50,7 +50,14 @@
     var settings = _extend(options, _defaultOptions);
 
     if (!settings.stops || settings.stops.length == 0) {
-      throw "You must supply stops when creating a map.";
+        map = new GMaps({
+            div: settings.selector,
+            lat: 53.349805,
+            lng: -6.26031,
+            zoom: settings.initialZoom
+        });
+
+        return;
     }
 
     // calculate past, future and current stops

@@ -44,12 +44,13 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Travel" asp-action="Index">Home</a>
+                        <a class="nav-link" asp-area="" asp-controller="Posts" asp-action="Index">View All Posts</a>
                     </li>
+                    <li class="nav-item nav-link">|</li>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Posts" asp-action="Index">All Posts</a>
+                            <a class="nav-link" asp-area="" asp-controller="Posts" asp-action="Index">Your Posts</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Travel" asp-action="Trips">Your Trips</a>

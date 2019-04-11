@@ -8,6 +8,11 @@ using Travelogue.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.PixelFormats;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace Travelogue.Controllers
 {
@@ -17,13 +22,16 @@ namespace Travelogue.Controllers
         private UserManager<TravelUser> _userManager;
         private readonly IImageWriter _imageWriter;
         private readonly IConfigurationRoot _config;
+        private IHostingEnvironment _hostingEnvironment;
 
-        public AuthController(SignInManager<TravelUser> signInManager, UserManager<TravelUser> userManager, IImageWriter imageWriter, IConfigurationRoot config)
+        public AuthController(SignInManager<TravelUser> signInManager, UserManager<TravelUser> userManager, 
+            IImageWriter imageWriter, IConfigurationRoot config, IHostingEnvironment hostingEnvironment)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _imageWriter = imageWriter;
             _config = config;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public IActionResult Login()
@@ -69,20 +77,37 @@ namespace Travelogue.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Register(RegisterViewModel vm, IFormFile Image, string returnUrl)
+        public async Task<ActionResult> Register(RegisterViewModel vm, IFormFile image, string returnUrl)
         {
             if (ModelState.IsValid)
             {
                 if (await _userManager.FindByEmailAsync(vm.Email) == null)
                 {
-                    var secureFileName = await _imageWriter.UploadImage(Image);
+                    var secureFileName = await _imageWriter.UploadImage(image);
+                    var path = Path.Combine(_hostingEnvironment.WebRootPath + "\\images\\", secureFileName);
+                    using (Image<Rgba32> imageMagic = Image.Load(path))
+                    {
+                        var wideImage = imageMagic.Width - imageMagic.Height;
+                        var highImage = imageMagic.Height - imageMagic.Width;
+
+                        if (highImage > 250)
+                        {
+                            imageMagic.Mutate(x => x.Crop(imageMagic.Width, imageMagic.Width));
+                        }
+                        else if (wideImage > 250)
+                        {
+                            imageMagic.Mutate(x => x.Crop(imageMagic.Height, imageMagic.Height));
+                        }
+                        
+                        imageMagic.Save(path); // Automatic encoder selected based on extension.
+                    }
 
                     var user = new TravelUser()
                     {
                         UserName = vm.Username,
                         Email = vm.Email,
                         PhoneNumber = vm.PhoneNumber.ToString(),
-                        Image = _config["ImageSettings:RootUrl"] + secureFileName
+                        Image = _config["ImageSettings:RootImagePath"] + secureFileName
                     };
 
                     var res =  await _userManager.CreateAsync(user, vm.Password);

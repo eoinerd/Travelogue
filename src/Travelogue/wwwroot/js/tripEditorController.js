@@ -15,6 +15,8 @@
         vm.isBusy = true;
         vm.newStop = {};
 
+        _showEmptyMap();
+
         var url = "/api/trips/" + vm.tripName + "/stops";
 
         $http.get(url)
@@ -82,7 +84,7 @@
                 currentStop: 1,
                 initialZoom: 3
             });
-        }
+        }       
     }
 
     function createPost(message) {
@@ -95,6 +97,16 @@
             executeNo: function () {
                 return false;
             }
+        });
+    }
+
+    function _showEmptyMap() {
+        // Show Empty Map
+        travelMap.createMap({
+            stops: false,
+            selector: "#map",
+            currentStop: 1,
+            initialZoom: 1.5
         });
     }
 

@@ -18,6 +18,8 @@
 
         vm.errorMessage = "";
         vm.isBusy = true;
+        
+        _showEmptyMap();
 
         $http.get("/api/trips")
         .then(function (response) {
@@ -48,5 +50,14 @@
             });
         };
 
+        function _showEmptyMap() {
+            // Show Empty Map
+            travelMap.createMap({
+                stops: false,
+                selector: "#map",
+                currentStop: 1,
+                initialZoom: 1.5
+            });
+        }
     }
 })();

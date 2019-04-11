@@ -50,6 +50,7 @@
         $(this).children('.fa').toggleClass('fa-chevron-circle-up fa-chevron-circle-down');
     });
 
+
 })();
 
 
