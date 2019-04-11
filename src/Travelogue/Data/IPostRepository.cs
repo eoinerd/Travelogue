@@ -21,5 +21,7 @@ namespace Travelogue.Data
         Task<bool> SaveChangesAsync();
 
         void UpdatePost(Post postModel);
+
+        Post GetPostIdByTitle(string title);
     }
 }

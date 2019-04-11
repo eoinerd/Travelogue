@@ -17,10 +17,6 @@ namespace Travelogue.Models
 
         public DateTime UpdatedOn { get; set; }
 
-        public string Stop { get; set; }
-
-        public string Trip { get; set; }
-
         public ICollection<Comment> Comments { get; set; }
 
         public bool AllowsComments { get; set; }

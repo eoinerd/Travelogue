@@ -10,5 +10,7 @@ namespace Travelogue.Models
         public double Longitude { get; set; }
         public int Order { get; set; }
         public DateTime ArrivalDate { get; internal set; }
+        public int TripId { get; set; }
+        public int PostId { get; set; }
     }
 }

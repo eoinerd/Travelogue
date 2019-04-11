@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Travelogue.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,17 +19,19 @@ namespace Travelogue.Controllers
     public class PostsController : Controller
     {
         private readonly IPostRepository _postRepository;
+        private readonly ITravelRepository _travelRepository;
         private readonly ICommentRepository _commentRepository;
         private readonly IImageWriter _imageWriter;
         private readonly IConfigurationRoot _config;
 
         public PostsController(IPostRepository postRepository, IImageWriter imageWriter, 
-            IConfigurationRoot config, ICommentRepository commentRepository)
+            IConfigurationRoot config, ICommentRepository commentRepository, ITravelRepository travelRepository)
         {
             _postRepository = postRepository;
             _imageWriter = imageWriter;
             _config = config;
             _commentRepository = commentRepository;
+            _travelRepository = travelRepository;
         }
 
         public async Task<IActionResult> Index(string searchString)
@@ -47,8 +50,8 @@ namespace Travelogue.Controllers
                 var vm = new PostViewModel();
                 vm.AllowsComments = post.AllowsComments;
                 vm.Title = post.Title;
-                vm.DatePosted = post.PostedOn;
-                vm.Post = post.Text.Substring(0, 300) + "....";
+                vm.PostedOn = post.PostedOn;
+                vm.Text = post.Text.Substring(0, 300) + "....";
                 vm.Id = post.Id;               
                 vm.Image = _config["ImageSettings:RootUrl"] + post.Image;
 
@@ -65,9 +68,9 @@ namespace Travelogue.Controllers
             // AutoMapper
             var postViewModel = new PostViewModel();
             postViewModel.Comments = model.Comments ?? new List<Comment>();
-            postViewModel.DatePosted = model.PostedOn;
+            postViewModel.PostedOn = model.PostedOn;
             postViewModel.Title = model.Title;
-            postViewModel.Post = model.Text;
+            postViewModel.Text = model.Text;
             postViewModel.Id = model.Id;
             postViewModel.Comments = await _commentRepository.GetCommentsByPostId(model.Id);
             postViewModel.Image = _config["ImageSettings:RootUrl"] + model.Image;
@@ -75,8 +78,9 @@ namespace Travelogue.Controllers
             return View(postViewModel);
         }
 
-        public IActionResult Create()
+        public IActionResult Create([FromQuery(Name = "trip")] string trip, [FromQuery(Name = "stop")] string stop)
         {
+            var test = trip;
             return View();
         }
 
@@ -88,20 +92,19 @@ namespace Travelogue.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    // should use automapper here.....
-                    var post = new Post();
-                    post.AllowsComments = viewModel.AllowsComments;
-                    post.PostedOn = DateTime.Now;
-                    post.Text = viewModel.Post;
-                    post.Title = viewModel.Title;
-                    post.Published = viewModel.Published;
+                    var post = Mapper.Map<Post>(viewModel);
                     post.UserName = User.Identity.Name;
                     var secureFileName = await _imageWriter.UploadImage(Image);
                     post.Image = _config["ImageSettings:RootImagePath"] + secureFileName;
+                
                     // need exception handling here....
                     _postRepository.CreatePost(post);
-
                     await _postRepository.SaveChangesAsync();
+
+                    // update Stops table...
+                    var postForStopUpdate = _postRepository.GetPostIdByTitle(viewModel.Title);
+                    _travelRepository.UpdateStop(viewModel.Trip, viewModel.Stop, postForStopUpdate.Id);
+                    await _travelRepository.SaveChangesAsync();
 
                     return RedirectToAction(nameof(Index));
                 }
@@ -132,10 +135,10 @@ namespace Travelogue.Controllers
 
             // automapper needed
             postViewModel.Comments = model.Comments ?? new List<Comment>();
-            postViewModel.DatePosted = model.PostedOn;
+            postViewModel.PostedOn = model.PostedOn;
             postViewModel.AllowsComments = model.AllowsComments;
             postViewModel.Title = model.Title;
-            postViewModel.Post = model.Text;
+            postViewModel.Text = model.Text;
             postViewModel.Published = model.Published;
             postViewModel.Id = model.Id;
             postViewModel.Image = _config["ImageSettings:RootUrl"] + model.Image;
@@ -159,12 +162,34 @@ namespace Travelogue.Controllers
             }
             
             postModel.Published = postViewModel.Published;
-            postModel.Text = postViewModel.Post;
+            postModel.Text = postViewModel.Text;
 
             _postRepository.UpdatePost(postModel);
             await _postRepository.SaveChangesAsync();
 
             return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> YourPosts()
+        {
+            var posts = await _postRepository.GetPostsByUsername(User.Identity.Name);
+
+            var viewModelList = new List<PostViewModel>();
+
+            foreach (var post in posts)
+            {
+                var vm = new PostViewModel();
+                vm.AllowsComments = post.AllowsComments;
+                vm.Title = post.Title;
+                vm.PostedOn = post.PostedOn;
+                vm.Text = post.Text.Substring(0, 300) + "....";
+                vm.Id = post.Id;
+                vm.Image = _config["ImageSettings:RootUrl"] + post.Image;
+
+                viewModelList.Add(vm);
+            }
+
+            return View("Index", viewModelList);
         }
     }
 }

@@ -19,23 +19,23 @@ namespace Travelogue.ViewModels
 
         [Required]
         [StringLength(6000, MinimumLength = 301)]
-        public string Post { get; set; }
+        public string Text { get; set; }
 
         [Required]
         public bool AllowsComments { get; set; }
 
         public string Image { get; set; }
 
-        public string Stop { get; set; }
-
-        public string Trip { get; set; }
-
         public bool Published { get; set; }
 
-        public DateTime DatePosted { get; set; }
+        public DateTime PostedOn { get; set; }
 
         public DateTime DateUpdated { get; set; }
 
         public IEnumerable<Comment> Comments { get; set; }
+
+        public string Trip { get; set; }
+
+        public string Stop { get; set; }
     }
 }

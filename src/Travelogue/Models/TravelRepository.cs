@@ -90,5 +90,18 @@ namespace Travelogue.Models
         {
             return _context.Posts.Where(p => p.Published).Count();
         }
+
+        public void UpdateStop(string trip, string stop, int postIdForStopUpdate)
+        {
+            var resultStop = (from t in _context.Trips
+                             join s in _context.Stops 
+                             on t.Id equals s.TripId
+                             where stop == s.Name
+                             select s).FirstOrDefault();
+
+            resultStop.PostId = postIdForStopUpdate;
+
+            _context.Stops.Update(resultStop);
+        }
     }
 }

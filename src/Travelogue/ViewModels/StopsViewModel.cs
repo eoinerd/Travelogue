@@ -13,11 +13,15 @@ namespace Travelogue.ViewModels
         public string Name { get; set; }
 
         public double Latitude { get; set; }
+
         public double Longitude { get; set; }
 
         [Required]
         public int Order { get; set; }
+
         [Required]
         public DateTime ArrivalDate { get; set; }
+
+        public int PostId { get; set; }
     }
 }

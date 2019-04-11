@@ -35,7 +35,12 @@
                 <td style="width: 100px;">{{ stop.name }}</td>
                 <td style="width: 100px;">{{ stop.arrivalDate | date:'MM-dd-yyyy' }}</td>
                 <td>
-                    <a href="/Posts/Create#/withMap/{{vm.tripName}}/{{stop.name}}">{{stop.postId > 0 ? "View" : "Create"}}</a>
+                    <div ng-if="stop.postId > 0">
+                        <a href="/Posts/Details/{{stop.postId}}">View</a>
+                    </div>
+                    <div ng-if="stop.postId == 0">
+                        <a href="/Posts/Create#/withMap/{{vm.tripName}}/{{stop.name}}">Create</a>
+                    </div>
                 </td>
             </tr>
         </table>

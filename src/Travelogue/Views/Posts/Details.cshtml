@@ -19,13 +19,13 @@
             </div>
             <hr>
             <!-- Date/Time -->
-            <p>Posted on @Html.DisplayFor(modelPost => Model.DatePosted)</p>
+            <p>Posted on @Html.DisplayFor(modelPost => Model.PostedOn)</p>
             <hr>
             <!-- Preview Image -->
             <img class="img-fluid rounded" src="@Html.DisplayFor(modelPost => Model.Image)" alt="" />
             <hr>
             <!-- Post Content -->
-            <p class="lead">@Model.Post</p>
+            <p class="lead" style="overflow-wrap: break-word;">@Model.Text</p>
 
             <hr>
 

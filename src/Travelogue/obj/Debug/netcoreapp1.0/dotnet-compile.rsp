@@ -235,6 +235,7 @@ C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Tr
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Data\IPostRepository.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Data\PostRepository.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Data\StoryContext.cs
+C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Data\Profiles\PostProfile.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Migrations\20170219193804_InitialDatabase.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Migrations\20170219193804_InitialDatabase.Designer.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Migrations\20170220190604_AddingIdentity.cs

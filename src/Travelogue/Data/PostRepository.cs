@@ -41,7 +41,7 @@ namespace Travelogue.Data
 
         public async Task<IEnumerable<Post>> GetAllPosts()
         {
-            return await _context.Posts.ToListAsync();  //.Result.Join();
+            return await _context.Posts.Where(x => x.Published).ToListAsync();  //.Result.Join();
         }
 
         public void UpdatePost(Post post)
@@ -52,6 +52,11 @@ namespace Travelogue.Data
         public async Task<bool> SaveChangesAsync()
         {
             return (await _context.SaveChangesAsync()) > 0;
+        }
+
+        public Post GetPostIdByTitle(string title)
+        {
+            return _context.Posts.Where(x => x.Title == title).FirstOrDefault();
         }
     }
 }
