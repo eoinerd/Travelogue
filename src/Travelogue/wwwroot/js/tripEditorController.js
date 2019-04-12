@@ -1,7 +1,27 @@
 ﻿(function () {
     "use strict";
 
-    angular.module("app-trips").controller("tripEditorController", tripEditorController);
+    angular.module("app-trips").controller("tripEditorController", tripEditorController)
+        .directive("datepicker", function () {
+        return {
+            restrict: "A",
+            require: "ngModel",
+            link: function (scope, elem, attrs, ngModelCtrl) {
+                var updateModel = function (dateText) {
+                    scope.$apply(function () {
+                        ngModelCtrl.$setViewValue(dateText);
+                    });
+                };
+                var options = {
+                    dateFormat: "dd/mm/yy",
+                    onSelect: function (dateText) {
+                        updateModel(dateText);
+                    }
+                };
+                elem.datepicker(options);
+            }
+        }
+    });
 
     function tripEditorController($routeParams, $http, $location) {
         var vm = this;

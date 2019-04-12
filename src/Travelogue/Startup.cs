@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Travelogue.Data;
 using Microsoft.EntityFrameworkCore;
+using Travelogue.Data.Profiles;
 
 namespace Travelogue
 {
@@ -102,9 +103,12 @@ namespace Travelogue
         {
             Mapper.Initialize(Configuration =>
             {
+                //Configuration.ConstructServicesUsing()
                 Configuration.CreateMap<TripViewModel, Trip>().ReverseMap();
                 Configuration.CreateMap<StopsViewModel, Stop>().ReverseMap();
-                Configuration.CreateMap<PostViewModel, Post>();
+                Configuration.AddProfile<PostProfile>();
+                Configuration.AddProfile<PostViewModelProfile>();
+               
             });
 
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));

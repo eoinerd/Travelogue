@@ -44,17 +44,12 @@ namespace Travelogue.Controllers
             }
 
             var viewModelList = new List<PostViewModel>();
-
             foreach (var post in posts)
             {
                 var vm = new PostViewModel();
-                vm.AllowsComments = post.AllowsComments;
-                vm.Title = post.Title;
-                vm.PostedOn = post.PostedOn;
-                vm.Text = post.Text.Substring(0, 300) + "....";
-                vm.Id = post.Id;               
+                vm = Mapper.Map<PostViewModel>(post);
                 vm.Image = _config["ImageSettings:RootUrl"] + post.Image;
-
+                vm.PostText = vm.PostText.Substring(0, 150) + "....";
                 viewModelList.Add(vm);
             }
 
@@ -64,23 +59,14 @@ namespace Travelogue.Controllers
         public async Task<IActionResult> Details(int Id)
         {
             var model = await _postRepository.GetPostById(Id);
-
-            // AutoMapper
-            var postViewModel = new PostViewModel();
-            postViewModel.Comments = model.Comments ?? new List<Comment>();
-            postViewModel.PostedOn = model.PostedOn;
-            postViewModel.Title = model.Title;
-            postViewModel.Text = model.Text;
-            postViewModel.Id = model.Id;
-            postViewModel.Comments = await _commentRepository.GetCommentsByPostId(model.Id);
+            var postViewModel = Mapper.Map<PostViewModel>(model);
             postViewModel.Image = _config["ImageSettings:RootUrl"] + model.Image;
 
             return View(postViewModel);
         }
 
-        public IActionResult Create([FromQuery(Name = "trip")] string trip, [FromQuery(Name = "stop")] string stop)
+        public IActionResult Create()
         {
-            var test = trip;
             return View();
         }
 
@@ -96,8 +82,7 @@ namespace Travelogue.Controllers
                     post.UserName = User.Identity.Name;
                     var secureFileName = await _imageWriter.UploadImage(Image);
                     post.Image = _config["ImageSettings:RootImagePath"] + secureFileName;
-                
-                    // need exception handling here....
+
                     _postRepository.CreatePost(post);
                     await _postRepository.SaveChangesAsync();
 
@@ -132,15 +117,7 @@ namespace Travelogue.Controllers
             var postViewModel = new PostViewModel();
 
             var model = await _postRepository.GetPostById(Id);
-
-            // automapper needed
-            postViewModel.Comments = model.Comments ?? new List<Comment>();
-            postViewModel.PostedOn = model.PostedOn;
-            postViewModel.AllowsComments = model.AllowsComments;
-            postViewModel.Title = model.Title;
-            postViewModel.Text = model.Text;
-            postViewModel.Published = model.Published;
-            postViewModel.Id = model.Id;
+            postViewModel = Mapper.Map<PostViewModel>(model);
             postViewModel.Image = _config["ImageSettings:RootUrl"] + model.Image;
 
             return View(postViewModel);
@@ -162,7 +139,7 @@ namespace Travelogue.Controllers
             }
             
             postModel.Published = postViewModel.Published;
-            postModel.Text = postViewModel.Text;
+            postModel.Text = postViewModel.PostText;
 
             _postRepository.UpdatePost(postModel);
             await _postRepository.SaveChangesAsync();
@@ -179,13 +156,8 @@ namespace Travelogue.Controllers
             foreach (var post in posts)
             {
                 var vm = new PostViewModel();
-                vm.AllowsComments = post.AllowsComments;
-                vm.Title = post.Title;
-                vm.PostedOn = post.PostedOn;
-                vm.Text = post.Text.Substring(0, 300) + "....";
-                vm.Id = post.Id;
+                vm = Mapper.Map<PostViewModel>(post);
                 vm.Image = _config["ImageSettings:RootUrl"] + post.Image;
-
                 viewModelList.Add(vm);
             }
 

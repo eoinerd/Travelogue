@@ -14,12 +14,9 @@ namespace Travelogue.ViewModels
         [Required]
         public string Title { get; set; }
 
-        ////[Required]
-        ////public string Location { get; set; }
-
         [Required]
-        [StringLength(6000, MinimumLength = 301)]
-        public string Text { get; set; }
+        [StringLength(6000, MinimumLength = 151)]
+        public string PostText { get; set; }
 
         [Required]
         public bool AllowsComments { get; set; }
@@ -37,5 +34,7 @@ namespace Travelogue.ViewModels
         public string Trip { get; set; }
 
         public string Stop { get; set; }
+
+        public string Username { get; set; }
     }
 }

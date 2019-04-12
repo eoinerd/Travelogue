@@ -90,11 +90,11 @@ namespace Travelogue.Controllers
                         var wideImage = imageMagic.Width - imageMagic.Height;
                         var highImage = imageMagic.Height - imageMagic.Width;
 
-                        if (highImage > 250)
+                        if (highImage > 0)
                         {
                             imageMagic.Mutate(x => x.Crop(imageMagic.Width, imageMagic.Width));
                         }
-                        else if (wideImage > 250)
+                        else if (wideImage > 0)
                         {
                             imageMagic.Mutate(x => x.Crop(imageMagic.Height, imageMagic.Height));
                         }

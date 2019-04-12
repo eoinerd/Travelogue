@@ -23,7 +23,12 @@ namespace Travelogue.Data
 
         public async Task<IEnumerable<Comment>> GetCommentsByPostId(int postId)
         {
-            return await _context.Comments.Where(x => x.PostId == postId).ToListAsync();
+            var hasComments = _context.Comments.Any(x => x.PostId == postId);
+            if (!hasComments)
+            {
+                return new List<Comment>();
+            }
+            return await  _context.Comments.Where(x => x.PostId == postId).ToListAsync();
         }
     }
 }

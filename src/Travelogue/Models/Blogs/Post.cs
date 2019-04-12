@@ -17,7 +17,7 @@ namespace Travelogue.Models
 
         public DateTime UpdatedOn { get; set; }
 
-        public ICollection<Comment> Comments { get; set; }
+        public IEnumerable<Comment> Comments { get; set; }
 
         public bool AllowsComments { get; set; }
 

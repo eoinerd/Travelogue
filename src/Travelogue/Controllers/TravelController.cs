@@ -40,7 +40,7 @@ namespace Travelogue.Controllers
                 var vm = new PostViewModel();
                 vm.AllowsComments = post.AllowsComments;
                 vm.Title = post.Title;
-                vm.Text = post.Text;
+                vm.PostText = post.Text;
                 vm.Id = post.Id;
                 vm.Image = _config["ImageSettings:RootUrl"] + post.Image;
 
