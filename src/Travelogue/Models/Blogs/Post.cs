@@ -17,12 +17,14 @@ namespace Travelogue.Models
 
         public DateTime UpdatedOn { get; set; }
 
-        public IEnumerable<Comment> Comments { get; set; }
+        public ICollection<Comment> Comments { get; set; }
 
         public bool AllowsComments { get; set; }
 
         public string UserName { get; set; }
 
         public string Image { get; set; }
+
+        public string TopTip { get; set; }
     }
 }

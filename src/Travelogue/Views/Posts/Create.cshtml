@@ -8,6 +8,7 @@
         <h2>@ViewData["Title"]</h2>
         <form method="post" enctype="multipart/form-data">
             <span asp-validation-summary="ModelOnly"></span>
+            @Html.AntiForgeryToken()
             @if (ViewBag.UserMessage != null)
             {
                 <div>@ViewBag.UserMessage</div>
@@ -19,9 +20,14 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="Text">Post</label>
-                <textarea cols="40" rows="10" asp-for="Text" type="text" class="form-control"></textarea>  @*data-bind="value: theValue, valueUpdate: 'afterkeydown'"*@
-                <span asp-validation-for="Text" class="text-muted"></span>
+                <label asp-for="PostText">Post</label>
+                <textarea cols="40" rows="10" asp-for="PostText" type="text" class="form-control"></textarea>  @*data-bind="value: theValue, valueUpdate: 'afterkeydown'"*@
+                <span asp-validation-for="PostText" class="text-muted"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TopTip" class="">Top Tip</label>
+                <textarea cols="40" rows="3" asp-for="TopTip" type="text" class="form-control"></textarea>
             </div>
 
             <div class="form-group">

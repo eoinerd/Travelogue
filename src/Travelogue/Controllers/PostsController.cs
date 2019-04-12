@@ -11,6 +11,8 @@ using Travelogue.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,15 +25,18 @@ namespace Travelogue.Controllers
         private readonly ICommentRepository _commentRepository;
         private readonly IImageWriter _imageWriter;
         private readonly IConfigurationRoot _config;
+        private readonly UserManager<TravelUser> _userManager;
 
         public PostsController(IPostRepository postRepository, IImageWriter imageWriter, 
-            IConfigurationRoot config, ICommentRepository commentRepository, ITravelRepository travelRepository)
+            IConfigurationRoot config, ICommentRepository commentRepository, ITravelRepository travelRepository,
+            UserManager<TravelUser> userManager)
         {
             _postRepository = postRepository;
             _imageWriter = imageWriter;
             _config = config;
             _commentRepository = commentRepository;
             _travelRepository = travelRepository;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index(string searchString)
@@ -71,7 +76,7 @@ namespace Travelogue.Controllers
         }
 
         [HttpPost]
-        // [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(PostViewModel viewModel, IFormFile Image)
         {
             try
@@ -82,7 +87,7 @@ namespace Travelogue.Controllers
                     post.UserName = User.Identity.Name;
                     var secureFileName = await _imageWriter.UploadImage(Image);
                     post.Image = _config["ImageSettings:RootImagePath"] + secureFileName;
-
+                    post.PostedOn = DateTime.Now;
                     _postRepository.CreatePost(post);
                     await _postRepository.SaveChangesAsync();
 
@@ -91,7 +96,7 @@ namespace Travelogue.Controllers
                     _travelRepository.UpdateStop(viewModel.Trip, viewModel.Stop, postForStopUpdate.Id);
                     await _travelRepository.SaveChangesAsync();
 
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("YourPosts");
                 }
             }
             catch (DbUpdateException ex)
@@ -108,7 +113,7 @@ namespace Travelogue.Controllers
             _postRepository.DeletePost(Id);
             var result = await _postRepository.SaveChangesAsync();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("YourPosts");
         }
 
         [HttpGet]
@@ -124,7 +129,7 @@ namespace Travelogue.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(PostViewModel postViewModel, IFormFile Image)
         {
             var postModel = await _postRepository.GetPostById(postViewModel.Id);
@@ -140,11 +145,13 @@ namespace Travelogue.Controllers
             
             postModel.Published = postViewModel.Published;
             postModel.Text = postViewModel.PostText;
+            postModel.UpdatedOn = DateTime.Now;
+            postModel.TopTip = postViewModel.TopTip;
 
             _postRepository.UpdatePost(postModel);
             await _postRepository.SaveChangesAsync();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("YourPosts");
         }
 
         public async Task<IActionResult> YourPosts()
@@ -158,10 +165,28 @@ namespace Travelogue.Controllers
                 var vm = new PostViewModel();
                 vm = Mapper.Map<PostViewModel>(post);
                 vm.Image = _config["ImageSettings:RootUrl"] + post.Image;
+                vm.PostText = vm.PostText.Substring(0, 150) + "....";
                 viewModelList.Add(vm);
             }
 
+            ViewBag.Message = true;
             return View("Index", viewModelList);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddComment(Comment comment)
+        {
+            // email, name, posid, image
+            var user = await _userManager.GetUserAsync(User);
+
+            if (!user.Image.Contains(_config["ImageSettings:RootUrl"]))
+            {
+                user.Image = _config["ImageSettings:RootUrl"] + user.Image;
+            }
+            comment.Username = User.Identity.Name;
+            comment.Image = user.Image;
+            var comments = _commentRepository.AddComment(comment);
+            return PartialView("_Comments", comments);
         }
     }
 }

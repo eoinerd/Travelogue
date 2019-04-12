@@ -42,6 +42,7 @@ namespace Travelogue.Data.Profiles
                 .ForMember(dest => dest.Stop, opts => opts.Ignore())
                 .ForMember(dest => dest.Trip, opts => opts.Ignore())
                 .ForMember(dest => dest.Username, opts => opts.MapFrom(src => src.UserName))
+                .ForMember(dest => dest.TopTip, opts => opts.MapFrom(src => src.TopTip))
                 .ForMember(dest => dest.DateUpdated, opts => opts.MapFrom(src => src.UpdatedOn));
         }
     }

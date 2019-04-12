@@ -8,6 +8,7 @@
         <h2>@ViewData["Title"]</h2>
         <form method="post" enctype="multipart/form-data">
             <span asp-validation-summary="ModelOnly"></span>
+            @Html.AntiForgeryToken()
             @if (ViewBag.UserMessage != null)
             {
                 <div>@ViewBag.UserMessage</div>
@@ -19,9 +20,14 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="Post">Post</label>
-                <textarea cols="40" rows="10" asp-for="Post" type="text" class="form-control"></textarea>  @*data-bind="value: theValue, valueUpdate: 'afterkeydown'"*@
-                <span asp-validation-for="Post" class="text-muted"></span>
+                <label asp-for="PostText">Post</label>
+                <textarea cols="40" rows="10" asp-for="PostText" type="text" class="form-control"></textarea>  @*data-bind="value: theValue, valueUpdate: 'afterkeydown'"*@
+                <span asp-validation-for="PostText" class="text-muted"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TopTip" class="">Top Tip</label>
+                <textarea cols="40" rows="3" asp-for="TopTip" type="text" class="form-control"></textarea>
             </div>
 
             <div class="form-group">
@@ -43,6 +49,8 @@
                 <a asp-controller="Post" asp-action="Index" class="btn btn-warning">Cancel</a>
                 <input type="submit" value="Create Post" class="btn btn-success" />
             </div>
+            <input type="hidden" asp-for="Trip" id="hdnTrip" />
+            <input type="hidden" asp-for="Stop" id="hdnStop" />
         </form>
     </div>
     <div class="col-md-8">
@@ -52,7 +60,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+@*<div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -68,14 +76,14 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
-<div class="text-center">
+@*<div class="text-center">
     <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalContactForm">
         Launch
         Modal Contact Form
     </a>
-</div>
+</div>*@
 @section Scripts {
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV8YBn-Y4Lyl43-uRP6nUtnPRw4Ta1zT8&sensor=false&amp;libraries=places"></script>
     <script src="~/lib/underscore/underscore-min.js"></script>
@@ -89,11 +97,11 @@
     <script src="~/js/bootstrap_confirm_dialog.js"></script>
     <script src="~/js/createPostWithMapController.js"></script>
 
-    <script type="text/javascript">
+    @*<script type="text/javascript">
         var viewModel = {
             theValue: ko.observable("defaultText"),
         };
 
         ko.applyBindings(viewModel);
-    </script>
+    </script>*@
 }

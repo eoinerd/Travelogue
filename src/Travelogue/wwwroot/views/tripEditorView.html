@@ -12,12 +12,10 @@
         <form novalidate name="newStopForm" ng-submit="vm.addStop()">
             <div class="form-group">
                 <label>Date</label>
-                <!--<p>{{datePicker || "00/00/0000"}}</p>-->
-                <input id="arrival" name="arrival" type="text" ng-model="vm.newStop.arrivalDate" datepicker />
+                <input id="arrival" name="arrival" class="form-control" autocomplete="off" type="text" ng-model="vm.newStop.arrivalDate" datepicker />
                 <!--<input id="arrival" name="arrival" type="text" ng-model="vm.newStop.arrivalDate" class="datepicker" />-->
                 <!--<input class="form-control" id="arrival" name="arrival" ng-model="vm.newStop.arrivalDate" required ng-pattern="/^(\d{2})\/(\d{2})\/(\d{4})$/" />-->
                 <span class="text-danger" ng-show="newStopForm.arrivalDate.$error.required">Required</span>
-                <!--<span class="text-danger" ng-show="newStopForm.arrivalDate.$error.pattern">Must match pattern MM/DD/YYYY</span>-->
             </div>
             <div class="form-group">
                 <label>Location</label>
@@ -36,7 +34,7 @@
             </tr>
             <tr ng-repeat="stop in vm.stops">
                 <td style="width: 100px;">{{ stop.name }}</td>
-                <td style="width: 100px;">{{ stop.arrivalDate | date:'MM-dd-yyyy' }}</td>
+                <td style="width: 100px;padding-right: 0px; padding-left: 0px;">{{ stop.arrivalDate | date:'MM-dd-yyyy' }}</td>
                 <td>
                     <div ng-if="stop.postId > 0">
                         <a href="/Posts/Details/{{stop.postId}}">View</a>

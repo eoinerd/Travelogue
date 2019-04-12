@@ -1,6 +1,26 @@
 ﻿// Write your Javascript code.
 (function () {
 
+    $("#addCommentBtn").on("click", function () {
+        var comment = {
+            Text: $("#userComment").val(),
+            PostId: $("#hdnPostId").val()
+        };
+
+        $.ajax({
+            url:"/Posts/AddComment",
+            type: "POST",
+            cache: false,
+            data: comment
+        }).done(function (result) {
+            $("#userComment").val("");
+            $("#commentsOnPageLoad").hide();
+            $("#comments").html(result);
+        }).fail(function (xhr) {
+            console.log("error: " + xhr.status + " - " + xhr.statusText + " - " + xhr.responseText);
+        })
+    });
+
     // Select all links with hashes
     $('a[href*="#"]')
       // Remove links that don't actually link to anything
@@ -49,7 +69,6 @@
         $("#sidebar").toggleClass("hide-sidebar");
         $(this).children('.fa').toggleClass('fa-chevron-circle-up fa-chevron-circle-down');
     });
-
 
 })();
 

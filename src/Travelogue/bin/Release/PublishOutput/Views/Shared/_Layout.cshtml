@@ -35,7 +35,7 @@
             </button>
             <div class="input-group" style="width: 60%;">
                 <form  asp-controller="Posts" asp-action="Index" style="width: 100%;">
-                    <input type="text" class="form-control" name="SearchString" placeholder="Search for..." style="display: inline-block;">
+                    <input type="text" class="form-control" name="SearchString" placeholder="Search for Posts..." style="display: inline-block;">
                     <span class="input-group-btn">
                         <input class="btn btn-primary" type="submit" value="Go!" />
                     </span>
@@ -44,12 +44,13 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Travel" asp-action="Index">Home</a>
+                        <a class="nav-link" asp-area="" asp-controller="Posts" asp-action="Index">View All Posts</a>
                     </li>
+                    <li class="nav-item nav-link">|</li>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Posts" asp-action="Index">All Posts</a>
+                            <a class="nav-link" asp-area="" asp-controller="Posts" asp-action="YourPosts">Your Posts</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Travel" asp-action="Trips">Your Trips</a>
@@ -100,7 +101,7 @@
                     </a>
                 </li>
             </ul>
-            <p class="text-muted small mb-0">Copyright &copy; Your Website 2019</p>
+            <p class="text-muted small mb-0">Copyright &copy; Eoin Dennehy 2019</p>
         </div>
     </footer>
 

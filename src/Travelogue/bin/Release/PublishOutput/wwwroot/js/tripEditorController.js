@@ -1,7 +1,27 @@
 ﻿(function () {
     "use strict";
 
-    angular.module("app-trips").controller("tripEditorController", tripEditorController);
+    angular.module("app-trips").controller("tripEditorController", tripEditorController)
+        .directive("datepicker", function () {
+        return {
+            restrict: "A",
+            require: "ngModel",
+            link: function (scope, elem, attrs, ngModelCtrl) {
+                var updateModel = function (dateText) {
+                    scope.$apply(function () {
+                        ngModelCtrl.$setViewValue(dateText);
+                    });
+                };
+                var options = {
+                    dateFormat: "dd/mm/yy",
+                    onSelect: function (dateText) {
+                        updateModel(dateText);
+                    }
+                };
+                elem.datepicker(options);
+            }
+        }
+    });
 
     function tripEditorController($routeParams, $http, $location) {
         var vm = this;
@@ -14,6 +34,8 @@
         vm.errorMessage = "";
         vm.isBusy = true;
         vm.newStop = {};
+
+        _showEmptyMap();
 
         var url = "/api/trips/" + vm.tripName + "/stops";
 
@@ -82,7 +104,7 @@
                 currentStop: 1,
                 initialZoom: 3
             });
-        }
+        }       
     }
 
     function createPost(message) {
@@ -95,6 +117,16 @@
             executeNo: function () {
                 return false;
             }
+        });
+    }
+
+    function _showEmptyMap() {
+        // Show Empty Map
+        travelMap.createMap({
+            stops: false,
+            selector: "#map",
+            currentStop: 1,
+            initialZoom: 1.5
         });
     }
 

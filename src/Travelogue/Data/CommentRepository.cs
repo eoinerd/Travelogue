@@ -16,9 +16,12 @@ namespace Travelogue.Data
             _context = context;
         }
 
-        public void AddComment(Comment comment)
+        public IEnumerable<Comment> AddComment(Comment comment)
         {
             _context.Comments.Add(comment);
+            _context.SaveChanges();
+
+            return _context.Comments.Where(x => x.PostId == comment.PostId).ToList();
         }
 
         public async Task<IEnumerable<Comment>> GetCommentsByPostId(int postId)

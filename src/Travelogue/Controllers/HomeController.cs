@@ -29,7 +29,11 @@ namespace Travelogue.Controllers
 
         public IActionResult Index()
         {
-            return RedirectToRoute("/Travel/Index/");      
+            return RedirectToRoute(new
+            {
+                controller = "Travel",
+                action = "Index"
+            });
         }
 
         public IActionResult Blog()

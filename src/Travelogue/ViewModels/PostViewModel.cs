@@ -36,5 +36,7 @@ namespace Travelogue.ViewModels
         public string Stop { get; set; }
 
         public string Username { get; set; }
+             
+        public string TopTip { get;  set; }
     }
 }

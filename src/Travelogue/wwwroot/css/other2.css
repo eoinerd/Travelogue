@@ -214,7 +214,7 @@ body {
 }
 .card .back {
   color: #0087cc;
-  top: 30px;
+  top: 54px;
   text-align: center;
   transform: rotateY(180deg);
 }

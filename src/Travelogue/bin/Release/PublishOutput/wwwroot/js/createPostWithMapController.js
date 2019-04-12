@@ -13,6 +13,9 @@
         vm.tripName = $routeParams.tripName;
         vm.stopName = $routeParams.stopName;
 
+        document.getElementById("hdnTrip").value = $routeParams.tripName;
+        document.getElementById("hdnStop").value = $routeParams.stopName;
+
         var url = "/api/stop/" + vm.tripName + "/" + vm.stopName;
 
         $http.get(url)

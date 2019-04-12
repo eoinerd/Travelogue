@@ -29,7 +29,7 @@ namespace Travelogue.Data
 
         public async Task<Post> GetPostById(int id)
         {
-            return await _context.Posts.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return await _context.Posts.Include(x => x.Comments).Where(x => x.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Post>> GetPostsByUsername(string name)

@@ -13,11 +13,6 @@
             <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
         </ol>
         <div class="carousel-inner" role="listbox">
-            @*<div class="carousel-item" style="background-image: url('https://media.timeout.com/images/105282343/image.jpg')">
-                <div class="carousel-caption d-none d-md-block">
-                    <h3 class="display-4">Prague, Czech Republic</h3>
-                </div>
-            </div>*@
             @foreach (var item in Model)
             {
                 <div class="carousel-item" style="background-image: url('@item.Image')">
@@ -70,7 +65,7 @@
                                 <img src="https://img.icons8.com/ios/50/000000/github-filled.png" style="width: 75%; margin-top: 18px;">
                             </div>
                             <div class="side back">
-                                <a href="https://github.com/eoinerd">GitHub</a>
+                                <a class="btn btn-primary" href="https://github.com/eoinerd">GitHub</a>
                             </div>
                         </div>
                     </div>
@@ -81,7 +76,7 @@
                                 <img src="https://img.icons8.com/ios/50/000000/linkedin-filled.png" style="width: 75%; margin-top: 18px;">
                             </div>
                             <div class="side back">
-                                <a href="https://www.linkedin.com/in/eoin-dennehy-41582631/">LinkedIn</a>
+                                <a class="btn btn-primary" href="https://www.linkedin.com/in/eoin-dennehy-41582631/">LinkedIn</a>
                             </div>
                         </div>
                     </div>
@@ -92,7 +87,7 @@
                                 <img src="https://img.icons8.com/ios/50/000000/facebook-filled.png" style="width: 75%; margin-top: 18px;">
                             </div>
                             <div class="side back">
-                                <a href="https://facebook.com/eoinerd">Facebook</a>
+                                <a class="btn btn-primary" href="https://facebook.com/eoinerd">Facebook</a>
                             </div>
                         </div>
                     </div>
@@ -100,10 +95,10 @@
                     <div class="card-container">
                         <div class="card">
                             <div class="side">
-                                <img src="~/images/59919.png" style="width: 75%; margin-top: 18px;" />
+                                <img src="~/images/34-512.png" style="width: 75%; margin-top: 18px;" />
                             </div>
                             <div class="side back">
-                                <a href="https://github.com/eoinerd">Some Link</a>
+                                <a class="btn btn-primary" href="~/shortest - v4 - CV - 2019 (1).pdf">Curriculum Vitae</a>
                             </div>
                         </div>
                     </div>
@@ -178,10 +173,11 @@
 
         <!-- Map -->
         <section id="contact" class="map">
-            <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe>
+            @*<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d6093.8771809368545!2d-8.422575400249917!3d40.21042894391866!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2spt!4v1555097063304!5m2!1sen!2spt" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>*@
+            <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d6093.8771809368545!2d-8.422575400249917!3d40.21042894391866!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2spt!4v1555097063304!5m2!1sen!2spt"></iframe>
             <br />
             <small>
-                <a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"></a>
+                <a href="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d6093.8771809368545!2d-8.422575400249917!3d40.21042894391866!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2spt!4v1555097063304!5m2!1sen!2spt"></a>
             </small>
         </section>
     </div>

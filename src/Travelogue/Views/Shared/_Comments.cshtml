@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Travelogue.Models.Comment>
+
+@foreach (var comment in Model.OrderByDescending(x => x.Id))
+{
+    <div class="media mb-4" style="padding: 10px;">
+        <img class="d-flex mr-3 rounded-circle" style="max-width: 50px;" src="@comment.Image" alt="">
+        <div class="media-body">
+            <h5 class="mt-0">@comment.Username</h5>
+            @comment.Text
+        </div>
+    </div>
+    <hr/>
+}

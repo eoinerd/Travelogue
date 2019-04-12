@@ -8,7 +8,7 @@ namespace Travelogue.Data
 {
     public interface ICommentRepository
     {
-        void AddComment(Comment comment);
+        IEnumerable<Comment> AddComment(Comment comment);
 
         Task<IEnumerable<Comment>> GetCommentsByPostId(int postId);
     }

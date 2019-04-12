@@ -8,36 +8,53 @@
     <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8">
-
-            @if (!string.IsNullOrEmpty(User.Identity.Name))
+            
+            @if (ViewBag.Message == true)
             {
                 <h1 class="my-4">
                     Your Posts, @User.Identity.Name!
                 </h1>
+
+                 <!-- Blog Post -->
+                @foreach (var item in Model)
+                {
+                    <div class="card-custom mb-4">
+                        <img class="card-img-top" src="@item.Image" alt="Card image cap">
+                        <div class="card-body">
+                            <h2 class="card-title">@item.Title</h2>
+                            <p class="card-text" style="overflow-wrap: break-word;">@item.PostText</p>
+                            <a class="btn btn-primary" asp-controller="Posts" asp-action="Details" asp-route-id="@item.Id">Read More &rarr;</a>
+                        </div>
+                        <div class="card-footer text-muted">
+                            Posted on @item.PostedOn by
+                            <a href="#">@item.Username</a>
+                        </div>
+                    </div>
+                }
             }
             else
             {
                 <h1 class="my-4">
                     Travel Posts
                 </h1>
-            }
 
-            <!-- Blog Post -->
-            @foreach (var item in Model)
-            {
-                <div class="card-custom mb-4">
-                    <img class="card-img-top" src="@item.Image" alt="Card image cap">
-                    <div class="card-body">
-                        <h2 class="card-title">@item.Title</h2>
-                        <p class="card-text" style="overflow-wrap: break-word;">@item.PostText</p>
-                        <a class="btn btn-primary" asp-controller="Posts" asp-action="Details" asp-route-id="@item.Id">Read More &rarr;</a>
+                 <!-- Blog Post -->
+                @foreach (var item in Model.Where(x => x.Published))
+                {
+                    <div class="card-custom mb-4">
+                        <img class="card-img-top" src="@item.Image" alt="Card image cap">
+                        <div class="card-body">
+                            <h2 class="card-title">@item.Title</h2>
+                            <p class="card-text" style="overflow-wrap: break-word;">@item.PostText</p>
+                            <a class="btn btn-primary" asp-controller="Posts" asp-action="Details" asp-route-id="@item.Id">Read More &rarr;</a>
+                        </div>
+                        <div class="card-footer text-muted">
+                            Posted on @item.PostedOn by
+                            <a href="#">@item.Username</a>
+                        </div>
                     </div>
-                    <div class="card-footer text-muted">
-                        Posted on @item.PostedOn by
-                        <a href="#">@item.Username</a>
-                    </div>
-                </div>
-            }
+                }
+            }          
 
             <!-- Pagination -->
             <ul class="pagination justify-content-center mb-4">
@@ -54,7 +71,7 @@
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
             @Html.Partial("_SidePanelCategories")
-            @Html.Partial("_SidePanelTopTip")
+            @*@Html.Partial("_SidePanelTopTip")*@
         </div>
     </div>
     <!-- /.row -->

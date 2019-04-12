@@ -7,12 +7,12 @@
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }
 <form method="post" enctype="multipart/form-data">
-    <div class="card-custom bg-light">
-        <article class="card-body mx-auto" style="max-width: 400px;">
+    <div class="bg-light">
+        <article class="card-body mx-auto" style="max-width: 360px;">
             <h4 class="card-title mt-3 text-center">Create Account</h4>
             <p class="text-center">Get started with your free account</p>
             <p>
-                <a href="" class="btn btn-block btn-twitter"> <i class="fa fa-twitter"></i>   Login via Twitter</a>
+                @*<a href="" class="btn btn-block btn-twitter"> <i class="fa fa-twitter"></i>   Login via Twitter</a>*@
                 <a href="" class="btn btn-block btn-facebook"> <i class="fa fa-facebook-f"></i>   Login via facebook</a>
             </p>
             <p class="divider-text">
@@ -37,13 +37,12 @@
                         <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
                     </div>
                     <input asp-for="PhoneNumber" class="form-control" placeholder="Phone" />
-                    <span asp-validation-for="PhoneNumber"></span>
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend" style="max-width: 40px;">
                         <span class="input-group-text"> <i class="fa fa-image"></i> </span>
                     </div>
-                    <input type="file" name="Image" id="Imageinput" asp-for="Image" class="form-control" placeholder="Upload image" />
+                    <input type="file" name="image" id="Imageinput" asp-for="Image" class="form-control" placeholder="Upload image" />
                     <span asp-validation-for="Image"></span>
                 </div> <!-- form-group end.// -->
                 <div class="form-group input-group">
@@ -60,9 +59,9 @@
                         <input class="form-control" placeholder="Repeat password" type="password">
                     </div>*@
                 <div class="form-group">
-                    <input type="submit" value="Register" class="btn btn-success" />
+                    <input type="submit" value="Register" class="btn btn-success" style="display: block; margin: 0 auto;min-width: 200px;"/>
                 </div> <!-- form-group// -->
-                <p class="text-center">Have an account? <a href="">Log In</a> </p>
+                @*<p class="text-center">Have an account? <a href="">Log In</a> </p>*@
         </article>
     </div>
 

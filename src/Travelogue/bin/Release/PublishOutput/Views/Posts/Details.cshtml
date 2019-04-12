@@ -11,118 +11,83 @@
             <!-- Author -->
             <p class="lead" style="display: inline-block;">
                 by
-                <a href="#">@User.Identity.Name</a>
+                <a href="#">@Model.Username</a>
             </p>
-            <div style="display: inline-block;float: right;">
-                <a class="btn btn-primary" asp-controller="Posts" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-                <a class="btn btn-primary" asp-controller="Posts" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
-            </div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div style="display: inline-block;float: right;">
+                    <a class="btn btn-primary" asp-controller="Posts" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                    <a class="btn btn-primary" asp-controller="Posts" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                </div>
+            }
+
             <hr>
             <!-- Date/Time -->
-            <p>Posted on @Html.DisplayFor(modelPost => Model.DatePosted)</p>
+            <p>Posted on @Html.DisplayFor(modelPost => Model.PostedOn)</p>
             <hr>
             <!-- Preview Image -->
             <img class="img-fluid rounded" src="@Html.DisplayFor(modelPost => Model.Image)" alt="" />
             <hr>
             <!-- Post Content -->
-            <p class="lead">@Model.Post</p>
+            <p class="lead" style="overflow-wrap: break-word;">@Model.PostText</p>
 
             <hr>
 
-            <!-- Comments Form -->
-            <div class="card-custom my-4">
-                <h5 class="card-header">Leave a Comment:</h5>
-                <div class="card-body">
-                    <form>
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Single Comment -->
-            <div class="media mb-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                <div class="media-body">
-                    <h5 class="mt-0">Commenter Name</h5>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-            </div>
-
-            <!-- Comment with nested comments -->
-            <div class="media mb-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                <div class="media-body">
-                    <h5 class="mt-0">Commenter Name</h5>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-
-                    <div class="media mt-4">
-                        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                        <div class="media-body">
-                            <h5 class="mt-0">Commenter Name</h5>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        </div>
+            @if (Model.AllowsComments)
+            {
+                @Html.Partial("_AddComment")
+               <div id="commentsOnPageLoad">@Html.Partial("_Comments", Model.Comments)</div> 
+               <div id="comments" style="border: 1px solid rgba(0,0,0,.1);"></div>
+            }
+            else
+            {
+                <div class="card-custom my-4 disabled">
+                    <h5 class="card-header">Comments are disabled for this Post.</h5>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+                            <button class="btn btn-primary disabled">Submit</button>
+                        </form>
                     </div>
-
-                    <div class="media mt-4">
-                        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                        <div class="media-body">
-                            <h5 class="mt-0">Commenter Name</h5>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        </div>
-                    </div>
-
                 </div>
-            </div>
+            }
 
+            <input type="hidden" value="@Model.Id" id="hdnPostId" />
+
+
+            @*<div class="media mb-4">
+                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                    <div class="media-body">
+                        <h5 class="mt-0">Commenter Name</h5>
+                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+
+                        <div class="media mt-4">
+                            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                            <div class="media-body">
+                                <h5 class="mt-0">Commenter Name</h5>
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                            </div>
+                        </div>
+
+                        <div class="media mt-4">
+                            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                            <div class="media-body">
+                                <h5 class="mt-0">Commenter Name</h5>
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            *@
         </div>
 
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
-            <!-- Categories Widget -->
-            <div class="card-custom my-4">
-                <h5 class="card-header">Categories</h5>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled mb-0">
-                                <li>
-                                    <a href="#">Travel</a>
-                                </li>
-                                <li>
-                                    <a href="#">Asia</a>
-                                </li>
-                                <li>
-                                    <a href="#">Food</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled mb-0">
-                                <li>
-                                    <a href="#">Weather</a>
-                                </li>
-                                <li>
-                                    <a href="#">Tips</a>
-                                </li>
-                                <li>
-                                    <a href="#">Hotels</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Side Widget -->
-            <div class="card-custom my-4">
-                <h5 class="card-header">Side Widget</h5>
-                <div class="card-body">
-                    You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-                </div>
-            </div>
+            @Html.Partial("_SidePanelCategories")
+            @Html.Partial("_SidePanelTopTip", Model.TopTip)
         </div>
     </div>
 </div>

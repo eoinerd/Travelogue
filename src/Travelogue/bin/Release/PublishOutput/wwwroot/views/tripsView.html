@@ -1,11 +1,11 @@
-﻿<form novalidate name="newTripForm" ng-submit="vm.addTrip()" style="padding:25px;">
+﻿<form novalidate name="newTripForm" ng-submit="vm.addTrip()" class="trip-form">
     <div class="form-group">
         <label for="name">Trip Name</label>
         <input class="form-control" type="text" id="name" name="name" ng-model="vm.newTrip.name" required ng-minlength="5">
-        <span ng-show="newTripForm.name.$error.required" class="text-warning">
+        <span ng-show="newTripForm.name.$error.required" class="text-danger ng-hide" ng-hide>
             Name Is Required
         </span>
-        <span ng-show="newTripForm.name.$error.minlength" class="text-warning">
+        <span ng-show="newTripForm.name.$error.minlength" class="text-danger">
             Name must be at least 5 chars
         </span>
     </div>
@@ -13,10 +13,10 @@
         <input type="submit" value="Add Trip" class="btn btn-success btn-sm" ng-disabled="newTripForm.$invalid" />
     </div>
 </form>
-<div>
+<div class="trip-table-container">
     <div class="text-danger" ng-show="vm.errorMessage"></div>
     <wait-cursor display-when="vm.isBusy"></wait-cursor>
-    <table class="table table-responsive table-striped" style="width: 94%; margin: 0 auto;">
+    <table class="table table-responsive table-striped trip-table">
         <tr ng-repeat="trip in vm.trips">
             <td>{{ trip.name }}</td>
             <td>{{ trip.dateCreated | date:'MM-dd-yyyy' }}</td>
@@ -25,4 +25,7 @@
             </td>
         </tr>
     </table>
+</div>
+<div class="map-container" style="width: 570px;">
+    <div id="map" class="map-trip"></div>
 </div>
