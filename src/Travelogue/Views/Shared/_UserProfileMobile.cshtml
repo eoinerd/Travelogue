@@ -1,0 +1,9 @@
+﻿<div id="sidebar-mobile" class="hide-sidebar">
+    <img src="@User.Claims.First(x => x.Type == "ProfileImage").Value" alt="headshot" class="headshot" />
+    <ul class="nav ul-pos">
+        <li><a class="btn btn-primary" asp-area="" asp-controller="Auth" asp-action="ViewProfile">View Profile</a></li>
+        <li><a class="btn btn-primary logout-btn-margin" asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a></li>
+    </ul>
+    <span id="userName">@User.Identity.Name</span>
+</div>
+

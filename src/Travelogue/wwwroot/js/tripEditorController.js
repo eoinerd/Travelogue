@@ -84,6 +84,12 @@
                 vm.isBusy = false;
             });
         };
+
+        $("#viewMap").click(function () {
+            $('html, body').animate({
+                scrollTop: $("#map").offset().top
+            }, 2000);
+        });
     }
 
     function _showMap(stops) {

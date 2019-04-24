@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using Travelogue.Models.Blogs;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,13 +24,15 @@ namespace Travelogue.Controllers
         private readonly IPostRepository _postRepository;
         private readonly ITravelRepository _travelRepository;
         private readonly ICommentRepository _commentRepository;
+        private readonly ISubPostRepository _subPostRepository;
+
         private readonly IImageWriter _imageWriter;
         private readonly IConfigurationRoot _config;
         private readonly UserManager<TravelUser> _userManager;
 
         public PostsController(IPostRepository postRepository, IImageWriter imageWriter, 
             IConfigurationRoot config, ICommentRepository commentRepository, ITravelRepository travelRepository,
-            UserManager<TravelUser> userManager)
+            UserManager<TravelUser> userManager, ISubPostRepository subPostRepository)
         {
             _postRepository = postRepository;
             _imageWriter = imageWriter;
@@ -37,12 +40,24 @@ namespace Travelogue.Controllers
             _commentRepository = commentRepository;
             _travelRepository = travelRepository;
             _userManager = userManager;
+            _subPostRepository = subPostRepository;
         }
 
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string searchString, int? pageNumber)
         {
             var posts = await _postRepository.GetAllPosts();
 
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            //else
+            //{
+            //    searchString = currentFilter;
+            //}
+
+            // Basic Search 
+            // NB: replace with something like Elastic Search
             if (!string.IsNullOrEmpty(searchString))
             {
                 posts = posts.Where(s => s.Title.Contains(searchString));
@@ -58,7 +73,8 @@ namespace Travelogue.Controllers
                 viewModelList.Add(vm);
             }
 
-            return View(viewModelList);
+            int pageSize = 3;
+            return View(PaginatedList<PostViewModel>.Create(viewModelList.AsQueryable(), pageNumber ?? 1, pageSize));
         }
 
         public async Task<IActionResult> Details(int Id)
@@ -66,6 +82,7 @@ namespace Travelogue.Controllers
             var model = await _postRepository.GetPostById(Id);
             var postViewModel = Mapper.Map<PostViewModel>(model);
             postViewModel.Image = _config["ImageSettings:RootUrl"] + model.Image;
+            postViewModel.SubPosts = await _subPostRepository.GetSubPostsByPostId(Id);
 
             return View(postViewModel);
         }
@@ -85,6 +102,8 @@ namespace Travelogue.Controllers
                 {
                     var post = Mapper.Map<Post>(viewModel);
                     post.UserName = User.Identity.Name;
+
+                    // ImageWriter to upload image for post
                     var secureFileName = await _imageWriter.UploadImage(Image);
                     post.Image = _config["ImageSettings:RootImagePath"] + secureFileName;
                     post.PostedOn = DateTime.Now;
@@ -111,7 +130,7 @@ namespace Travelogue.Controllers
         public async Task<IActionResult> Delete(int Id)
         {
             _postRepository.DeletePost(Id);
-            var result = await _postRepository.SaveChangesAsync();
+            await _postRepository.SaveChangesAsync();
 
             return RedirectToAction("YourPosts");
         }
@@ -119,13 +138,18 @@ namespace Travelogue.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
         {
-            var postViewModel = new PostViewModel();
+            if (ModelState.IsValid)
+            {
+                var postViewModel = new PostViewModel();
 
-            var model = await _postRepository.GetPostById(Id);
-            postViewModel = Mapper.Map<PostViewModel>(model);
-            postViewModel.Image = _config["ImageSettings:RootUrl"] + model.Image;
+                var model = await _postRepository.GetPostById(Id);
+                postViewModel = Mapper.Map<PostViewModel>(model);
+                postViewModel.Image = _config["ImageSettings:RootUrl"] + model.Image;
 
-            return View(postViewModel);
+                return View(postViewModel);
+            }
+
+            return View();
         }
 
         [HttpPost]
@@ -154,7 +178,7 @@ namespace Travelogue.Controllers
             return RedirectToAction("YourPosts");
         }
 
-        public async Task<IActionResult> YourPosts()
+        public async Task<IActionResult> YourPosts(int? pageNumber)
         {
             var posts = await _postRepository.GetPostsByUsername(User.Identity.Name);
 
@@ -170,7 +194,8 @@ namespace Travelogue.Controllers
             }
 
             ViewBag.Message = true;
-            return View("Index", viewModelList);
+            int pageSize = 3;
+            return View("Index", PaginatedList<PostViewModel>.Create(viewModelList.AsQueryable(), pageNumber ?? 1, pageSize));
         }
 
         [HttpPost]
@@ -186,7 +211,31 @@ namespace Travelogue.Controllers
             comment.Username = User.Identity.Name;
             comment.Image = user.Image;
             var comments = _commentRepository.AddComment(comment);
-            return PartialView("_Comments", comments);
+            return PartialView("Comments/_Comments", comments);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddSubPost(Models.Blogs.SubPost subPost)
+        {
+            if (ModelState.IsValid)
+            {
+                // Add/Update subPost to DB......
+                if (subPost.Id > 0)
+                {
+                    await _subPostRepository.UpdateSubPost(subPost);
+                }
+                else
+                {
+                    await _subPostRepository.AddSubPost(subPost);
+                }
+                
+                // Get subPosts by PostID ordered by SubPostId....
+                var subPosts = await _subPostRepository.GetSubPostsByPostId(subPost.PostId);
+
+                // Return subPosts
+                return PartialView("SubPosts/_SubPosts", subPosts);
+            }
+            return RedirectToAction("YourPosts");
         }
     }
 }

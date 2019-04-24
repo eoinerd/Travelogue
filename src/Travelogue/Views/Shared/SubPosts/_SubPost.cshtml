@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Travelogue.Models.Blogs.SubPost>
+
+@foreach (var subPost in Model)
+{
+    <h5>
+        <b id="@subPost.Category">@subPost.Category</b>
+    </h5>
+
+    <div class="sub-post-section">@Html.Raw(subPost.SubPostText)</div>
+}

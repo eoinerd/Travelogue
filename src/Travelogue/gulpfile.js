@@ -1,9 +1,23 @@
-﻿/// <binding AfterBuild='minify' />
-var glup = require('gulp');
-var uglify = require('gulp-uglify');
+﻿var gulp = require('gulp');
 
-//gulp.task('minify', function () {
-//    return gulp.src("wwwroot/js/*.js")
-//                .pipe(uglify())
-//                .pipe(gulp.dest("wwwroot/lib/_app"));
-//});
+//Using package to minifying files 
+uglify = require("gulp-uglify");
+
+var paths = {
+    webroot: "./wwwroot/"
+};
+
+//Getting Path of Javascript files 
+paths.js = paths.webroot + "js/**/*.js";
+
+//Path to Writing minified Files after minifying
+paths.Destination = paths.webroot + "MinifiedJavascriptfiles";
+
+// Task Name [MinifyingTask]
+gulp.task('MinifyingTask', function () {   // path to your files
+    gulp.src(paths.js)
+        // concat files
+        .pipe(uglify())
+        // Writing files to Destination
+        .pipe(gulp.dest(paths.Destination));
+});

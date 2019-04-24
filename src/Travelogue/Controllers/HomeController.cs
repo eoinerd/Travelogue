@@ -36,13 +36,6 @@ namespace Travelogue.Controllers
             });
         }
 
-        public IActionResult Blog()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";

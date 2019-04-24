@@ -44,9 +44,6 @@
           "Node.js": "0.10.28"
         }
       },
-      "knockoutjs/3.4.1": {
-        "type": "package"
-      },
       "Libuv/1.9.0": {
         "type": "package",
         "dependencies": {
@@ -6353,17 +6350,6 @@
         "tools/bin_tools.ps1",
         "tools/install.ps1",
         "tools/uninstall.ps1"
-      ]
-    },
-    "knockoutjs/3.4.1": {
-      "sha512": "lECp4g3O4X30l8pVbg9VtLGiXQ6pAQmsotN1TtgMLUoMjU6gX+dt7zWcmUMQfvAEoYphLX+iw6fdWM5y6Ovz2g==",
-      "type": "package",
-      "path": "knockoutjs/3.4.1",
-      "files": [
-        "Content/Scripts/knockout-3.4.1.debug.js",
-        "Content/Scripts/knockout-3.4.1.js",
-        "knockoutjs.3.4.1.nupkg.sha512",
-        "knockoutjs.nuspec"
       ]
     },
     "Libuv/1.9.0": {
@@ -13494,8 +13480,7 @@
       "Microsoft.Extensions.Options.ConfigurationExtensions >= 1.0.0",
       "Microsoft.NETCore.App >= 1.0.1",
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0",
-      "SixLabors.ImageSharp >= 1.0.0-beta0006",
-      "knockoutjs >= 3.4.1"
+      "SixLabors.ImageSharp >= 1.0.0-beta0006"
     ],
     ".NETCoreApp,Version=v1.0": []
   },

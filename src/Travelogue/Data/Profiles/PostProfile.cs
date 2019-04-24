@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Travelogue.Models;
+using Travelogue.Models.Blogs;
 using Travelogue.ViewModels;
 
 namespace Travelogue.Data.Profiles

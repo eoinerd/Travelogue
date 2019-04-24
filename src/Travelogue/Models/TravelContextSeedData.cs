@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Travelogue.Data;
+using Travelogue.Models.Blogs;
 
 namespace Travelogue.Models
 {
@@ -49,6 +50,22 @@ namespace Travelogue.Models
             foreach (Post p in posts)
             {
                 _context.Posts.Add(p);
+            }
+            _context.SaveChanges();
+
+            // Look for any students.
+            if (_context.SubPosts.Any())
+            {
+                return;   // DB has been seeded
+            }
+
+            var subPosts = new SubPost[]
+            {
+                new SubPost {Category = "Food", SubPostText = "some stuff about food in some place becasue some stuff about food in some place becasue some stuff about food in some place becasue some stuff about food in some place becasue some stuff about food in some place becasue some stuff about food in some place becasue some stuff about food in some place becasue some stuff about food in some place becasue some stuff about food in some place becasue some stuff about food in some place becasue some stuff about food in some place becasue some stuff about food in some place becasue some stuff about food in some place becasue some stuff about food in some place becasue some stuff about food in some place becasue some stuff about food in some place becasue ", PostId = 1} , 
+            };
+            foreach (SubPost sp in subPosts)
+            {
+                _context.SubPosts.Add(sp);
             }
             _context.SaveChanges();
 

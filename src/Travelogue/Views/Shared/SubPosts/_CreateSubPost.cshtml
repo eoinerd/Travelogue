@@ -1,0 +1,21 @@
+﻿@model Travelogue.Models.Blogs.SubPost
+
+<h3>Add Sub Post</h3>
+    <div class="well" id="createSubPostForm">
+        <div class="form-group">
+            <label asp-for="Category">Category</label>
+            <input asp-for="Category" id="category" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SubPostText">Sub Post</label>
+            <textarea asp-for="SubPostText" type="text" id="summerNoteCreateSubPost"></textarea>
+        </div>
+        <input type="hidden" value="@Model.PostId" id="hdnPostId" />
+        <input type="hidden" value="@Model.Id" id="hdnSubPostId" />  
+        <div>
+            <a asp-controller="Posts" asp-action="Index" class="btn btn-warning">Cancel</a>
+            <input id="submitSubPost" type="button" value="Post" class="btn btn-success" />
+        </div>
+    </div>
+    

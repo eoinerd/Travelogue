@@ -20,6 +20,6 @@ namespace Travelogue.ViewModels
         [Required]
         public string Image { get; set; }
 
-        public int PhoneNumber { get; set; }
+        public int? PhoneNumber { get; set; }
     }
 }

@@ -1,0 +1,21 @@
+﻿@model Travelogue.Models.Blogs.SubPost
+
+<h3>Edit Sub Post</h3>
+<div class="well" id="editSubPostForm">
+    <div class="form-group">
+        <label asp-for="Category">Category</label>
+        <input asp-for="Category" value="@Model.Category" id="@("categoryEdit" + Model.Id)" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SubPostText">Sub Post</label>
+        <textarea asp-for="SubPostText" type="text" id="@("summernote" + Model.Id)"></textarea>
+    </div>
+    <input type="hidden" value="@Model.PostId" id="hdnPostIdEdit" />
+    <input type="hidden" value="@Model.Id" id="hdnSubPostIdEdit" />   
+    <div id="@Model.Id">
+        <a asp-controller="Posts" asp-action="Index" class="btn btn-warning">Cancel</a>
+        <input id="submitEditSubPost" type="button" value="Update" class="btn btn-success" />
+    </div>
+</div>
+

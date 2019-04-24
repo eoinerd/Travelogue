@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Travelogue.Models
+namespace Travelogue.Models.Blogs
 {
     public class Post
     {

@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0/",
-    "signature": "88c51335ff8a0a6ad0b172ade426c755c7f14468"
+    "signature": "ec53c6c7f97ec8440426b0cf6ad445f65d4236dd"
   },
   "compilationOptions": {
     "defines": [
@@ -19,7 +19,6 @@
         "dependencies": {
           "AutoMapper": "4.2.1",
           "Bower": "1.3.11",
-          "knockoutjs": "3.4.1",
           "Microsoft.AspNetCore.Diagnostics": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
           "Microsoft.AspNetCore.Mvc": "1.0.1",
@@ -79,7 +78,6 @@
           "Node.js": "0.10.28"
         }
       },
-      "knockoutjs/3.4.1": {},
       "Libuv/1.9.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0"
@@ -2932,7 +2930,6 @@
         "dependencies": {
           "AutoMapper": "4.2.1",
           "Bower": "1.3.11",
-          "knockoutjs": "3.4.1",
           "Microsoft.AspNetCore.Diagnostics": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
           "Microsoft.AspNetCore.Mvc": "1.0.1",
@@ -2992,7 +2989,6 @@
           "Node.js": "0.10.28"
         }
       },
-      "knockoutjs/3.4.1": {},
       "Libuv/1.9.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0"
@@ -5757,11 +5753,6 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-JNo9rMr25g1ZA1hv8aTzkDTiglq3FGTPoNOqNTGrwckYqJ9/DulmlndUduhPZWJXnIlYxo0krbwgwBtrCZvNqQ=="
-    },
-    "knockoutjs/3.4.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-lECp4g3O4X30l8pVbg9VtLGiXQ6pAQmsotN1TtgMLUoMjU6gX+dt7zWcmUMQfvAEoYphLX+iw6fdWM5y6Ovz2g=="
     },
     "Libuv/1.9.0": {
       "type": "package",

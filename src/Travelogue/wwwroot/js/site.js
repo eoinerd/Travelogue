@@ -8,17 +8,113 @@
         };
 
         $.ajax({
-            url:"/Posts/AddComment",
+            url: "/Posts/AddComment",
             type: "POST",
             cache: false,
             data: comment
-        }).done(function (result) {
+        }).done(function(result) {
             $("#userComment").val("");
             $("#commentsOnPageLoad").hide();
             $("#comments").html(result);
+        }).fail(function(xhr) {
+            console.log("error: " + xhr.status + " - " + xhr.statusText + " - " + xhr.responseText);
+        });
+    });
+
+    ///////////////////////////
+
+    $("#createSubPost").click(function () {
+        $(".sub-posts-create").css("display", "block");
+
+        $('#summerNoteCreateSubPost').summernote({
+            height: 200,
+            popover: {
+                image: [],
+                link: [],
+                air: []
+            }
+        });
+
+        $('html, body').animate({
+            scrollTop: $("#createSubPostForm").offset().top - 100
+        }, 1000);
+    });
+
+    ////////////////////////////
+
+    $("body").on("click", "#submitSubPost", function () {
+        var subPost = {
+            Category: $("#category").val(),
+            SubPostText: $("#summerNoteCreateSubPost").val(),
+            PostId: $("#hdnPostId").val(),
+            Id: $("#hdnSubPostId").val()
+        };
+
+        $.ajax({
+            url: "/Posts/AddSubPost",
+            type: "POST",
+            cache: false,
+            data: subPost
+        }).done(function (result) {
+            $(".sub-posts").css("display", "none");
+            $("#initialSubPosts").remove();
+            $("#subPostEdit").css("display", "none");
+            $("#subPosts").html(result);
         }).fail(function (xhr) {
             console.log("error: " + xhr.status + " - " + xhr.statusText + " - " + xhr.responseText);
-        })
+        });
+    });
+
+    $("body").on("click", "#submitEditSubPost", function () {
+        var parentId = $(this).parent().attr('id');
+        var subPostText = "#summernote" + parentId;
+        var subPost = {
+            Category: $("#categoryEdit" + parentId).val(),
+            SubPostText: $(subPostText).val(),
+            PostId: $("#hdnPostIdEdit").val(),
+            Id: parentId
+        };
+
+        $.ajax({
+            url: "/Posts/AddSubPost",
+            type: "POST",
+            cache: false,
+            data: subPost
+        }).done(function (result) {
+            var outerDiv = $(result);
+            $("#initialSubPosts").remove();
+            $("#subPosts").html(result);
+        }).fail(function (xhr) {
+            console.log("error: " + xhr.status + " - " + xhr.statusText + " - " + xhr.responseText);
+        });
+    });
+
+    ///////////////////////////////////////////////////
+
+    $(".sub-post-category").on("click",function () {
+        var catName = $(this).text();
+        $('html, body').animate({
+            scrollTop: $("#" + catName).offset().top - 100
+        }, 1000);
+    });
+
+    /////////////////////////////////////////////////////////
+
+    $("body").on("click", ".editSubPostBtn", function () {
+        var subPostId = this.id;
+
+        $('#summernote' + subPostId).summernote({
+            height: 200,
+            popover: {
+                image: [],
+                link: [],
+                air: []
+            }
+        });
+
+        var outerDiv = $(this).parent().parent().parent();
+        outerDiv.hide();
+        $("#showEdit" + subPostId).show();
     });
 
     // Select all links with hashes

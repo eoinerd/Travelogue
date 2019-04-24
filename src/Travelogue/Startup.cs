@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Http;
 using Travelogue.Data;
 using Microsoft.EntityFrameworkCore;
 using Travelogue.Data.Profiles;
+using Travelogue.Extensions;
 
 namespace Travelogue
 {
@@ -63,10 +64,11 @@ namespace Travelogue
 
             services.AddDbContext<StoryContext>(options => options.UseSqlServer("Server=EOINERD\\SQLEXPRESS;Database=StoryDb;Trusted_Connection=true;MultipleActiveResultSets=true"));
 
-            //services.AddScoped<IBlogRepository, BlogRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<ITravelRepository, TravelRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<ISubPostRepository, SubPostRepository>();
+            services.AddScoped<CustomClaimsCookieSignInHelper<TravelUser>>();
 
             services.AddIdentity<TravelUser, IdentityRole>(config =>
            {

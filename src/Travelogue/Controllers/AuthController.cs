@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,32 +14,36 @@ using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.PixelFormats;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using Travelogue.Extensions;
 
 namespace Travelogue.Controllers
 {
     public class AuthController : Controller
     {
         private SignInManager<TravelUser> _signInManager;
+        private CustomClaimsCookieSignInHelper<TravelUser> _customClaimsCookieSignInHelper;
         private UserManager<TravelUser> _userManager;
         private readonly IImageWriter _imageWriter;
         private readonly IConfigurationRoot _config;
         private IHostingEnvironment _hostingEnvironment;
 
         public AuthController(SignInManager<TravelUser> signInManager, UserManager<TravelUser> userManager, 
-            IImageWriter imageWriter, IConfigurationRoot config, IHostingEnvironment hostingEnvironment)
+            IImageWriter imageWriter, IConfigurationRoot config, IHostingEnvironment hostingEnvironment,
+            CustomClaimsCookieSignInHelper<TravelUser> customClaimsCookieSignInHelper)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _imageWriter = imageWriter;
             _config = config;
             _hostingEnvironment = hostingEnvironment;
+            _customClaimsCookieSignInHelper = customClaimsCookieSignInHelper;
         }
 
         public IActionResult Login()
         {
             if(User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Trips", "App");
+                return RedirectToAction("Index", "Travel");
             }
 
             return View();
@@ -49,11 +54,22 @@ namespace Travelogue.Controllers
         {
             if(ModelState.IsValid)
             {
-                var signInResult = await _signInManager.PasswordSignInAsync(vm.Username, vm.Password, true, false);
+                var signInResult =  await _signInManager.PasswordSignInAsync(vm.Username, vm.Password, true, false);
 
                 if(signInResult.Succeeded)
-                {
-                    if(string.IsNullOrWhiteSpace(returnUrl))
+                {                
+                    var user =  await _userManager.FindByNameAsync(vm.Username);
+
+                    // Add custom claim for ProfileImage
+                    var customClaims = new[]
+                    {
+                        new Claim("ProfileImage", user.Image)
+                    };
+
+                    // Use the CustomClaimsCookiesSignInHelper which inherits from IdentityUser
+                    await _customClaimsCookieSignInHelper.SignInUserAsync(user, true, customClaims);
+
+                    if (string.IsNullOrWhiteSpace(returnUrl))
                     {
                         return RedirectToAction("Index", "Travel");
                     }
@@ -64,7 +80,7 @@ namespace Travelogue.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("","Username or password incorrect");
+                    ModelState.AddModelError("Password","Username or password incorrect");
                 }
             }
 
@@ -83,8 +99,11 @@ namespace Travelogue.Controllers
             {
                 if (await _userManager.FindByEmailAsync(vm.Email) == null)
                 {
+                    // use ImageWriter to upload image
                     var secureFileName = await _imageWriter.UploadImage(image);
                     var path = Path.Combine(_hostingEnvironment.WebRootPath + "\\images\\", secureFileName);
+
+                    // Use ImageMagic (3rd party) to resize to perfect square for profile pic
                     using (Image<Rgba32> imageMagic = Image.Load(path))
                     {
                         var wideImage = imageMagic.Width - imageMagic.Height;
@@ -116,6 +135,17 @@ namespace Travelogue.Controllers
                         return View();
 
                     var signInResult = await _signInManager.PasswordSignInAsync(vm.Username, vm.Password, true, false);
+                    // var user = await _userManager.FindByNameAsync(vm.Username);
+
+                    if (signInResult.Succeeded)
+                    {
+                        var customClaims = new[]
+                        {
+                            new Claim("ProfileImage", user.Image)
+                        };
+
+                        await _customClaimsCookieSignInHelper.SignInUserAsync(user, true, customClaims);
+                    }                 
                 }
      
                 if (string.IsNullOrWhiteSpace(returnUrl))
@@ -141,7 +171,11 @@ namespace Travelogue.Controllers
                 return View(new TravelUser());
             }
 
-            user.Image = _config["ImageSettings:RootUrl"] + user.Image;
+            if (!user.Image.Contains(_config["ImageSettings:RootUrl"]))
+            {
+                user.Image = _config["ImageSettings:RootUrl"] + user.Image;
+            }
+
             return View(user);
         }
         public async Task<ActionResult> Logout()

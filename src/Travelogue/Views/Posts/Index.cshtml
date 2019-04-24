@@ -1,5 +1,5 @@
-﻿
-@model IEnumerable<Travelogue.ViewModels.PostViewModel>
+﻿@model Travelogue.ViewModels.PaginatedList<Travelogue.ViewModels.PostViewModel>
+@*@model IEnumerable<Travelogue.ViewModels.PostViewModel>*@
 @{
     ViewData["Title"] = "Posts";
 }
@@ -16,13 +16,13 @@
                 </h1>
 
                  <!-- Blog Post -->
-                @foreach (var item in Model)
+                foreach (var item in Model)
                 {
                     <div class="card-custom mb-4">
                         <img class="card-img-top" src="@item.Image" alt="Card image cap">
                         <div class="card-body">
                             <h2 class="card-title">@item.Title</h2>
-                            <p class="card-text" style="overflow-wrap: break-word;">@item.PostText</p>
+                            <p class="card-text" style="overflow-wrap: break-word;">@Html.Raw(item.PostText)</p>
                             <a class="btn btn-primary" asp-controller="Posts" asp-action="Details" asp-route-id="@item.Id">Read More &rarr;</a>
                         </div>
                         <div class="card-footer text-muted">
@@ -39,13 +39,13 @@
                 </h1>
 
                  <!-- Blog Post -->
-                @foreach (var item in Model.Where(x => x.Published))
+                foreach (var item in Model.Where(x => x.Published))
                 {
                     <div class="card-custom mb-4">
                         <img class="card-img-top" src="@item.Image" alt="Card image cap">
                         <div class="card-body">
                             <h2 class="card-title">@item.Title</h2>
-                            <p class="card-text" style="overflow-wrap: break-word;">@item.PostText</p>
+                            <p class="card-text" style="overflow-wrap: break-word;">@Html.Raw(item.PostText)</p>
                             <a class="btn btn-primary" asp-controller="Posts" asp-action="Details" asp-route-id="@item.Id">Read More &rarr;</a>
                         </div>
                         <div class="card-footer text-muted">
@@ -57,21 +57,31 @@
             }          
 
             <!-- Pagination -->
-            <ul class="pagination justify-content-center mb-4">
-                <li class="page-item">
-                    <a class="page-link" href="#">&larr; Older</a>
-                </li>
-                <li class="page-item disabled">
-                    <a class="page-link" href="#">Newer &rarr;</a>
-                </li>
-            </ul>
+            @{
+                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            }
 
+            <a asp-action="Index"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@(Model.PageIndex - 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-default @prevDisabled">
+                &larr; Newer
+            </a>
+            <a asp-action="Index"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@(Model.PageIndex + 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-default @nextDisabled">
+                Older &rarr;
+            </a>
         </div>
 
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
-            @Html.Partial("_SidePanelCategories")
-            @*@Html.Partial("_SidePanelTopTip")*@
+            @*@Html.Partial("SidePanels/_SidePanelCategories")*@
+            @*@Html.Partial("SidePanels/_SidePanelTopTip")*@
         </div>
     </div>
     <!-- /.row -->

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Travelogue.Data.ValueTypeResolvers;
 using Travelogue.Models;
+using Travelogue.Models.Blogs;
 using Travelogue.ViewModels;
 
 namespace Travelogue.Data.Profiles

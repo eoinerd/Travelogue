@@ -5,12 +5,12 @@
 }
 
 <header>
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+            <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselIndicators" data-slide-to="3"></li>
         </ol>
         <div class="carousel-inner" role="listbox">
             @foreach (var item in Model)
@@ -22,16 +22,17 @@
                 </div>
             }        
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
         </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
     </div>
 </header>
+
 <!-- Page Content -->
 <section class="py-5">
     <div class="container">
@@ -62,40 +63,40 @@
                     <div class="card-container">
                         <div class="card">
                             <div class="side">
-                                <img src="https://img.icons8.com/ios/50/000000/github-filled.png" style="width: 75%; margin-top: 18px;">
+                                <img src="https://img.icons8.com/ios/50/000000/github-filled.png" class="flip-card-image">
                             </div>
                             <div class="side back">
                                 <a class="btn btn-primary" href="https://github.com/eoinerd">GitHub</a>
                             </div>
                         </div>
                     </div>
-                    <div style="display:inline-block;width:150px;"></div>
+                    <div class="flip-card-spacer"></div>
                     <div class="card-container">
                         <div class="card">
                             <div class="side">
-                                <img src="https://img.icons8.com/ios/50/000000/linkedin-filled.png" style="width: 75%; margin-top: 18px;">
+                                <img src="https://img.icons8.com/ios/50/000000/linkedin-filled.png" class="flip-card-image">
                             </div>
                             <div class="side back">
                                 <a class="btn btn-primary" href="https://www.linkedin.com/in/eoin-dennehy-41582631/">LinkedIn</a>
                             </div>
                         </div>
                     </div>
-                    <div style="display:inline-block;width:150px;"></div>
+                    <div class="flip-card-spacer"></div>
                     <div class="card-container">
                         <div class="card">
                             <div class="side">
-                                <img src="https://img.icons8.com/ios/50/000000/facebook-filled.png" style="width: 75%; margin-top: 18px;">
+                                <img src="https://img.icons8.com/ios/50/000000/facebook-filled.png" class="flip-card-image">
                             </div>
                             <div class="side back">
                                 <a class="btn btn-primary" href="https://facebook.com/eoinerd">Facebook</a>
                             </div>
                         </div>
                     </div>
-                    <div style="display:inline-block;width:150px;"></div>
+                    <div class="flip-card-spacer"></div>
                     <div class="card-container">
                         <div class="card">
                             <div class="side">
-                                <img src="~/images/34-512.png" style="width: 75%; margin-top: 18px;" />
+                                <img src="~/images/34-512.png" class="flip-card-image" />
                             </div>
                             <div class="side back">
                                 <a class="btn btn-primary" href="~/shortest - v4 - CV - 2019 (1).pdf">Curriculum Vitae</a>
@@ -162,18 +163,8 @@
             </div>
         </section>
 
-        <!-- Call to Action -->
-        @*<section class="content-section bg-primary text-white">
-            <div class="container text-center">
-                <h2 class="mb-4">The buttons below are impossible to resist...</h2>
-                <a href="#" class="btn btn-xl btn-light mr-4">Click Me!</a>
-                <a href="#" class="btn btn-xl btn-dark">Look at Me!</a>
-            </div>
-        </section>*@
-
         <!-- Map -->
         <section id="contact" class="map">
-            @*<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d6093.8771809368545!2d-8.422575400249917!3d40.21042894391866!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2spt!4v1555097063304!5m2!1sen!2spt" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>*@
             <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d6093.8771809368545!2d-8.422575400249917!3d40.21042894391866!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2spt!4v1555097063304!5m2!1sen!2spt"></iframe>
             <br />
             <small>

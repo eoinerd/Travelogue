@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0",
-    "signature": "be2fb5c6add4fc3f7c8c4ad33489df2b7f5d664c"
+    "signature": "948bc23865d5a8d3254673d0e7cd9c45bf643591"
   },
   "compilationOptions": {
     "defines": [
@@ -19,7 +19,6 @@
         "dependencies": {
           "AutoMapper": "4.2.1",
           "Bower": "1.3.11",
-          "knockoutjs": "3.4.1",
           "Microsoft.AspNetCore.Diagnostics": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
           "Microsoft.AspNetCore.Mvc": "1.0.1",
@@ -85,7 +84,6 @@
           "Node.js": "0.10.28"
         }
       },
-      "knockoutjs/3.4.1": {},
       "Microsoft.AspNetCore.Antiforgery/1.0.1": {
         "dependencies": {
           "Microsoft.AspNetCore.DataProtection": "1.0.0",
@@ -3571,11 +3569,6 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-JNo9rMr25g1ZA1hv8aTzkDTiglq3FGTPoNOqNTGrwckYqJ9/DulmlndUduhPZWJXnIlYxo0krbwgwBtrCZvNqQ=="
-    },
-    "knockoutjs/3.4.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-lECp4g3O4X30l8pVbg9VtLGiXQ6pAQmsotN1TtgMLUoMjU6gX+dt7zWcmUMQfvAEoYphLX+iw6fdWM5y6Ovz2g=="
     },
     "Microsoft.AspNetCore.Antiforgery/1.0.1": {
       "type": "package",

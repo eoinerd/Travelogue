@@ -4,7 +4,7 @@
 }
 
 <div class="row">
-    <div style="margin: 0 auto; width: 60%;">
+    <div class="post-container">
         <h1 style="text-align: center;padding-top: 20px;">@ViewData["Title"]</h1>
         <form method="post" enctype="multipart/form-data">
             <span asp-validation-summary="ModelOnly"></span>
@@ -21,23 +21,23 @@
 
             <div class="form-group">
                 <label asp-for="PostText">Post</label>
-                <textarea style="max-width: 100%;" cols="40" rows="10" asp-for="PostText" type="text" class="form-control"></textarea>
+                <textarea asp-for="PostText" type="text" id="summerNoteEditPost"></textarea>
                 <span asp-validation-for="PostText" class="text-muted"></span>
             </div>
-
+            
             <div class="form-group">
-                <label asp-for="TopTip">Top Tip</label>
-                <textarea style="max-width: 100%;" cols="40" rows="3" asp-for="TopTip" type="text" class="form-control"></textarea>
+                <label asp-for="TopTip" class="">Top Tip</label>
+                <textarea cols="40" rows="3" asp-for="TopTip" type="text" class="form-control"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="AllowsComments">Allow Comments</label>
+                <input type="checkbox" asp-for="AllowsComments" />
             </div>
 
             <div class="form-group">
-                <label asp-for="AllowsComments">Allow Comments?</label>
-                <input type="checkbox" asp-for="AllowsComments" class="form-control" />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Published">Publish Post?</label>
-                <input type="checkbox" asp-for="Published" class="form-control" />
+                <label asp-for="Published">Publish Post</label>
+                <input type="checkbox" asp-for="Published" />
             </div>
 
             <div class="form-group">
@@ -59,3 +59,17 @@
     </div>*@
 </div>
 
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#summerNoteEditPost').summernote({
+                height: 200,
+                popover: {
+                    image: [],
+                    link: [],
+                    air: []
+                }
+            });
+        });
+    </script>
+}

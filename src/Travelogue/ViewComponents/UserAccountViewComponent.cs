@@ -9,7 +9,7 @@ namespace Travelogue.ViewComponents
 {
     public class UserAccountViewComponent : ViewComponent
     {
-        private UserManager<TravelUser> _userManager;
+        private readonly UserManager<TravelUser> _userManager;
         private readonly IConfigurationRoot _config;
 
         public UserAccountViewComponent(UserManager<TravelUser> userManager, IConfigurationRoot config)
@@ -18,14 +18,9 @@ namespace Travelogue.ViewComponents
             _config = config;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(string userName)
         {
-            var user = await _userManager.GetUserAsync((ClaimsPrincipal)User);
-
-            if(user == null)
-            {
-                return View(new TravelUser());
-            }
+            var user = await _userManager.FindByNameAsync(userName);
 
             if (!user.Image.Contains(_config["ImageSettings:RootUrl"]))
             {

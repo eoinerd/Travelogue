@@ -1,9 +1,14 @@
 ﻿<div>
     <div class="col-md-4 edit-trip-container">
-        <a href="#/" class="btn btn-link mg-tp-20">
-            <i class="fa fa-angle-left"></i>Back
+        <a href="#/" class="btn btn-sm mg-tp-20">
+            <i class="fa fa-angle-left"></i> Back
         </a>
-        <h2>
+        
+        <div class="btn btn-sm mg-tp-20" id="viewMap">
+            <i class="fa fa-globe"></i> View Map
+        </div>
+        
+        <h2 style="padding-top: 20px;">
             {{ vm.tripName }}
         </h2>
         <wait-cursor display-when="vm.isBusy"></wait-cursor>

@@ -26,7 +26,7 @@
             <p>Posted on @Html.DisplayFor(modelPost => Model.PostedOn)</p>
             <hr>
             <!-- Preview Image -->
-            <img class="img-fluid rounded" src="@Html.DisplayFor(modelPost => Model.Image)" alt="" />
+            <img class="img-fluid rounded" src="@Model.Image" alt="" />
             <hr>
             <!-- Post Content -->
             <p class="lead" style="overflow-wrap: break-word;">@Model.PostText</p>
@@ -36,8 +36,8 @@
             @if (Model.AllowsComments)
             {
                 @Html.Partial("_AddComment")
-               <div id="commentsOnPageLoad">@Html.Partial("_Comments", Model.Comments)</div> 
-               <div id="comments" style="border: 1px solid rgba(0,0,0,.1);"></div>
+                <div id="commentsOnPageLoad">@Html.Partial("_Comments", Model.Comments)</div>
+                <div id="comments" style="border: 1px solid rgba(0,0,0,.1);"></div>
             }
             else
             {
@@ -55,39 +55,15 @@
             }
 
             <input type="hidden" value="@Model.Id" id="hdnPostId" />
-
-
-            @*<div class="media mb-4">
-                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                    <div class="media-body">
-                        <h5 class="mt-0">Commenter Name</h5>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-
-                        <div class="media mt-4">
-                            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                            <div class="media-body">
-                                <h5 class="mt-0">Commenter Name</h5>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </div>
-                        </div>
-
-                        <div class="media mt-4">
-                            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                            <div class="media-body">
-                                <h5 class="mt-0">Commenter Name</h5>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            *@
         </div>
 
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
             @Html.Partial("_SidePanelCategories")
-            @Html.Partial("_SidePanelTopTip", Model.TopTip)
+            @if (!string.IsNullOrEmpty(Model.TopTip))
+            {
+                @Html.Partial("_SidePanelTopTip", Model.TopTip)
+            }
         </div>
     </div>
 </div>

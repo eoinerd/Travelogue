@@ -1,4 +1,5 @@
-﻿@model Travelogue.ViewModels.PostViewModel
+﻿@using SubPost = Travelogue.Models.Blogs.SubPost
+@model Travelogue.ViewModels.PostViewModel
 @{
     ViewData["Title"] = "View Post";
 }
@@ -26,18 +27,30 @@
             <p>Posted on @Html.DisplayFor(modelPost => Model.PostedOn)</p>
             <hr>
             <!-- Preview Image -->
-            <img class="img-fluid rounded" src="@Html.DisplayFor(modelPost => Model.Image)" alt="" />
+            <img class="img-fluid rounded" src="@Model.Image" alt="" />
             <hr>
             <!-- Post Content -->
-            <p class="lead" style="overflow-wrap: break-word;">@Model.PostText</p>
+            <div class="lead" style="overflow-wrap: break-word;">@Html.Raw(Model.PostText)</div>
+            
+            <!-- Sub Posts-->
+            <div id="initialSubPosts">@Html.Partial("SubPosts/_SubPosts", Model.SubPosts)</div>
+            
+            <div class="sub-post-section">
+                <div id="subPosts"></div>
+            </div>
+            
+            <div  class="sub-posts card-custom card-body bg-light sub-posts-create" style="display: none;">
+                @Html.Partial("SubPosts/_CreateSubPost", new SubPost() { PostId = Model.Id})
+            </div>
+           
 
             <hr>
 
             @if (Model.AllowsComments)
             {
-                @Html.Partial("_AddComment")
-               <div id="commentsOnPageLoad">@Html.Partial("_Comments", Model.Comments)</div> 
-               <div id="comments" style="border: 1px solid rgba(0,0,0,.1);"></div>
+                @Html.Partial("Comments/_AddComment")
+                <div id="commentsOnPageLoad">@Html.Partial("Comments/_Comments", Model.Comments)</div>
+                <div id="comments" style="border: 1px solid rgba(0,0,0,.1);"></div>
             }
             else
             {
@@ -55,39 +68,40 @@
             }
 
             <input type="hidden" value="@Model.Id" id="hdnPostId" />
-
-
-            @*<div class="media mb-4">
-                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                    <div class="media-body">
-                        <h5 class="mt-0">Commenter Name</h5>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-
-                        <div class="media mt-4">
-                            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                            <div class="media-body">
-                                <h5 class="mt-0">Commenter Name</h5>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </div>
-                        </div>
-
-                        <div class="media mt-4">
-                            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                            <div class="media-body">
-                                <h5 class="mt-0">Commenter Name</h5>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            *@
         </div>
 
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
-            @Html.Partial("_SidePanelCategories")
-            @Html.Partial("_SidePanelTopTip", Model.TopTip)
+            @Html.Partial("SidePanels/_SidePanelCategories", Model.SubPosts)
+            @if (!string.IsNullOrEmpty(Model.TopTip))
+            {
+                @Html.Partial("SidePanels/_SidePanelTopTip", Model.TopTip)
+            }
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //$('#summernote').summernote({
+            //    height: 200,
+            //    popover: {
+            //        image: [],
+            //        link: [],
+            //        air: []
+            //    }
+            //});
+
+            //$('#summerNoteCreateSubPost').summernote({
+            //    height: 200,
+            //    popover: {
+            //        image: [],
+            //        link: [],
+            //        air: []
+            //    }
+            //});
+            
+        });
+    </script>
+}

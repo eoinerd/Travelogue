@@ -1,0 +1,22 @@
+﻿@using Travelogue.Models.Blogs
+@model IEnumerable<SubPost>
+
+@foreach (var subPost in Model)
+{
+    <div class="subPostListItem">
+        <div class="row">
+            <h5 class="col-md-6">
+                <b id="@subPost.Category">@subPost.Category</b>
+            </h5>
+            <div class="edit-subPost-btn-container">
+                <button id="@subPost.Id" class="btn btn-primary editSubPostBtn">Edit</button>
+            </div>
+        </div>
+        <div class="sub-post-section lead">@Html.Raw(subPost.SubPostText)</div>
+    </div>
+    
+
+    <div id="@("showEdit" + subPost.Id)" class="sub-posts card-custom card-body bg-light" style="display: none;">
+        @Html.Partial("SubPosts/_EditSubPost", subPost)
+    </div>
+}

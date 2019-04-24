@@ -239,6 +239,7 @@ C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Tr
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Data\Profiles\PostProfile.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Data\Profiles\PostViewModelProfile.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Data\ValueTypeResolvers\CommentsResolver.cs
+C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Extensions\CustomClaimsCookieSignInHelper.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Migrations\20170219193804_InitialDatabase.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Migrations\20170219193804_InitialDatabase.Designer.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\Migrations\20170220190604_AddingIdentity.cs
@@ -276,6 +277,7 @@ C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Tr
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\ViewModels\BlogViewModel.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\ViewModels\ContactViewModel.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\ViewModels\LoginViewModel.cs
+C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\ViewModels\PaginatedList.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\ViewModels\PostViewModel.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\ViewModels\RegisterViewModel.cs
 C:\Users\Eoin\Documents\Visual Studio 2015\Projects\Travelogue\Travelogue\src\Travelogue\ViewModels\StopsViewModel.cs

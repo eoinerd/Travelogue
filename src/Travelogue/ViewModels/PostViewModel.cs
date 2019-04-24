@@ -15,7 +15,6 @@ namespace Travelogue.ViewModels
         public string Title { get; set; }
 
         [Required]
-        [StringLength(6000, MinimumLength = 151)]
         public string PostText { get; set; }
 
         [Required]
@@ -38,5 +37,9 @@ namespace Travelogue.ViewModels
         public string Username { get; set; }
              
         public string TopTip { get;  set; }
+
+        public string Category { get; set; }
+
+        public IEnumerable<Models.Blogs.SubPost> SubPosts { get; set; }
     }
 }
