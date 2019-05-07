@@ -30,27 +30,27 @@ namespace Travelogue.Controllers
             _postRepo = postRepo;
         }
 
+        //[RequireHttps]
         public async Task<IActionResult> Index()
         {
             var posts = await _postRepo.GetPostsByUsername(User.Identity.Name);
 
             var viewModelList = new List<PostViewModel>();
-            foreach(var post in posts)
+            foreach (var post in posts)
             {
                 var vm = new PostViewModel();
                 vm.AllowsComments = post.AllowsComments;
                 vm.Title = post.Title;
                 vm.PostText = post.Text;
                 vm.Id = post.Id;
-                vm.Image = _config["ImageSettings:RootUrl"] + post.Image;
+                vm.Image = "/img/" + post.Image;
 
                 viewModelList.Add(vm);
             }
-
             return View(viewModelList);
         }
 
-        [Authorize]
+        //[Authorize]
         public IActionResult Trips()
         {
             return View();

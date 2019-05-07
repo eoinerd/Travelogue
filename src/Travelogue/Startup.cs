@@ -57,12 +57,19 @@ namespace Travelogue
                 opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             });
 
+            // Add functionality to inject IOptions<T>
+            services.AddOptions();
+
+            // Add our Config object so it can be injected
+            services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
+
             services.AddScoped<IMailService, DebugMailService>();
             services.AddScoped<IImageWriter, ImageWriter>();
             services.AddSingleton(Configuration);
             services.AddDbContext<TravelogueContext>();
 
-            services.AddDbContext<StoryContext>(options => options.UseSqlServer("Server=EOINERD\\SQLEXPRESS;Database=StoryDb;Trusted_Connection=true;MultipleActiveResultSets=true"));
+            services.AddDbContext<StoryContext>(options => 
+                options.UseSqlServer(Configuration["ConnectionStrings:Default"]));
 
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<ITravelRepository, TravelRepository>();
@@ -116,6 +123,7 @@ namespace Travelogue
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -126,10 +134,18 @@ namespace Travelogue
                 app.UseDeveloperExceptionPage();
                 app.UseExceptionHandler("/Home/Error");
             }
-        
+
+
             app.UseStaticFiles();
 
             app.UseIdentity();
+            app.UseCookieAuthentication();
+            app.UseFacebookAuthentication(new FacebookOptions()
+            {
+                AppId = "419118675331691",
+                AppSecret = "5084225386eca065a89e71b047cce370",
+                AutomaticChallenge = true
+            });
 
             app.UseMvc(routes =>
             {

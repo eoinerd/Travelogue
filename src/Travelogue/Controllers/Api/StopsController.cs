@@ -33,8 +33,8 @@ namespace Travelogue.Controllers.Api
         {
             try
             {
+                // Get and return the stops for a trip by its name
                 var trip = _repository.GetUserTripByName(tripName, this.User.Identity.Name);
-
                 return Ok(Mapper.Map<IEnumerable<StopsViewModel>>(trip.Stops.OrderBy(x => x.ArrivalDate).ToList()));
             }
             catch(Exception ex)
@@ -54,6 +54,7 @@ namespace Travelogue.Controllers.Api
                 {
                     var newStop = Mapper.Map<Stop>(vm);
 
+                    // get a stops coordinates
                     var result = await _coords.GetCoordsAsync(newStop.Name);
 
                     if(!result.Success)
@@ -65,6 +66,7 @@ namespace Travelogue.Controllers.Api
                         newStop.Latitude = result.Latitude;
                         newStop.Longitude = result.Longitude;
 
+                        // Add new stop to the DB
                         _repository.AddStop(tripName, newStop, User.Identity.Name);
 
                         if(await _repository.SaveChangesAsync())
@@ -78,7 +80,7 @@ namespace Travelogue.Controllers.Api
             }
             catch(Exception ex)
             {
-                _logger.LogError("Failed to save new stop:{0}", ex);
+                _logger.LogError("Failed to save new stop:{0}", ex.Message);
             }
 
             return BadRequest("Failed to save new stop");

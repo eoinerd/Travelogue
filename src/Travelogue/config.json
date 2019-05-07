@@ -3,11 +3,11 @@
     "ToAddress": "eoinerd@gmail.com"
   },
   "ImageSettings": {
-    "RootImagePath": "/images/",
+    "RootImagePath": "/img/",
     "RootUrl":  "http://localhost:54015/"
   },
   "ConnectionStrings": {
-    "StoryContextConnection": "Server=EOINERD\\SQLEXPRESS;Database=StoryDb;Trusted_Connection=true;MultipleActiveResultSets=true"
+    "StoryContextConnection": "Data Source=10.70.15.205\\SQL2017,782;Initial Catalog=eoinerd_travelogue;Integrated Security=False;User ID=eoinerd_eoinerd;Password=^Jsj21o3;Connect Timeout=15;Encrypt=False;Packet Size=4096"
   },
   "Keys": {
     "BingKey": "1pyt6Oi96QbZplB0meWf~7n8N3oqpfMAt9RFFoswYOw~AgeIiNviHhSJPC8CE0z-rxXpU1FH_idzup4djBjgiVcUdAg_hBghDgtLDrGF3FXr"

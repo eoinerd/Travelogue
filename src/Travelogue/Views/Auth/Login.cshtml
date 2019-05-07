@@ -6,34 +6,40 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }
-<form method="post">
+@*<form method="post">*@
     <div class="bg-light">
         <article class="card-body mx-auto" style="max-width: 360px;">
             <h4 class="card-title mt-3 text-center">Login</h4>
-            <p style="padding-top:15px;">
-                <a href="" class="btn btn-block btn-facebook"> <i class="fa fa-facebook-f"></i>   Login via facebook</a>
-            </p>
+            <form type="post">
+                <p style="padding-top: 15px;">
+                    <a asp-controller="Auth" asp-action="FacebookLogin" class="btn btn-block btn-facebook"><i class="fa fa-facebook-f"></i> Login via facebook</a>
+                </p>
+            </form>
+            
             <p class="divider-text">
                 <span class="bg-light">OR</span>
             </p>
-            <div class="form-group input-group" style="padding-top:20px;">
-                <div class="input-group-prepend" style="max-width: 40px;">
-                    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                </div>
-                <input asp-for="Username" class="form-control" placeholder="User name" style="width: 100%;"/>
-                <span asp-validation-for="Username"></span>
-            </div> <!-- form-group// -->  
-            <div class="form-group input-group">
-                <div class="input-group-prepend" style="max-width: 40px;">
-                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-                </div>
-                <input type="password" asp-for="Password" class="form-control" placeholder="Password"  style="width: 100%;"/>
-                <span asp-validation-for="Password"></span>
-            </div> <!-- form-group// -->
-            <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-success" style="display: block; margin: 0 auto;min-width: 200px;"/>
-            </div> <!-- form-group// -->
+            <form method="post">
+                @Html.AntiForgeryToken()
+                <div class="form-group input-group" style="padding-top: 20px;">
+                    <div class="input-group-prepend" style="max-width: 40px;">
+                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                    </div>
+                    <input asp-for="Username" class="form-control" placeholder="User name" style="width: 100%;"/>
+                    <span asp-validation-for="Username"></span>
+                </div> <!-- form-group// -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend" style="max-width: 40px;">
+                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    <input type="password" asp-for="Password" class="form-control w100" placeholder="Password" style="width: 100%;"/>
+                    <span asp-validation-for="Password"></span>
+                </div> <!-- form-group// -->
+                <div class="form-group">
+                    <input type="submit" value="Login" class="btn btn-success" style="display: block; margin: 0 auto; min-width: 200px;"/>
+                </div> <!-- form-group// -->
+            </form>
         </article>
     </div>
-</form>
+@*</form>*@
 

@@ -68,8 +68,8 @@ namespace Travelogue.Controllers
             {
                 var vm = new PostViewModel();
                 vm = Mapper.Map<PostViewModel>(post);
-                vm.Image = _config["ImageSettings:RootUrl"] + post.Image;
-                vm.PostText = vm.PostText.Substring(0, 150) + "....";
+                vm.Image = "/img/" + post.Image;
+                vm.PostText = vm.PostText.Length > 150 ? vm.PostText.Substring(0, 150) + "...." : vm.PostText;
                 viewModelList.Add(vm);
             }
 
@@ -81,7 +81,7 @@ namespace Travelogue.Controllers
         {
             var model = await _postRepository.GetPostById(Id);
             var postViewModel = Mapper.Map<PostViewModel>(model);
-            postViewModel.Image = _config["ImageSettings:RootUrl"] + model.Image;
+            postViewModel.Image = "/img/" + model.Image;
             postViewModel.SubPosts = await _subPostRepository.GetSubPostsByPostId(Id);
 
             return View(postViewModel);
@@ -105,7 +105,7 @@ namespace Travelogue.Controllers
 
                     // ImageWriter to upload image for post
                     var secureFileName = await _imageWriter.UploadImage(Image);
-                    post.Image = _config["ImageSettings:RootImagePath"] + secureFileName;
+                    post.Image = secureFileName;// _config["ImageSettings:RootImagePath"] + secureFileName;
                     post.PostedOn = DateTime.Now;
                     _postRepository.CreatePost(post);
                     await _postRepository.SaveChangesAsync();
@@ -144,7 +144,7 @@ namespace Travelogue.Controllers
 
                 var model = await _postRepository.GetPostById(Id);
                 postViewModel = Mapper.Map<PostViewModel>(model);
-                postViewModel.Image = _config["ImageSettings:RootUrl"] + model.Image;
+                postViewModel.Image = "/img/" + model.Image;
 
                 return View(postViewModel);
             }
@@ -164,7 +164,7 @@ namespace Travelogue.Controllers
             if(Image != null)
             {
                 var secureFileName = await _imageWriter.UploadImage(Image);
-                postModel.Image = _config["ImageSettings:RootImagePath"] + secureFileName;
+                postModel.Image = "/img/" + secureFileName; //_config["ImageSettings:RootImagePath"] + secureFileName;
             }
             
             postModel.Published = postViewModel.Published;
@@ -188,8 +188,8 @@ namespace Travelogue.Controllers
             {
                 var vm = new PostViewModel();
                 vm = Mapper.Map<PostViewModel>(post);
-                vm.Image = _config["ImageSettings:RootUrl"] + post.Image;
-                vm.PostText = vm.PostText.Substring(0, 150) + "....";
+                vm.Image = "/img/" + post.Image;
+                vm.PostText = vm.PostText.Length > 150 ? vm.PostText.Substring(0, 150) + "...." : vm.PostText;
                 viewModelList.Add(vm);
             }
 
@@ -204,9 +204,9 @@ namespace Travelogue.Controllers
             // email, name, posid, image
             var user = await _userManager.GetUserAsync(User);
 
-            if (!user.Image.Contains(_config["ImageSettings:RootUrl"]))
+            if (!user.Image.Contains("/img/"))
             {
-                user.Image = _config["ImageSettings:RootUrl"] + user.Image;
+                user.Image = "/img/" + user.Image;
             }
             comment.Username = User.Identity.Name;
             comment.Image = user.Image;

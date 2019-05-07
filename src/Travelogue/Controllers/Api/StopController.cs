@@ -33,6 +33,7 @@ namespace Travelogue.Controllers.Api
         {
             try
             {
+                // Get a particular users stop by trip name
                 var trip = _repository.GetUserTripByName(tripName, this.User.Identity.Name);
                 return Ok(Mapper.Map<IEnumerable<StopsViewModel>>(trip.Stops.Where(x => x.Name == stopName).ToList()));
             }

@@ -43,7 +43,7 @@ namespace Travelogue.Data
         {
             base.OnConfiguring(builder);
 
-            builder.UseSqlServer("Server=EOINERD\\SQLEXPRESS;Database=StoryDb;Trusted_Connection=true;MultipleActiveResultSets=true");
+            builder.UseSqlServer(_config["ConnectionStrings:Default"]);
         }
     }
 }

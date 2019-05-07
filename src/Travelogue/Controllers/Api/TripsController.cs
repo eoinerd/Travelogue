@@ -29,6 +29,7 @@ namespace Travelogue.Controllers.Api
         {
             try
             {
+                // Get all trips from DB for a user
                 var results = _repository.GetTripsByUsername(this.User.Identity.Name);
                 return Ok(Mapper.Map<IEnumerable<TripViewModel>>(results));
             }
@@ -48,6 +49,7 @@ namespace Travelogue.Controllers.Api
 
                 newTrip.UserName = User.Identity.Name;
 
+                // Add a new Trip
                 _repository.AddTrip(newTrip);
 
                 if(await _repository.SaveChangesAsync())

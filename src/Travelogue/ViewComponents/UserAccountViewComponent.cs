@@ -22,9 +22,9 @@ namespace Travelogue.ViewComponents
         {
             var user = await _userManager.FindByNameAsync(userName);
 
-            if (!user.Image.Contains(_config["ImageSettings:RootUrl"]))
+            if (!user.Image.Contains("/images/"))
             {
-                user.Image =_config["ImageSettings:RootUrl"] + user.Image;
+                user.Image = "/images/" + user.Image;
             }
             
             return View(user);

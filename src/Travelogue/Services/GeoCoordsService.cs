@@ -29,7 +29,8 @@ namespace Travelogue.Services
                 Message = "Failed to get coordinates"
             };
 
-            var apiKey = _config["Keys:BingKey"];
+            var apiKey =
+                "1pyt6Oi96QbZplB0meWf~7n8N3oqpfMAt9RFFoswYOw~AgeIiNviHhSJPC8CE0z-rxXpU1FH_idzup4djBjgiVcUdAg_hBghDgtLDrGF3FXr"; //_config["Keys:BingKey"];
             var encodedName = WebUtility.UrlEncode(name);
             var url = $"http://dev.virtualearth.net/REST/v1/Locations?q={encodedName}&key={apiKey}";
 
