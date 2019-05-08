@@ -3,14 +3,13 @@
     display: block;
     padding-top: 50px;
     width: 100%; 
-    background-color: #eee; 
 }
 
 body {
     padding-top: 0px;
     padding-bottom: 20px;
     margin: 0;
-    background-color: #eee;
+    background-color: transparent !important; 
 }
 
 #footer {
@@ -33,13 +32,13 @@ body {
     font-size: 12px;
 }
 
-    .menu li {
-        list-style-type: none;
-    }
+.menu li {
+    list-style-type: none;
+}
 
-        .menu li.active {
-            font-weight: bold;
-        }
+.menu li.active {
+    font-weight: bold;
+}
 
 #sidebar {
     background: #f7f7f0;
@@ -60,10 +59,10 @@ body {
     padding: 20px;
 }
 
-    #sidebar.hide-sidebar {
-        top: -340px;
-        transition: top 0.5s ease-in 0.2s !important;
-    }
+#sidebar.hide-sidebar {
+    top: -340px;
+    transition: top 0.5s ease-in 0.2s !important;
+}
 
 #wrapper {
     display: block;
@@ -75,13 +74,13 @@ body {
     border-radius: 50%;
 }
 
-    #wrapper.hide-sidebar {
-        margin-left: 0px;
-        -moz-transition: margin-left ease .45s;
-        -o-transition: margin-left ease .45s;
-        -webkit-transition: margin-left ease .45s;
-        transition: margin-left ease .45s;
-    }
+#wrapper.hide-sidebar {
+    margin-left: 0px;
+    -moz-transition: margin-left ease .45s;
+    -o-transition: margin-left ease .45s;
+    -webkit-transition: margin-left ease .45s;
+    transition: margin-left ease .45s;
+}
 
 .middle {
     width: 50%;
@@ -104,9 +103,9 @@ body {
     background: white;
 }
 
-    .loading img {
-        position: absolute;
-    }
+.loading img {
+    position: absolute;
+}
 
 .controls {
     width: 100%;
@@ -115,33 +114,26 @@ body {
     top: 23%;
 }
 
-    .controls span {
-        display: inline-block;
-        height: 12px;
-        width: 12px;
-        box-sizing: border-box;
-        background-color: #FFF;
-        border: 1px solid rgba(0, 0, 0, 0.2);
-        border-radius: 7px;
-        margin: 0 5px;
-        cursor: pointer;
-        box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.08) inset;
-        -webkit-transition: all 400ms;
-        transition: all 400ms;
-    }
+.controls span {
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    box-sizing: border-box;
+    background-color: #FFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 7px;
+    margin: 0 5px;
+    cursor: pointer;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.08) inset;
+    -webkit-transition: all 400ms;
+    transition: all 400ms;
+}
 
-        .controls span.active {
-            cursor: default;
-            background-color: #000000;
-            border: none;
-            box-shadow: 0px -1px 1px 0px rgba(0, 0, 0, 0.35) inset;
-        }
-
-#map {
-    width: 100%;
-    height: 466px;
-    top: 30px;
-    right: 10px;
+.controls span.active {
+    cursor: default;
+    background-color: #000000;
+    border: none;
+    box-shadow: 0px -1px 1px 0px rgba(0, 0, 0, 0.35) inset;
 }
 
 #container {
@@ -180,25 +172,25 @@ body {
     border: none;
 }
 
-    .card:hover {
-        transform: rotateY(180deg);
-    }
+.card:hover {
+    transform: rotateY(180deg);
+}
 
-    .card .side {
-        backface-visibility: hidden;
-        border-radius: 6px;
-        height: 100%;
-        position: absolute;
-        overflow: hidden;
-        width: 100%;
-    }
+.card .side {
+    backface-visibility: hidden;
+    border-radius: 6px;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+}
 
-    .card .back {
-        color: #0087cc;
-        top: 54px;
-        text-align: center;
-        transform: rotateY(180deg);
-    }
+.card .back {
+    color: #0087cc;
+    top: 54px;
+    text-align: center;
+    transform: rotateY(180deg);
+}
 
 .fa-chevron-circle-down:hover, .fa-chevron-circle-up:hover, .sidetoggle:hover {
     cursor: pointer;
@@ -218,22 +210,22 @@ body {
     margin-bottom: 15px;
 }
 
-    .divider-text span {
-        padding: 7px;
-        font-size: 12px;
-        position: relative;
-        z-index: 2;
-    }
+.divider-text span {
+    padding: 7px;
+    font-size: 12px;
+    position: relative;
+    z-index: 2;
+}
 
-    .divider-text:after {
-        content: "";
-        position: absolute;
-        width: 100%;
-        border-bottom: 1px solid #ddd;
-        top: 55%;
-        left: 0;
-        z-index: 1;
-    }
+.divider-text:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    top: 55%;
+    left: 0;
+    z-index: 1;
+}
 
 .btn-facebook {
     background-color: #405D9D;
@@ -247,24 +239,6 @@ body {
 
 .card-custom {
     border: 1px solid rgba(0,0,0,.1);
-}
-
-.trip-form {
-    padding: 25px;
-}
-
-.trip-table-container {
-    display: inline-block;
-}
-
-.trip-table {
-    margin: 0 auto;
-    margin-left: 26px;
-}
-
-.edit-trip-container {
-    padding-left: 20px;
-    display: inline-block;
 }
 
 .mg-tp-20 {
@@ -304,8 +278,11 @@ body {
     }
 
     .mobile-menu {
-        width: 100%;
         margin-bottom: 10px;
+    }
+
+    .mobile-header {
+        color: #FFF;
     }
 
     .profile-container-mobile {
@@ -333,41 +310,16 @@ body {
     .jumbotron-content {
         width: 100%;
         margin: 0 auto;
-        background-color: #f7f7f0;
         margin-top: 40px;
         padding: 1px 20px 20px 20px;
-        border: 1px solid #dadad2;
         min-height: 330px;
+        padding: 35px;
+        border-radius: 5px; 
+        box-shadow: 0px 0px 20px 6px;
     }
 
     .form-control {
         min-width: 82%;
-    }
-
-    /* trips */
-    .map-container-trips {
-        width: 322px;
-        float: right;
-        display: inline-block;
-    }
-
-    .map-container {
-        width: 322px;
-        float: right;
-        display: inline-block;
-    }
-
-    .map-trip {
-        top: 0px !important;
-    }
-
-    #viewMap {
-        float: right;
-    }
-
-    /* Post - Details */
-    .post-container {
-        margin: 0 auto; width: 80%;
     }
 }
 
@@ -390,6 +342,10 @@ body {
 
     .mobile-menu {
         width: 0%;
+    }
+
+    .mobile-header {
+        display: none;
     }
 
     .profile-container-mobile {
@@ -419,47 +375,10 @@ body {
     .form-control {
         min-width: 0;
     }
-
-    /* trips */
-    .map-container-trips {
-        width: 570px;
-    }
-
-    .map-container {
-        width: 606px;
-    }
-
-    .map-trip {
-        top: -153px !important;
-    }
-
-    #viewMap {
-        display: none;
-    }
-
-    /* Post - Details*/
-    .post-container {
-        margin: 0 auto; width: 60%;
-    }
 }
 
 @media only screen and (min-width: 768px) {
     /* For desktop: */
-}
-
-
-/*.search-container {
-    width: 60%;
-}*/
-
-.sub-posts {
-    background-color: #eee !important;
-}
-.sub-post-section {
-    overflow-wrap: break-word; 
-    padding-top: 20px;
-    font-size: 1.25rem;
-    font-weight: 300;
 }
 
 .logout-btn-margin {
@@ -482,13 +401,19 @@ body {
 
 .flip-card-spacer {
     display:inline-block;
-    width:150px;
+    width:66px;
 }
 
-.edit-subPost-btn-container {
-    width: 50%;
-}
-
-.editSubPostBtn {
-    float: right;
+.landingContainer {
+    content: "";
+    display: block;
+    /*position: absolute;*/
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    /*opacity: 0.4;*/
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }

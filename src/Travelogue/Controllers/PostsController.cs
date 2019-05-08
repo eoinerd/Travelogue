@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 using Travelogue.Models.Blogs;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -27,20 +28,20 @@ namespace Travelogue.Controllers
         private readonly ISubPostRepository _subPostRepository;
 
         private readonly IImageWriter _imageWriter;
-        private readonly IConfigurationRoot _config;
+        private readonly ILogger<PostsController> _logger;
         private readonly UserManager<TravelUser> _userManager;
 
         public PostsController(IPostRepository postRepository, IImageWriter imageWriter, 
-            IConfigurationRoot config, ICommentRepository commentRepository, ITravelRepository travelRepository,
-            UserManager<TravelUser> userManager, ISubPostRepository subPostRepository)
+             ICommentRepository commentRepository, ITravelRepository travelRepository,
+            UserManager<TravelUser> userManager, ISubPostRepository subPostRepository, ILogger<PostsController> logger)
         {
             _postRepository = postRepository;
             _imageWriter = imageWriter;
-            _config = config;
             _commentRepository = commentRepository;
             _travelRepository = travelRepository;
             _userManager = userManager;
             _subPostRepository = subPostRepository;
+            _logger = logger;
         }
 
         public async Task<IActionResult> Index(string searchString, int? pageNumber)
@@ -79,12 +80,21 @@ namespace Travelogue.Controllers
 
         public async Task<IActionResult> Details(int Id)
         {
-            var model = await _postRepository.GetPostById(Id);
-            var postViewModel = Mapper.Map<PostViewModel>(model);
-            postViewModel.Image = "/img/" + model.Image;
-            postViewModel.SubPosts = await _subPostRepository.GetSubPostsByPostId(Id);
+            try
+            {
+                var model = await _postRepository.GetPostById(Id);
+                var postViewModel = Mapper.Map<PostViewModel>(model);
+                postViewModel.Image = "/img/" + model.Image;
+                postViewModel.SubPosts = await _subPostRepository.GetSubPostsByPostId(Id);
 
-            return View(postViewModel);
+                return View(postViewModel);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+
+            return Redirect("~/Home/Error");
         }
 
         public IActionResult Create()

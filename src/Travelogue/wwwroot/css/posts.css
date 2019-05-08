@@ -1,0 +1,30 @@
+﻿.edit-subPost-btn-container {
+    width: 50%;
+}
+
+.editSubPostBtn {
+    float: right;
+}
+
+.sub-posts {
+    background-color: #eee !important;
+}
+.sub-post-section {
+    overflow-wrap: break-word; 
+    padding-top: 20px;
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+@media only screen and (min-width: 360px) {
+    .post-container {
+        margin: 0 auto; width: 100%;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .post-container {
+        margin: 0 auto;
+        width: 80%;
+    }
+}

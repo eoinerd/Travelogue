@@ -1,0 +1,68 @@
+﻿
+.trip-form {
+    padding: 25px;
+}
+
+.trip-table-container {
+    display: inline-block;
+}
+
+.trip-table {
+    margin: 0 auto;
+    margin-left: 26px;
+}
+
+.edit-trip-container 
+{
+    padding-left: 20px;
+    display: inline-block;
+}
+
+#map {
+    width: 100%;
+    height: 466px;
+    top: 30px;
+    right: 10px;
+}
+
+@media only screen and (min-width: 360px) {
+    .map-container-trips {
+        width: 322px;
+        float: right;
+        display: inline-block;
+    }
+
+    .map-container {
+        width: 322px;
+        float: right;
+        display: inline-block;
+    }
+
+    .map-trip {
+        top: 0px !important;
+    }
+
+    #viewMap {
+        float: right;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .map-container-trips {
+        width: 570px;
+    }
+
+    .map-container {
+        width: 580px;
+    }
+
+    .map-trip {
+        top: -153px !important;
+    }
+
+    #viewMap {
+        display: none;
+    }
+}
+
+
